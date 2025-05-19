@@ -1,0 +1,40 @@
+name: dan-still-wordpress-site
+recipe: wordpress
+config:
+  webroot: .
+  php: '8.0'  # You can also use 8.1, 8.2, etc.
+  database: mysql
+
+services:
+  mysql:
+    type: mysql:5.7  # or 8.0 if you prefer
+    portforward: true
+
+tooling:
+  composer:
+    service: appserver
+    cmd: composer
+
+  yarn:
+    service: appserver
+    cmd: yarn
+
+  sass:
+    service: appserver
+    cmd: sass
+
+  npm:
+    service: appserver
+    cmd: npm
+
+  build:
+    service: appserver
+    cmd: yarn build
+
+  dev:
+    service: appserver
+    cmd: yarn dev
+
+proxy:
+  appserver:
+    - dan-still-wordpress-site.lndo.site
