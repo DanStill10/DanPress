@@ -1,15 +1,31 @@
+// /Users/danielstill/Projects/DanPress/wp-content/themes/your-custom-theme-name/jsconfig.json
 {
-  "extends": "@roots/sage/config/jsconfig.json",
   "compilerOptions": {
-    "baseUrl": "resources",
+    "baseUrl": ".", // This tells VS Code that non-relative imports are resolved relative to this file's directory
     "paths": {
-      "@fonts/*": ["fonts/*"],
-      "@images/*": ["images/*"],
-      "@scripts/*": ["scripts/*"],
-      "@styles/*": ["styles/*"]
+      // Map your Bud aliases for better autocompletion and path resolution
+      "@src/*": ["src/*"]
     },
-    "types": ["@roots/bud", "@roots/sage", "@roots/bud-tailwindcss"]
+    "jsx": "react", // This is crucial for React projects to understand JSX syntax
+    "target": "es2021", // Or "esnext" for the latest features
+    "module": "node16", // Use ES Modules
+    "allowJs": true, // Allow JavaScript files to be part of the project
+    "checkJs": true, // Enable type checking in JavaScript files (highly recommended for novices!)
+    "moduleResolution": "node16", // How modules are resolved
+    "esModuleInterop": true, // For better compatibility with CommonJS imports/exports
+    "skipLibCheck": true, // Skip type checking of all declaration files (node_modules)
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+    "resolveJsonModule": true // Allow importing .json files
   },
-  "include": ["bud.config.js", "resources"],
-  "exclude": ["node_modules", "public"]
+  "include": [
+    "src/**/*", // Include all files in your 'src' directory
+    "bud.config.js" // Include your Bud config for IDE understanding
+  ],
+  "exclude": [
+    "node_modules", // Exclude node modules
+    "public", // Exclude your compiled public/dist directory
+    "vendor", // Exclude Composer vendor directory if it's in your theme
+    "*.test.js", // Exclude test files if you have them
+    "*.spec.js" // Exclude test files if you have them
+  ]
 }

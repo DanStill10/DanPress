@@ -1,88 +1,33 @@
+// @ts-check
+
+// Import the Bud extensions you are using
+import BudSass from '@roots/bud-sass';
+import BudReact from '@roots/bud-react';
+import BudSWC from '@roots/bud-swc';
+
 /**
  * Build configuration
  *
- * @see {@link https://roots.io/docs/sage/ sage documentation}
- * @see {@link https://bud.js.org/guides/configure/ bud.js configuration guide}
- *
- * @typedef {import('@roots/bud').Bud} Bud
- * @param {Bud} app
+ * @see {@link https://bud.js.org/guides/configure}
+ * @param {import('@roots/bud').Bud} app
  */
 export default async (app) => {
-  /**
-   * Application entrypoints
-   * @see {@link https://bud.js.org/docs/bud.entry/}
-   */
   app
+    .setPath('@src', 'src')
+    .setPath('@dist', 'public')
+
     .entry({
-      app: ['@scripts/app', '@styles/app'],
-      editor: ['@scripts/editor', '@styles/editor'],
+      app: ['@src/index.js', '@src/index.scss'],
     })
 
-    /**
-     * Directory contents to be included in the compilation
-     * @see {@link https://bud.js.org/docs/bud.assets/}
-     */
-    .assets(['images'])
+    .use(BudSass)
+    .use(BudReact)
+    .use(BudSWC)
 
-    /**
-     * Matched files trigger a page reload when modified
-     * @see {@link https://bud.js.org/docs/bud.watch/}
-     */
-    .watch(['resources/views', 'app'])
+    .dev
+      .setProxyUrl('http://dan-still-wordpress-site.lndo.site/')
+      .setUrl('http://localhost:3000')
+    .parent
 
-    /**
-     * Proxy origin (`WP_HOME`)
-     * @see {@link https://bud.js.org/docs/bud.proxy/}
-     */
-    .proxy('http://example.test')
-
-    /**
-     * Development origin
-     * @see {@link https://bud.js.org/docs/bud.serve/}
-     */
-    .serve('http://0.0.0.0:3000')
-
-    /**
-     * URI of the `public` directory
-     * @see {@link https://bud.js.org/docs/bud.setPublicPath/}
-     */
-    .setPublicPath('/app/themes/sage/public/')
-
-    /**
-     * Generate WordPress `theme.json`
-     *
-     * @note This overwrites `theme.json` on every build.
-     *
-     * @see {@link https://bud.js.org/extensions/sage/theme.json/}
-     * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json/}
-     */
-    .wpjson.settings({
-      color: {
-        custom: false,
-        customDuotone: false,
-        customGradient: false,
-        defaultDuotone: false,
-        defaultGradients: false,
-        defaultPalette: false,
-        duotone: [],
-      },
-      custom: {
-        spacing: {},
-        typography: {
-          'font-size': {},
-          'line-height': {},
-        },
-      },
-      spacing: {
-        padding: true,
-        units: ['px', '%', 'em', 'rem', 'vw', 'vh'],
-      },
-      typography: {
-        customFontSize: false,
-      },
-    })
-    .useTailwindColors()
-    .useTailwindFontFamily()
-    .useTailwindFontSize()
-    .enable();
+    .watch(['**/*.php']);
 };

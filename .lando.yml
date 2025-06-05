@@ -2,12 +2,19 @@ name: dan-still-wordpress-site
 recipe: wordpress
 config:
   webroot: .
-  php: '8.0'  # You can also use 8.1, 8.2, etc.
+  php: '8.0'
   database: mysql
 
 services:
+  appserver: 
+    type: php:8.0 # Specify the PHP version for the appserver
+    build:
+      - "composer install --no-dev --no-interaction --prefer-dist" # Example: run composer install on build
+    environment:
+      WP_ENV: development # <-- Add this line for development environment detection
+
   mysql:
-    type: mysql:5.7  # or 8.0 if you prefer
+    type: mysql:5.7
     portforward: true
 
 tooling:

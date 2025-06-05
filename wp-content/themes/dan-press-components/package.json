@@ -19,8 +19,16 @@
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
   },
   "devDependencies": {
-    "@roots/bud": "6.7.3",
-    "@roots/bud-tailwindcss": "6.7.3",
-    "@roots/sage": "6.7.3"
+    "@roots/bud": "6.24.0",
+    "@roots/bud-react": "^6.24.0",
+    "@roots/bud-sass": "^6.24.0",
+    "@roots/bud-swc": "^6.24.0",
+    "@roots/sage": "6.7.3",
+    "sass": "^1.89.0",
+    "sass-loader": "^16.0.5"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
