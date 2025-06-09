@@ -1,7 +1,51 @@
-/node_modules
-/vendor
-/public
-.env
-.budfiles
-npm-debug.log
-yarn-error.log
+# -----------------------------------------------------------------------------
+# WordPress Theme .gitignore
+# For: /wp-content/themes/dan-press-components/
+# -----------------------------------------------------------------------------
+
+# Bud.js build output directory
+/public/
+
+# Bud.js cache & temporary files
+.budfiles/
+.cache/
+
+# Dependency Directories
+# ----------------------
+# Ignoring Node and Composer dependencies is standard practice.
+# They should be installed as part of the build/deployment process.
+/node_modules/
+/vendor/
+
+# Log files
+# ---------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bud-debug.log*
+php_errorlog
+debug.log
+
+# Operating System generated files
+# --------------------------------
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+
+# Editor/IDE specific files & directories
+# ---------------------------------------
+.vscode/
+.idea/
+*.project
+*.swp
+*~
+*.sublime-project
+*.sublime-workspace
+nbproject/
+
+# Other
+# -----
+composer.phar
+*.bak

@@ -1,0 +1,139 @@
+# -----------------------------------------------------------------------------
+# WordPress Project Root .gitignore
+#
+# Meant for the main project directory (e.g., where wp-admin, wp-includes are)
+# -----------------------------------------------------------------------------
+
+# WordPress Core Files & Directories
+# These are typically managed by downloading a release or via Composer.
+# It's best practice to ignore them from your project's Git repository.
+/wp-admin/
+/wp-includes/
+/wp-*.php
+index.php
+license.txt
+readme.html
+xmlrpc.php
+
+# IMPORTANT: Ignore the main WordPress configuration file.
+# This often contains sensitive database credentials.
+# It's usually created on the server or symlinked from a non-web-accessible location.
+# wp-config-sample.php can be kept as a template.
+wp-config.php
+
+# Lando specific files
+# Your .lando.yml should be committed.
+# Ignore any Lando generated state or temporary files if they appear.
+# .lando.tmp/
+# .lando-sync.yml.state
+
+# WP-CONTENT Folder
+# -----------------
+# Be selective here. Your theme 'dan-press-components' should NOT be ignored if it's in wp-content/themes/.
+# Other default themes or non-custom plugins might be ignored.
+
+# Standard WordPress content directories that are often ignored:
+#wp-content/uploads/ # User-uploaded media. You mentioned wanting to include this for now, so it's commented out.
+# /wp-content/uploads/
+
+wp-content/upgrade/
+wp-content/backups/ # Or any backup plugin specific directory like backup-*/, wp-backup-*/ etc.
+wp-content/cache/
+# wp-content/advanced-cache.php
+# wp-content/object-cache.php
+# wp-content/wp-cache-config.php
+
+# Example: Ignore default themes if you're not using them
+wp-content/themes/twentytwenty*/
+wp-content/themes/twentytwentyone/
+wp-content/themes/twentytwentytwo/
+wp-content/themes/twentytwentythree/
+wp-content/themes/twentytwentyfour/
+
+# Example: Ignore specific plugins if they are managed by Composer or not part of your custom dev
+# wp-content/plugins/akismet/
+# wp-content/plugins/hello.php
+
+# Your specific theme (dan-press-components) should have its own .gitignore
+# for its internal files (like its /public, .budfiles, etc.).
+# This root .gitignore should NOT ignore /wp-content/themes/dan-press-components/
+
+# Dependency Directories
+# ----------------------
+# If you have a root-level package.json or composer.json
+#
+# node_modules/ (at the project root level)
+# You mentioned wanting to include node_modules for now, so it's commented out.
+# Uncomment if you decide to ignore it (standard practice).
+# /node_modules/
+#
+# vendor/ (Composer dependencies at the project root level)
+# Uncomment if you decide to ignore it (standard practice).
+# /vendor/
+
+# Bud.js cache & temporary files (if ever run from root, less likely)
+.budfiles/
+.cache/
+
+# Log files
+# ---------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bud-debug.log*
+php_errorlog
+debug.log
+
+# Operating System generated files
+# --------------------------------
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+
+# Editor/IDE specific files & directories
+# ---------------------------------------
+.vscode/
+.idea/
+*.project
+*.swp
+*~
+*.sublime-project
+*.sublime-workspace
+nbproject/
+
+# Composer files
+# --------------
+composer.phar
+
+# Backup files
+# ------------
+*.bak
+
+# SFTP configuration files (if any)
+# sftp-config.json
+
+# -----------------------------------------------------------------------------
+# Notes for your specific project:
+#
+# 1. `/wp-content/themes/dan-press-components/`:
+#    This .gitignore assumes this theme is part of your project and should NOT be ignored by a broad rule like `/wp-content/themes/*`.
+#    The theme itself should have its own `.gitignore` (like the one we created previously) to manage its internal build files (`/public/`, `node_modules/` within the theme, etc.).
+#
+# 2. `node_modules/` at project root:
+#    If you have a `package.json` in your project root and run `npm install` or `yarn install` there,
+#    a `node_modules/` folder will be created. I've commented out ignoring it based on your previous request.
+#    Standard practice is to ignore it.
+#
+# 3. `wp-content/uploads/`:
+#    Standard practice is to ignore this as it contains user-generated content. I've commented out ignoring it
+#    based on your request to potentially include it for now.
+#
+# 4. `.lando.yml`:
+#    This file is crucial for your Lando setup and SHOULD BE committed. It's correctly not ignored.
+#
+# 5. `resources/` folder:
+#    This folder is specific to your theme `dan-press-components`. The theme's own `.gitignore` correctly does not ignore it.
+#    This root-level `.gitignore` doesn't need to address it directly, as it's nested within a directory that is (and should be) tracked.
+# -----------------------------------------------------------------------------
