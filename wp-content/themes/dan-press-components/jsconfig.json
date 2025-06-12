@@ -1,4 +1,4 @@
-// /Users/danielstill/Projects/DanPress/wp-content/themes/your-custom-theme-name/jsconfig.json
+// /Users/danielstill/Projects/DanPress/wp-content/themes/dan-press-components/jsconfig.json
 {
   "compilerOptions": {
     "baseUrl": ".", // This tells VS Code that non-relative imports are resolved relative to this file's directory

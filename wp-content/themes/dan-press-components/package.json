@@ -6,10 +6,15 @@
     "@roots/bud-preset-recommend": "^6.24.0",
     "@roots/bud-react": "^6.24.0",
     "@roots/bud-sass": "^6.24.0",
-    "@roots/bud-swc": "^6.24.0"
+    "@roots/bud-swc": "^6.24.0",
+    "@wordpress/scripts": "^30.18.0"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "scripts": {
+  "start": "wp-scripts start",
+  "build": "wp-scripts build"
   }
 }
