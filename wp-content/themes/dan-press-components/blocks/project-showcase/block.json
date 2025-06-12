@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "dan-press/project-showcase",
+  "title": "Project Showcase",
+  "category": "design",
+  "icon": "portfolio",
+  "description": "A block to feature a single portfolio project.",
+  "attributes": {
+    "projectTitle": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
