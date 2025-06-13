@@ -1,109 +1,69 @@
-# Dan Press Components - WordPress Theme
+# DanPress Portfolio Site
 
-This is a custom WordPress theme designed for modern front-end development. It uses Lando for a consistent local development environment and Bud.js for compiling assets like Sass and React.
+This repository contains the complete WordPress project for the Dan Still portfolio website. It is managed with Lando for local development and structured for modern theme and block development.
 
-## Prerequisites
+## Project Architecture
 
-Before you begin, ensure you have the following software installed on your local machine:
-
-* **Lando:** For running the local WordPress environment. [Installation Guide](https://lando.dev/download/)
-* **Node.js:** Version 20.x or higher. [Download](https://nodejs.org/)
-* **Yarn:** Version 1.22.x or higher. [Installation Guide](https://classic.yarnpkg.com/en/docs/install)
+* **Local Environment:** Managed by [Lando](https://lando.dev/). The configuration is in `.lando.yml`.
+* **CMS:** WordPress. Core files are managed as part of the Lando setup and are ignored by Git.
+* **Theme:** A custom theme located at `wp-content/themes/dan-press-components`. This theme is where all front-end development takes place.
+* **Content Blocks:** All custom content components (e.g., "Project Showcase") are built as native WordPress blocks within the theme.
 
 ---
 
-## Local Development Setup
+## Local Environment Setup
 
-Follow these steps to get the project running on your local machine.
+### Prerequisites
 
-1.  **Clone the Repository:**
+* [Lando](https://lando.dev/download/)
+* [Node.js](https://nodejs.org/) (v20.x or higher)
+* [Yarn](https://classic.yarnpkg.com/en/docs/install) (v1.22.x or higher)
+* [Composer](https://getcomposer.org/)
+
+### Quick Start
+
+1.  **Clone the repository:**
     ```bash
-    git clone [your-repository-url]
-    cd [your-project-directory]
+    git clone [https://github.com/DanStill10/DanPress.git](https://github.com/DanStill10/DanPress.git)
+    cd DanPress
     ```
 
 2.  **Start Lando:**
-    From the project root, start the Lando containers. This will provision your web server and database.
+    This command will build the containers, install WordPress, and provide you with local access URLs.
     ```bash
     lando start
     ```
-    Once it's running, you can access the local site at the URL provided by Lando (e.g., `http://dan-still-wordpress-site.lndo.site/`).
 
-3.  **Install Front-End Dependencies:**
-    Navigate to the theme directory and install the necessary Node.js packages.
+3.  **Install Dependencies:**
+    The project uses both PHP and Node.js dependencies. Install them from the theme directory.
     ```bash
     cd wp-content/themes/dan-press-components
+    composer install
     yarn install
     ```
 
-4.  **Run the Development Build:**
-    To watch for file changes and automatically recompile assets, run the following command from the theme directory.
+4.  **Start Development:**
+    Front-end development is handled entirely within the theme. See the theme's README for detailed instructions on compiling assets and building blocks.
     ```bash
-    npx bud build --watch
-    ```
-    *Note: You must manually refresh your browser to see changes. See the "Current Status" section for why we use this command instead of `npx bud dev`.*
-
----
-
-## Build Commands
-
-All commands should be run from within the theme directory (`wp-content/themes/dan-press-components`).
-
-* **Development (Watch Mode):** Compiles assets and watches for changes. **This is the recommended command for development.**
-    ```bash
-    npx bud build --watch
-    ```
-
-* **Production Build:** Compiles and minifies assets for production.
-    ```bash
-    npx bud build
+    # Navigate to the theme directory to begin development
+    cd wp-content/themes/dan-press-components
+    
+    # See this theme's README.md for the next steps.
     ```
 
 ---
 
-## Troubleshooting Journey & Project History
+## Deployment & CI/CD
 
-This project encountered a series of complex and interconnected issues during its initial setup. This log is provided to help future developers understand the state of the project and avoid repeating these debugging steps.
+This project is structured to be deployed via a CI/CD pipeline.
 
-### Phase 1: Environment & Command Execution
-* **Initial Error:** `lando yarn dev` failed with `executable file not found in $PATH`.
-* **Resolution:** Confirmed that Node.js build tools must be run on the **host machine (the Mac)**, not inside the Lando container. The local Bud.js server runs on the host and proxies to the Lando site.
+* **`.gitignore`:** The repository is configured to ignore WordPress core files, build artifacts (`/public`, `/build`), and dependency directories (`/vendor`, `/node_modules`).
+* **Build Steps:** A future pipeline will be responsible for:
+    1.  Running `composer install --no-dev` to get production PHP dependencies.
+    2.  Running `yarn install` to get Node.js dependencies.
+    3.  Running `npx bud build` to compile production theme assets.
+    4.  Running `yarn build` (from `wp-scripts`) to compile production block assets.
+    5.  Deploying the theme files to the production server.
 
-### Phase 2: The Stubborn `setProxyUrl` Error
-* **Error:** Running `npx bud dev` repeatedly failed with `TypeError: Cannot read properties of undefined (reading 'setProxyUrl')`.
-* **Diagnosis:** This was the most difficult issue, caused by a **severe version mismatch** between `@roots/bud` and its various extensions (e.g., `@roots/bud-sass`, `@roots/sage`). The project had a mix of `v6.7.3` and `v6.24.0` packages, which are incompatible.
-* **Resolution:**
-    1.  Manually edited `package.json` to align **every single `@roots/*` package** to the same version (`^6.24.0`).
-    2.  Performed a complete "scorched earth" reinstall by deleting `node_modules`, `yarn.lock`, `.budfiles`, `.cache`, and clearing the Yarn cache (`yarn cache clean`) before running `yarn install`. This ensured a perfectly consistent dependency tree.
-
-### Phase 3: Build & Configuration Errors
-After resolving the versioning crisis, a series of smaller configuration errors appeared.
-
-1.  **`Module not found` Error:**
-    * **Problem:** The build failed because it couldn't find `src/index.js`.
-    * **Resolution:** The theme's source files are in `/resources`, not `/src`. The `bud.config.js` was updated with `app.setPath('@src', 'resources')` and the correct entrypoints.
-
-2.  **`package.json` Integrity Errors:**
-    * **Problem:** `yarn install` failed due to `Unexpected end of JSON input` and later `Not Found` for a package.
-    * **Resolution:** The `package.json` file was manually rebuilt in a code editor to fix syntax errors. A typo in a package name (`@roots/bud-preset-recommended`) was corrected to `@roots/bud-preset-recommend`.
-
-3.  **ES Module `import` Error:**
-    * **Problem:** After fixing dependencies, the build failed with `Cannot use import statement outside a module`.
-    * **Resolution:** This was resolved by adding `"type": "module"` to `package.json`. However, this change unexpectedly caused the original `setProxyUrl` error to return, pointing to a likely bug in the tool itself. The final fix was to **remove** `"type": "module"` and **rename `bud.config.js` to `bud.config.mjs`**, which correctly isolates the module context to just the config file.
-
-### Phase 4: Final Bug Confirmation
-* **Problem:** Even with a perfect configuration, `npx bud dev` continued to fail with the `setProxyUrl` error, while `npx bud build` worked perfectly.
-* **Conclusion:** This is a confirmed bug within the Bud.js (`v6.24.0`) framework, specific to how the `dev` service initializes in this environment.
-
----
-
-## Current Status & Development Workflow
-
-* **Primary Issue:** As of this writing, `npx bud dev` is **unusable** due to a persistent internal bug in Bud.js. A bug report has been filed with the Roots team.
-* **Recommended Workflow:** Use the watch mode for development. It provides automatic recompilation on file changes.
-    ```bash
-    npx bud build --watch
-    ```
-* **Limitation:** This workflow **does not include Hot Module Replacement (HMR)**. You will need to **manually refresh your browser** to see updated styles and scripts. This is a temporary measure until the bug in `bud dev` is resolved by the framework authors.
-
+This ensures a lean repository and a consistent, automated build process.
 
