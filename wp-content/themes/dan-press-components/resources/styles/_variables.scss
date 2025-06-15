@@ -1,0 +1,23 @@
+// --- Add sass attributes ---
+@use 'sass:color';
+
+// --- Font Families ---
+$font-title:   'Jura', sans-serif;
+$font-heading: 'Sanchez', serif;
+$font-body:    'Noto Sans', sans-serif;
+
+// --- Color Palette ---
+$magnolia:    #ece8efff;
+$moonstone:   #53b3cbff;
+$steel-blue:  #2d7dd2ff;
+$mantis:      #78bc61ff;
+$rich-black:  #0d1f2dff;
+
+// --- Semantic Variables ---
+$color-primary:   $steel-blue;
+$color-secondary: $moonstone;
+$color-accent:    $mantis;
+
+$color-background: $magnolia;
+$color-text:       $rich-black;
+$color-text-light: color.adjust($rich-black, $lightness: 25%);

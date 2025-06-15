@@ -1,0 +1,154 @@
+// ==========================================================================
+// Global Styles Boilerplate
+// ==========================================================================
+// This file sets up foundational styles, including a CSS reset, typography
+// defaults, and a sticky footer layout.
+
+// Importing most important sass essential files in order
+@import 'variables';
+
+// --------------------------------------------------------------------------
+// 1. CSS Reset & Box-Sizing
+// --------------------------------------------------------------------------
+// A simple, modern reset to ensure consistent box-sizing across all elements.
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+// --------------------------------------------------------------------------
+// 2. Sticky Footer & Site Layout
+// --------------------------------------------------------------------------
+// This uses modern Flexbox to make the footer "stick" to the bottom of the
+// viewport, even on pages with very little content.
+// It requires the HTML structure we previously set up (header.php, footer.php).
+
+html,
+body {
+  height: 100%; // Ensure the html and body take up the full viewport height.
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: $font-body;
+  color: $color-text;
+  background-color: $color-background;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; // Improves font rendering on WebKit browsers.
+  margin: 0; // Remove default body margin.
+}
+
+// The #content div is the one we opened in header.php and closed in footer.php.
+// flex-grow: 1 tells this element to expand and take up all available empty
+// space, pushing the footer down to the bottom.
+.site-content {
+  flex-grow: 1;
+}
+
+// A general container class for centering content.
+.container {
+  width: 90%;
+  max-width: 1200px; // A common max-width for content.
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// --------------------------------------------------------------------------
+// 3. Typography Defaults
+// --------------------------------------------------------------------------
+// Set up a clean, readable typographic scale using your chosen fonts.
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 700; // Assuming you loaded a bold weight for headings.
+  line-height: 1.2;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: $color-primary;
+}
+
+// Example sizing (adjust as needed)
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: darken($color-primary, 10%);
+    text-decoration: underline;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 4. Images & Media
+// --------------------------------------------------------------------------
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+// --------------------------------------------------------------------------
+// 5. Basic Form Styling
+// --------------------------------------------------------------------------
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+textarea {
+  padding: 0.75em;
+  border: 1px solid lighten($color-text, 60%);
+  border-radius: 4px;
+  width: 100%;
+  font-family: $font-body;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
+  }
+}
+
+button,
+input[type="submit"] {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background-color: $color-primary;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: $font-heading;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: darken($color-primary, 10%);
+  }
+}
+
