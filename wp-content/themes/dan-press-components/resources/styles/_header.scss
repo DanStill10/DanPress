@@ -1,0 +1,62 @@
+.site-header {
+  padding: 1.5rem 0;
+  background-color: transparent; // Or use a color like darken($color-background, 5%);
+  border-bottom: 1px solid lighten($color-text, 70%);
+
+  .site-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.site-branding {
+  .site-title {
+    font-family: $font-title;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-text;
+    text-decoration: none;
+    margin: 0;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  .site-description {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $color-text-light;
+    margin: 0;
+  }
+}
+
+.main-navigation {
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 2rem; // Creates space between menu items
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    font-family: $font-heading;
+    font-weight: 700;
+    text-decoration: none;
+    color: $color-text;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid transparent; // For the hover effect
+
+    &:hover,
+    &.current-menu-item a { // Styles the current page's menu item
+      color: $color-primary;
+      border-bottom-color: $color-primary;
+    }
+  }
+}
