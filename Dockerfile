@@ -13,9 +13,6 @@ RUN docker-php-ext-install mysqli intl opcache
 # Install Imagick via PECL
 RUN pecl install imagick && docker-php-ext-enable imagick
 
-# Fix: disable mpm_event (default), enable mpm_prefork (required by mod_php)
-RUN a2dismod mpm_event && a2enmod mpm_prefork
-
 # Enable Apache mod_rewrite for WordPress permalinks
 RUN a2enmod rewrite
 
@@ -40,5 +37,15 @@ COPY . ${APACHE_DOCUMENT_ROOT}
 
 # Set proper permissions
 RUN chown -R www-data:www-data ${APACHE_DOCUMENT_ROOT}
+
+# Startup fix: disable conflicting MPMs at container start (Railway re-enables them at runtime)
+CMD ["bash", "-lc", "\
+  set -eux; \
+  a2dismod mpm_event mpm_worker || true; \
+  rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true; \
+  a2enmod mpm_prefork; \
+  apache2ctl -t; \
+  exec apache2-foreground \
+"]
 
 EXPOSE 80
