@@ -13,6 +13,9 @@ RUN docker-php-ext-install mysqli intl opcache
 # Install Imagick via PECL
 RUN pecl install imagick && docker-php-ext-enable imagick
 
+# Fix: disable mpm_event (default), enable mpm_prefork (required by mod_php)
+RUN a2dismod mpm_event && a2enmod mpm_prefork
+
 # Enable Apache mod_rewrite for WordPress permalinks
 RUN a2enmod rewrite
 
