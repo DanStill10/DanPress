@@ -1,0 +1,32 @@
+/* ==========================================================================
+   DSD Project Showcase — Block Editor Styles
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Admin Banner
+   -------------------------------------------------------------------------- */
+
+.dsd-admin-banner {
+  font-family: var(--dsd-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--dsd-text-main);
+  color: var(--dsd-bg);
+  padding: 4px 8px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   Inline Input Layout
+   -------------------------------------------------------------------------- */
+
+.dsd-inline-inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.dsd-inline-inputs > div {
+  flex: 1;
+}

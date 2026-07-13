@@ -25,10 +25,10 @@ require $composer;
  */
 function dan_press_enqueue_fonts() {
     wp_enqueue_style(
-        'dan-press-google-fonts', // A unique name for our font stylesheet
-        'https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sanchez:ital@0;1&display=swap',
-        [], // No dependencies
-        null // No version number
+        'dan-press-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        [],
+        null
     );
 }
 add_action( 'wp_enqueue_scripts', 'dan_press_enqueue_fonts' );
@@ -45,16 +45,8 @@ add_action( 'wp_enqueue_scripts', 'dan_press_enqueue_fonts' );
 |
 */
 function danpress_enqueue_theme_assets() {
-    // Step 1: Enqueue Google Fonts first.
-    wp_enqueue_style(
-        'dan-press-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Jura:wght@400;700&family=Noto+Sans:wght@400;700&family=Sanchez&display=swap',
-        [],
-        null
-    );
-
-    // Step 2: Check if we are in development or production.
-    // You can set define('WP_ENV', 'development'); in your wp-config.php file.
+    // Step 1: Check if we are in development or production.
+    // You can set define('WP_ENV', 'development'); in your wp-config.php.
     if ( defined( 'WP_ENV' ) && WP_ENV === 'development' ) {
         // --- DEVELOPMENT MODE ---
         // Load assets directly from the Bud dev server URL.
@@ -66,9 +58,6 @@ function danpress_enqueue_theme_assets() {
             ['dan-press-google-fonts'],
             null
         );
-
-        // You can enqueue app.js here later if needed
-        // wp_enqueue_script('dan-press-app', "{$dev_url}/app.js", [], null, true);
 
     } else {
         // --- PRODUCTION MODE ---
@@ -99,4 +88,3 @@ function dan_press_register_nav_menu() {
     register_nav_menu( 'primary_menu', __( 'Primary Menu', 'dan-press' ) );
 }
 add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
-

@@ -1,9 +1,16 @@
+@import 'variables';
+
+// ==========================================================================
+// Footer — DSD Design System
+// ==========================================================================
+
 .site-footer {
   padding: 2rem 0;
-  background-color: $rich-black; // Using your dark color for contrast
-  color: lighten($magnolia, 5%);
-  font-family: $font-body;
+  background-color: var(--dsd-bg);
+  color: var(--dsd-text-main);
+  font-family: var(--dsd-font-sans);
   font-size: 0.9rem;
+  border-top: 1px solid var(--dsd-border);
 
   .site-footer-inner {
     display: flex;
@@ -22,18 +29,24 @@
   }
 
   a {
-    color: white;
-    text-decoration: none;
+    font-family: var(--dsd-font-mono);
+    font-size: 0.75rem;
     font-weight: 700;
+    color: var(--dsd-text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 
     &:hover {
-      text-decoration: underline;
-      color: $color-secondary;
+      color: var(--dsd-accent);
+      text-decoration: none;
     }
   }
 }
 
 .site-info {
-  color: $color-text-light;
+  font-family: var(--dsd-font-mono);
+  font-size: 0.7rem;
+  color: var(--dsd-text-muted);
+  letter-spacing: 0.02em;
 }
-

@@ -12,11 +12,11 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php wp_head(); // CRITICAL: WordPress hook for plugins and styles ?>
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); // Important hook for accessibility and plugins ?>
+<?php wp_body_open(); ?>
 
 <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'dan-press' ); ?></a>
 
@@ -30,13 +30,16 @@
             <p class="site-description">From complex problems to elegant solutions.</p>
         </div><!-- .site-branding -->
 
+        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+            <span class="hamburger-icon"></span>
+            <span class="screen-reader-text">Menu</span>
+        </button>
+
         <nav id="site-navigation" class="main-navigation">
             <?php
-            // This will display your primary navigation menu.
-            // Go to Appearance > Menus in your WordPress admin to create it.
             wp_nav_menu(
                 array(
-                    'theme_location' => 'primary_menu', // You'll need to register this location.
+                    'theme_location' => 'primary_menu',
                     'menu_id'        => 'primary-menu',
                 )
             );

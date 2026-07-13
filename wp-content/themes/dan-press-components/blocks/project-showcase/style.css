@@ -1,0 +1,106 @@
+/* ==========================================================================
+   DSD Project Showcase — Block Styles (Front-End + Editor)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Card Container
+   -------------------------------------------------------------------------- */
+
+.dsd-showcase {
+  font-family: var(--dsd-font-sans);
+  background: var(--dsd-bg);
+  border: 1px solid var(--dsd-border);
+  padding: 24px;
+  color: var(--dsd-text-main);
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Card Top Bar (Badge + Tech Stack)
+   -------------------------------------------------------------------------- */
+
+.dsd-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--dsd-border);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.dsd-badge {
+  font-family: var(--dsd-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dsd-accent);
+  border: 1px solid var(--dsd-accent);
+  padding: 2px 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dsd-tech-stack {
+  font-family: var(--dsd-font-mono);
+  font-size: 11px;
+  color: var(--dsd-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Card Title
+   -------------------------------------------------------------------------- */
+
+.dsd-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  color: var(--dsd-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   Card Description
+   -------------------------------------------------------------------------- */
+
+.dsd-card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dsd-text-muted);
+  margin: 0 0 20px 0;
+}
+
+/* --------------------------------------------------------------------------
+   Card Action Link
+   -------------------------------------------------------------------------- */
+
+.dsd-card-action {
+  border-top: 1px solid var(--dsd-border);
+  padding-top: 16px;
+}
+
+.dsd-link {
+  font-family: var(--dsd-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dsd-text-main);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dsd-link:hover {
+  color: var(--dsd-accent);
+  text-decoration: none;
+}
+
+.dsd-link:hover .dsd-arrow {
+  transform: translateX(4px);
+  color: var(--dsd-accent);
+}
+
+.dsd-arrow {
+  margin-left: 4px;
+  transition: transform 0.1s ease;
+}

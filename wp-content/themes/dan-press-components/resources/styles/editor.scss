@@ -1,0 +1,89 @@
+// ==========================================================================
+// Editor Styles — DSD Design System
+// ==========================================================================
+// Gutenberg admin overrides to ensure the block editor respects DSD tokens.
+// This file is compiled by Bud.js and loaded as the theme's editor stylesheet.
+
+@import 'variables';
+
+// --------------------------------------------------------------------------
+// Force Gutenberg text controls to obey DSD framework
+// --------------------------------------------------------------------------
+
+.components-text-control__input {
+  border: 1px solid var(--dsd-border) !important;
+  border-radius: 0px !important;
+  font-family: var(--dsd-font-mono) !important;
+  font-size: 0.875rem !important;
+  background-color: var(--dsd-bg) !important;
+  color: var(--dsd-text-main) !important;
+}
+
+.components-text-control__input:focus {
+  border-color: var(--dsd-accent) !important;
+  box-shadow: 0 0 0 1px var(--dsd-accent) !important;
+}
+
+// --------------------------------------------------------------------------
+// Select controls
+// --------------------------------------------------------------------------
+
+.components-select-control__input {
+  border: 1px solid var(--dsd-border) !important;
+  border-radius: 0px !important;
+  font-family: var(--dsd-font-mono) !important;
+  background-color: var(--dsd-bg) !important;
+  color: var(--dsd-text-main) !important;
+}
+
+// --------------------------------------------------------------------------
+// Panel headers
+// --------------------------------------------------------------------------
+
+.components-panel__body-title {
+  font-family: var(--dsd-font-mono) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+// --------------------------------------------------------------------------
+// Block editor canvas — dark background
+// --------------------------------------------------------------------------
+
+.editor-styles-wrapper {
+  background-color: var(--dsd-bg);
+  color: var(--dsd-text-main);
+  font-family: var(--dsd-font-sans);
+}
+
+// --------------------------------------------------------------------------
+// Block toolbar
+// --------------------------------------------------------------------------
+
+.block-editor-block-toolbar {
+  border-radius: 0px !important;
+}
+
+// --------------------------------------------------------------------------
+// Inspector controls sidebar
+// --------------------------------------------------------------------------
+
+.components-panel {
+  background-color: var(--dsd-bg) !important;
+  color: var(--dsd-text-main) !important;
+}
+
+.components-panel__body {
+  border-top-color: var(--dsd-border) !important;
+}
+
+.components-base-control__label {
+  font-family: var(--dsd-font-mono) !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: var(--dsd-text-muted) !important;
+}

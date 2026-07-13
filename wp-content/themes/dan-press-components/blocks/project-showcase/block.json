@@ -1,16 +1,34 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "dan-press/project-showcase",
-  "title": "Project Showcase",
-  "category": "design",
+  "name": "dsd-lib/showcase-card",
+  "title": "DSD Project Showcase",
+  "category": "theme",
   "icon": "portfolio",
-  "description": "A block to feature a single portfolio project.",
+  "description": "A high-contrast project card featuring deployment status, tech stack, and repository link.",
   "attributes": {
-    "projectTitle": {
-      "type": "string"
+    "title": {
+      "type": "string",
+      "default": "PROJECT_NAME"
+    },
+    "tagline": {
+      "type": "string",
+      "default": "System microservice or architectural feature."
+    },
+    "envTag": {
+      "type": "string",
+      "default": "PRODUCTION"
+    },
+    "techList": {
+      "type": "string",
+      "default": "WordPress, React, Node.js"
+    },
+    "repoLink": {
+      "type": "string",
+      "default": "#"
     }
   },
   "editorScript": "file:./index.js",
-  "render": "file:./render.php"
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
 }

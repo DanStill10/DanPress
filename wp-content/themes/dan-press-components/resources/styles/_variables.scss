@@ -1,23 +1,60 @@
-// --- Add sass attributes ---
-@use 'sass:color';
+// ==========================================================================
+// DSD Design System Tokens
+// ==========================================================================
+// All design decisions flow from this file. CSS custom properties are defined
+// on :root so they persist at runtime. SCSS aliases reference them for
+// compile-time functions (darken/lighten) where possible.
 
-// --- Font Families ---
-$font-title:   'Jura', sans-serif;
-$font-heading: 'Sanchez', serif;
-$font-body:    'Noto Sans', sans-serif;
+// --------------------------------------------------------------------------
+// 1. CSS Custom Properties (Runtime Tokens)
+// --------------------------------------------------------------------------
 
-// --- Color Palette ---
-$magnolia:    #ece8efff;
-$moonstone:   #53b3cbff;
-$steel-blue:  #2d7dd2ff;
-$mantis:      #78bc61ff;
-$rich-black:  #0d1f2dff;
+:root {
+  // --- Surface ---
+  --dsd-bg: #111111;
+  --dsd-bg-elevated: #1a1a1a;
 
-// --- Semantic Variables ---
-$color-primary:   $steel-blue;
-$color-secondary: $moonstone;
-$color-accent:    $mantis;
+  // --- Typography ---
+  --dsd-text-main: #ffffff;
+  --dsd-text-muted: #999999;
 
-$color-background: $magnolia;
-$color-text:       $rich-black;
-$color-text-light: color.adjust($rich-black, $lightness: 25%);
+  // --- Borders ---
+  --dsd-border: #333333;
+
+  // --- Accent ---
+  --dsd-accent: #0066FF;
+  --dsd-accent-hover: #0052cc;
+
+  // --- Font Stacks ---
+  --dsd-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --dsd-font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+// --------------------------------------------------------------------------
+// 2. SCSS Aliases (Compile-Time References)
+// --------------------------------------------------------------------------
+// These let existing SCSS partials keep using $variable syntax.
+// NOTE: darken()/lighten() cannot resolve var() values at compile time.
+//       Use --dsd-accent-hover or hardcoded values for hover states.
+
+// Font families
+$font-body:  var(--dsd-font-sans);
+$font-mono:  var(--dsd-font-mono);
+
+// Colors
+$color-text:        var(--dsd-text-main);
+$color-text-muted:  var(--dsd-text-muted);
+$color-bg:          var(--dsd-bg);
+$color-bg-elevated: var(--dsd-bg-elevated);
+$color-border:      var(--dsd-border);
+$color-accent:      var(--dsd-accent);
+
+// Legacy aliases (map old names to new tokens for partial compatibility)
+$color-primary:     var(--dsd-accent);
+$color-secondary:   var(--dsd-accent);
+$color-background:  var(--dsd-bg);
+$color-text-light:  var(--dsd-text-muted);
+
+// Named colors (kept for any direct references)
+$rich-black:  #111111;
+$magnolia:    #111111;
