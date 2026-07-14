@@ -1,0 +1,11 @@
+.git
+.github
+.vscode
+.idea
+.lando.yml
+.dockerignore
+Dockerfile
+*.log
+*.md
+!wp-content/themes/dan-press-components/README.md
+php.ini

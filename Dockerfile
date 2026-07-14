@@ -1,19 +1,52 @@
+# =============================================================================
+# Stage 1: Build (installs dependencies & compiles theme assets)
+# =============================================================================
+FROM php:8.2-apache AS build
+
+# Install Node.js 20 and Yarn
+RUN apt-get update && apt-get install -y ca-certificates curl gnupg \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update && apt-get install -y nodejs \
+    && npm install -g yarn \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+COPY . .
+
+# Install theme Composer dependencies (autoloader)
+WORKDIR /var/www/html/wp-content/themes/dan-press-components
+RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+# Install theme Node dependencies and build assets
+RUN yarn install --frozen-lockfile
+RUN yarn build
+RUN npx wp-scripts build
+
+# Clean up build-only artifacts from the final image
+RUN rm -rf node_modules .budfiles .cache
+
+# =============================================================================
+# Stage 2: Production (PHP + Apache with built assets)
+# =============================================================================
 FROM php:8.2-apache
 
-# Install system dependencies for PHP extensions
+# System dependencies for PHP extensions
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libmagickwand-dev \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions required by WordPress
+# PHP extensions
 RUN docker-php-ext-install mysqli intl opcache
-
-# Install Imagick via PECL
 RUN pecl install imagick && docker-php-ext-enable imagick
 
-# Enable Apache mod_rewrite for WordPress permalinks
+# Apache: enable mod_rewrite for WordPress permalinks
 RUN a2enmod rewrite
 
 # Recommended PHP settings for WordPress
@@ -27,13 +60,15 @@ RUN { \
     echo 'allow_url_include = Off'; \
 } > /usr/local/etc/php/conf.d/wordpress-recommended.ini
 
-# Set document root and copy WordPress files
+# Set document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 WORKDIR ${APACHE_DOCUMENT_ROOT}
-COPY . ${APACHE_DOCUMENT_ROOT}
+
+# Copy built application from the build stage
+COPY --from=build ${APACHE_DOCUMENT_ROOT} ${APACHE_DOCUMENT_ROOT}
 
 # Set proper permissions
 RUN chown -R www-data:www-data ${APACHE_DOCUMENT_ROOT}
