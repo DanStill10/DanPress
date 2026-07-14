@@ -39,7 +39,7 @@ COPY . ${APACHE_DOCUMENT_ROOT}
 RUN chown -R www-data:www-data ${APACHE_DOCUMENT_ROOT}
 
 # Startup fix: disable conflicting MPMs at container start (Railway re-enables them at runtime)
-CMD ["bash", "-lc", "\
+CMD ["bash", "-c", "\
   set -eux; \
   a2dismod mpm_event mpm_worker || true; \
   rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true; \
