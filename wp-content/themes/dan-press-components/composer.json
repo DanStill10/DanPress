@@ -1,47 +1,18 @@
 {
-  "name": "roots/sage",
+  "name": "danstill/dan-press-components",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "WordPress starter theme with a modern development workflow",
-  "homepage": "https://roots.io/sage/",
+  "description": "WordPress theme for the Dan Press portfolio site",
   "authors": [
     {
-      "name": "Ben Word",
-      "email": "ben@benword.com",
-      "homepage": "https://github.com/retlehs"
-    },
-    {
-      "name": "Scott Walkinshaw",
-      "email": "scott.walkinshaw@gmail.com",
-      "homepage": "https://github.com/swalkinshaw"
-    },
-    {
-      "name": "QWp6t",
-      "email": "hi@qwp6t.me",
-      "homepage": "https://github.com/qwp6t"
-    },
-    {
-      "name": "Brandon Nifong",
-      "email": "brandon@tendency.me",
-      "homepage": "https://github.com/log1x"
+      "name": "Daniel Still"
     }
   ],
-  "keywords": [
-    "wordpress"
-  ],
-  "support": {
-    "issues": "https://github.com/roots/sage/issues",
-    "forum": "https://discourse.roots.io/"
-  },
   "require": {
-    "php": "^7.4|^8.0"
+    "php": "^8.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "3.7.1"
-  },
-  "suggest": {
-    "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0).",
-    "log1x/sage-svg": "A useful SVG directive for inlining SVG's within Blade views (^1.0)."
   },
   "config": {
     "optimize-autoloader": true,

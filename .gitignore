@@ -19,7 +19,11 @@ wp-config.php
 
 # WP-CONTENT Folder
 # -----------------
-# In a CI/CD workflow, user uploads should not be in the repository.
+# Plugins and mu-plugins are installed at deploy time, not tracked in Git.
+/wp-content/plugins/
+/wp-content/mu-plugins/
+
+# User uploads should not be in the repository.
 # They should be synced separately or stored on a service like S3.
 /wp-content/uploads/
 

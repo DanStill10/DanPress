@@ -5,6 +5,10 @@
 .lando.yml
 .dockerignore
 Dockerfile
+railway.json
+wp-config.php
+license.txt
+readme.html
 *.log
 *.md
 !wp-content/themes/dan-press-components/README.md
