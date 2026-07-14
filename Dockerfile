@@ -25,7 +25,7 @@ RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoload
 # Install theme Node dependencies and build assets
 RUN yarn install --frozen-lockfile
 RUN yarn build
-RUN npx wp-scripts build
+RUN npx bud build
 
 # Clean up build-only artifacts from the final image
 RUN rm -rf node_modules .budfiles .cache
@@ -73,12 +73,17 @@ COPY --from=build ${APACHE_DOCUMENT_ROOT} ${APACHE_DOCUMENT_ROOT}
 # Set proper permissions
 RUN chown -R www-data:www-data ${APACHE_DOCUMENT_ROOT}
 
+# Default port (Railway overrides this at runtime)
+ENV PORT=80
+
 # Startup fix: disable conflicting MPMs at container start (Railway re-enables them at runtime)
 CMD ["bash", "-c", "\
   set -eux; \
   a2dismod mpm_event mpm_worker || true; \
   rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true; \
   a2enmod mpm_prefork; \
+  sed -i 's/Listen 80/Listen ${PORT}/' /etc/apache2/ports.conf; \
+  sed -i 's/:80/:${PORT}/' /etc/apache2/sites-available/000-default.conf; \
   apache2ctl -t; \
   exec apache2-foreground \
 "]
