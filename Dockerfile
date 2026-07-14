@@ -49,6 +49,9 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 # Apache: enable mod_rewrite for WordPress permalinks
 RUN a2enmod rewrite
 
+# Allow WordPress .htaccess rewrite rules to take effect
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
 # Recommended PHP settings for WordPress
 RUN { \
     echo 'upload_max_filesize = 64M'; \
