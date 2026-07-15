@@ -4,7 +4,7 @@
 FROM php:8.2-apache AS build
 
 # Install Node.js 20 and Yarn
-RUN apt-get update && apt-get install -y ca-certificates curl gnupg \
+RUN apt-get update && apt-get install -y ca-certificates curl gnupg unzip \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
