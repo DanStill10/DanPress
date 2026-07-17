@@ -6,7 +6,6 @@
 .dockerignore
 Dockerfile
 railway.json
-wp-config.php
 license.txt
 readme.html
 *.log

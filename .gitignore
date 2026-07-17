@@ -12,7 +12,7 @@ readme.html
 xmlrpc.php
 
 # CRITICAL: Ignore the WordPress configuration file for security.
-wp-config.php
+# wp-config.php
 
 # Lando specific files to ignore (if any beyond .lando.yml)
 # .lando.tmp/

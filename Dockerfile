@@ -16,6 +16,13 @@ RUN apt-get update && apt-get install -y ca-certificates curl gnupg unzip \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+# Download WordPress core (gitignored files won't be in the build context)
+RUN curl -fsSL https://wordpress.org/latest.tar.gz -o /tmp/wordpress.tar.gz \
+    && tar -xzf /tmp/wordpress.tar.gz -C /tmp \
+    && cp -a /tmp/wordpress/* /var/www/html/ \
+    && rm -rf /tmp/wordpress /tmp/wordpress.tar.gz
+
 COPY . .
 
 # Install WordPress plugins (downloaded from WordPress.org at build time)
@@ -78,8 +85,14 @@ RUN { \
 
 # Set document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+
+# Grant explicit directory permissions for /var/www/html
+RUN printf '<Directory /var/www/html>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>\n' >> /etc/apache2/apache2.conf
 
 WORKDIR ${APACHE_DOCUMENT_ROOT}
 
@@ -90,7 +103,7 @@ COPY --from=build ${APACHE_DOCUMENT_ROOT} ${APACHE_DOCUMENT_ROOT}
 RUN chown -R www-data:www-data ${APACHE_DOCUMENT_ROOT}
 
 # Default port (Railway overrides this at runtime)
-ENV PORT=80
+ENV PORT=8080
 
 # Startup fix: disable conflicting MPMs at container start (Railway re-enables them at runtime)
 CMD ["bash", "-c", "\
@@ -98,10 +111,10 @@ CMD ["bash", "-c", "\
   a2dismod mpm_event mpm_worker || true; \
   rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true; \
   a2enmod mpm_prefork; \
-  sed -i 's/Listen 80/Listen ${PORT}/' /etc/apache2/ports.conf; \
-  sed -i 's/:80/:${PORT}/' /etc/apache2/sites-available/000-default.conf; \
+  sed -i \"s/Listen .*/Listen ${PORT}/\" /etc/apache2/ports.conf; \
+  sed -i \"s/<VirtualHost _default_:80>/<VirtualHost *:${PORT}>/\" /etc/apache2/sites-available/000-default.conf; \
   apache2ctl -t; \
   exec apache2-foreground \
 "]
 
-EXPOSE 80
+EXPOSE 8080
