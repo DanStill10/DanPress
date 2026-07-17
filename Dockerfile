@@ -28,15 +28,15 @@ COPY . .
 # Install WordPress plugins (downloaded from WordPress.org at build time)
 RUN mkdir -p wp-content/plugins \
     && curl -fsSL -o /tmp/wpforms.zip https://downloads.wordpress.org/plugin/wpforms-lite.zip \
-    && unzip -q /tmp/wpforms.zip -d wp-content/plugins && rm /tmp/wpforms.zip \
+    && unzip -qo /tmp/wpforms.zip -d wp-content/plugins && rm /tmp/wpforms.zip \
     && curl -fsSL -o /tmp/updraftplus.zip https://downloads.wordpress.org/plugin/updraftplus.zip \
-    && unzip -q /tmp/updraftplus.zip -d wp-content/plugins && rm /tmp/updraftplus.zip \
+    && unzip -qo /tmp/updraftplus.zip -d wp-content/plugins && rm /tmp/updraftplus.zip \
     && curl -fsSL -o /tmp/acf.zip https://downloads.wordpress.org/plugin/advanced-custom-fields.zip \
-    && unzip -q /tmp/acf.zip -d wp-content/plugins && rm /tmp/acf.zip \
+    && unzip -qo /tmp/acf.zip -d wp-content/plugins && rm /tmp/acf.zip \
     && curl -fsSL -o /tmp/ai1wm.zip https://downloads.wordpress.org/plugin/all-in-one-wp-migration.zip \
-    && unzip -q /tmp/ai1wm.zip -d wp-content/plugins && rm /tmp/ai1wm.zip \
+    && unzip -qo /tmp/ai1wm.zip -d wp-content/plugins && rm /tmp/ai1wm.zip \
     && curl -fsSL -o /tmp/akismet.zip https://downloads.wordpress.org/plugin/akismet.zip \
-    && unzip -q /tmp/akismet.zip -d wp-content/plugins && rm /tmp/akismet.zip
+    && unzip -qo /tmp/akismet.zip -d wp-content/plugins && rm /tmp/akismet.zip
 
 # Install theme Composer dependencies (autoloader)
 WORKDIR /var/www/html/wp-content/themes/dan-press-components
