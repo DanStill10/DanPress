@@ -59,6 +59,14 @@ function danpress_enqueue_theme_assets() {
             null
         );
 
+        wp_enqueue_script(
+            'dan-press-app',
+            "{$dev_url}/app.js",
+            [],
+            null,
+            true
+        );
+
     } else {
         // --- PRODUCTION MODE ---
         // Load assets from the /public directory using the manifest.
@@ -79,6 +87,19 @@ function danpress_enqueue_theme_assets() {
                     );
                 }
             }
+
+            // Enqueue the main script from the manifest.
+            if ( ! empty( $manifest['app']['js'] ) ) {
+                foreach ( $manifest['app']['js'] as $js_file ) {
+                    wp_enqueue_script(
+                        'dan-press-app',
+                        "{$dist_uri}/{$js_file}",
+                        [],
+                        null,
+                        true
+                    );
+                }
+            }
         }
     }
 }
@@ -88,3 +109,88 @@ function dan_press_register_nav_menu() {
     register_nav_menu( 'primary_menu', __( 'Primary Menu', 'dan-press' ) );
 }
 add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
+
+/*
+|--------------------------------------------------------------------------
+| Customizer: Hero Section Fields
+|--------------------------------------------------------------------------
+*/
+function dsd_hero_customize_register( $wp_customize ) {
+
+    // Panel
+    $wp_customize->add_panel( 'dsd_hero_panel', array(
+        'title'    => __( 'Hero Section', 'dan-press' ),
+        'priority' => 30,
+    ) );
+
+    // Section
+    $wp_customize->add_section( 'dsd_hero_section', array(
+        'title' => __( 'Hero Content', 'dan-press' ),
+        'panel' => 'dsd_hero_panel',
+    ) );
+
+    // --- Cycling Words ---
+    $wp_customize->add_setting( 'hero_words', array(
+        'default'           => 'Solve, Build, Ship',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'hero_words', array(
+        'label'   => __( 'Cycling Words (comma-separated)', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'text',
+    ) );
+
+    // --- Subtitle ---
+    $wp_customize->add_setting( 'hero_subtitle', array(
+        'default'           => 'From complex problems to elegant solutions.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'hero_subtitle', array(
+        'label'   => __( 'Subtitle', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'text',
+    ) );
+
+    // --- Primary CTA ---
+    $wp_customize->add_setting( 'hero_cta_primary_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'hero_cta_primary_text', array(
+        'label'   => __( 'Primary Button Text', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'hero_cta_primary_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'hero_cta_primary_url', array(
+        'label'   => __( 'Primary Button URL', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'url',
+    ) );
+
+    // --- Secondary CTA ---
+    $wp_customize->add_setting( 'hero_cta_secondary_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'hero_cta_secondary_text', array(
+        'label'   => __( 'Secondary Button Text', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'hero_cta_secondary_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'hero_cta_secondary_url', array(
+        'label'   => __( 'Secondary Button URL', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+        'type'    => 'url',
+    ) );
+}
+add_action( 'customize_register', 'dsd_hero_customize_register' );

@@ -1,0 +1,157 @@
+@import 'variables';
+
+// ==========================================================================
+// Hero Section — DSD Design System
+// ==========================================================================
+
+.dsd-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--dsd-bg);
+  padding: 6rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dsd-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+// --------------------------------------------------------------------------
+// Animated Headline
+// --------------------------------------------------------------------------
+
+.dsd-hero-headline {
+  font-family: var(--dsd-font-body);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--dsd-text-main);
+  margin: 0;
+}
+
+.dsd-hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+  &--active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &--exiting {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.dsd-hero-cursor {
+  display: inline-block;
+  color: var(--dsd-accent);
+  animation: dsd-blink 1s step-end infinite;
+  margin-left: 4px;
+}
+
+@keyframes dsd-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// --------------------------------------------------------------------------
+// Subtitle
+// --------------------------------------------------------------------------
+
+.dsd-hero-subtitle {
+  font-family: var(--dsd-font-mono);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  color: var(--dsd-text-muted);
+  letter-spacing: 0.02em;
+  max-width: 540px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+// --------------------------------------------------------------------------
+// CTA Buttons
+// --------------------------------------------------------------------------
+
+.dsd-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dsd-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--dsd-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dsd-btn--primary {
+  background-color: var(--dsd-accent);
+  color: #ffffff;
+  border-color: var(--dsd-accent);
+
+  &:hover,
+  &:focus {
+    background-color: var(--dsd-accent-hover);
+    border-color: var(--dsd-accent-hover);
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.dsd-btn--ghost {
+  background-color: transparent;
+  color: var(--dsd-text-main);
+  border-color: var(--dsd-border);
+
+  &:hover,
+  &:focus {
+    border-color: var(--dsd-accent);
+    color: var(--dsd-accent);
+    text-decoration: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-hero {
+    min-height: auto;
+    padding: 8rem 0 4rem;
+  }
+
+  .dsd-hero-headline {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .dsd-hero-actions {
+    flex-direction: column;
+    width: 100%;
+
+    .dsd-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
