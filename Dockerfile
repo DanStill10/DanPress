@@ -1,7 +1,7 @@
 # =============================================================================
 # Stage 1: Build (installs dependencies & compiles theme assets)
 # =============================================================================
-FROM php:8.2-apache AS build
+FROM php:8.3-apache AS build
 
 # Install Node.js 20 and Yarn
 RUN apt-get update && apt-get install -y ca-certificates curl gnupg unzip \
@@ -53,7 +53,7 @@ RUN rm -rf node_modules .budfiles .cache
 # =============================================================================
 # Stage 2: Production (PHP + Apache with built assets)
 # =============================================================================
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # System dependencies for PHP extensions
 RUN apt-get update && apt-get install -y \
