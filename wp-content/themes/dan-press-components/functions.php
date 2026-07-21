@@ -20,6 +20,27 @@ if ( ! file_exists( $composer = __DIR__ . '/vendor/autoload.php' ) ) {
 }
 require $composer;
 
+/*
+|--------------------------------------------------------------------------
+| ACF Local JSON
+|--------------------------------------------------------------------------
+|
+| Save and load ACF field group JSON from the theme's acf-json/ directory.
+| This keeps field groups version-controlled alongside the theme.
+|
+*/
+function dsd_acf_json_load_point( $paths ) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'dsd_acf_json_load_point' );
+
+function dsd_acf_json_save_point( $path ) {
+    $path = get_stylesheet_directory() . '/acf-json';
+    return $path;
+}
+add_filter( 'acf/settings/save_json', 'dsd_acf_json_save_point' );
+
 /**
  * Enqueue Google Fonts for the theme.
  */

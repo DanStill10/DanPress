@@ -4,4 +4,105 @@
 // Client Logos Marquee — DSD Design System
 // ==========================================================================
 
-// TODO: Build in feature/client-logos branch
+.dsd-client-logos {
+  padding: 5rem 0 3rem;
+  overflow: hidden;
+}
+
+// --------------------------------------------------------------------------
+// Infinite Scroll Track
+// --------------------------------------------------------------------------
+
+.dsd-client-logos__track-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.dsd-client-logos__track {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: max-content;
+
+  &--scroll {
+    animation: dsd-marquee 40s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@keyframes dsd-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Individual Logo Items
+// --------------------------------------------------------------------------
+
+.dsd-client-logos__item {
+  flex-shrink: 0;
+}
+
+.dsd-client-logos__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    text-decoration: none;
+  }
+}
+
+.dsd-client-logos__img {
+  height: 48px;
+  width: auto;
+  filter: grayscale(100%) brightness(2);
+  transition: filter 0.3s ease;
+
+  .dsd-client-logos__link:hover &,
+  .dsd-client-logos__link:focus & {
+    filter: grayscale(0%) brightness(1);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-client-logos {
+    padding: 3rem 0 2rem;
+  }
+
+  .dsd-client-logos__track {
+    gap: 2rem;
+  }
+
+  .dsd-client-logos__img {
+    height: 36px;
+  }
+}
