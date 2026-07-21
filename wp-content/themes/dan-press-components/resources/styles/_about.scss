@@ -4,4 +4,178 @@
 // About / Why Partner With Us — DSD Design System
 // ==========================================================================
 
-// TODO: Build in feature/about-section branch
+.dsd-about {
+  padding: 6rem 0;
+}
+
+.dsd-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+// --------------------------------------------------------------------------
+// Left Column — Content
+// --------------------------------------------------------------------------
+
+.dsd-about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dsd-about-btn {
+  align-self: flex-start;
+}
+
+.dsd-about-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dsd-text-main);
+  margin: 0;
+}
+
+.dsd-about-desc {
+  color: var(--dsd-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Right Column — Portfolio Image Carousels
+// --------------------------------------------------------------------------
+
+.dsd-about-portfolio {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.dsd-about-portfolio__track-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+
+  &--1 {
+    position: absolute;
+    top: 0;
+    left: -10%;
+    right: -10%;
+    transform: rotate(-4deg);
+  }
+
+  &--2 {
+    position: absolute;
+    bottom: 0;
+    left: -10%;
+    right: -10%;
+    transform: rotate(-4deg);
+  }
+}
+
+.dsd-about-portfolio__track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+
+  &--scroll {
+    animation: dsd-portfolio-marquee 35s linear infinite;
+  }
+
+  &--reverse {
+    animation-direction: reverse;
+  }
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes dsd-portfolio-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.dsd-about-portfolio__item {
+  flex-shrink: 0;
+  width: 240px;
+  border: 1px solid var(--dsd-border);
+  overflow: hidden;
+  background: var(--dsd-bg-elevated);
+
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+  }
+
+  &:hover img {
+    filter: brightness(1);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 1024px) {
+  .dsd-about-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .dsd-about-portfolio {
+    height: 300px;
+  }
+
+  .dsd-about-portfolio__item {
+    width: 200px;
+
+    img {
+      height: 125px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .dsd-about {
+    padding: 3rem 0;
+  }
+
+  .dsd-about-portfolio {
+    height: 220px;
+  }
+
+  .dsd-about-portfolio__item {
+    width: 160px;
+
+    img {
+      height: 100px;
+    }
+  }
+}
