@@ -4,4 +4,113 @@
 // Services Grid — DSD Design System
 // ==========================================================================
 
-// TODO: Build in feature/services-grid branch
+.dsd-services {
+  padding: 5rem 0;
+  background-color: var(--dsd-bg-elevated);
+  border-top: 1px solid var(--dsd-border);
+  border-bottom: 1px solid var(--dsd-border);
+}
+
+.dsd-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+// --------------------------------------------------------------------------
+// Service Card
+// --------------------------------------------------------------------------
+
+.dsd-services-grid__card {
+  background: var(--dsd-bg);
+  border: 1px solid var(--dsd-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    border-color: var(--dsd-accent);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.dsd-services-grid__category {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dsd-text-muted);
+}
+
+.dsd-services-grid__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--dsd-text-main);
+}
+
+.dsd-services-grid__desc {
+  font-size: 0.9rem;
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+// --------------------------------------------------------------------------
+// Icon Circle
+// --------------------------------------------------------------------------
+
+.dsd-services-grid__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--dsd-border);
+  border-radius: 50%;
+  margin-top: auto;
+  transition: border-color 0.2s ease;
+
+  .dsd-services-grid__card:hover & {
+    border-color: var(--dsd-accent);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--dsd-text-muted);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+
+    .dsd-services-grid__card:hover & {
+      stroke: var(--dsd-accent);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-services {
+    padding: 3rem 0;
+  }
+
+  .dsd-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
