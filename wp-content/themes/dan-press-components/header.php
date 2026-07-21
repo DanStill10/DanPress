@@ -35,6 +35,10 @@
             <span class="screen-reader-text">Menu</span>
         </button>
 
+        <?php
+        $contact_btn_text = get_theme_mod( 'header_contact_text', 'Get In Touch' );
+        $contact_btn_url  = get_theme_mod( 'header_contact_url', '#contact' );
+        ?>
         <nav id="site-navigation" class="main-navigation">
             <?php
             wp_nav_menu(
@@ -44,7 +48,14 @@
                 )
             );
             ?>
+            <?php if ( $contact_btn_text ) : ?>
+                <a href="<?php echo esc_url( $contact_btn_url ); ?>" class="dsd-header-cta"><?php echo esc_html( $contact_btn_text ); ?></a>
+            <?php endif; ?>
         </nav><!-- #site-navigation -->
+
+        <?php if ( $contact_btn_text ) : ?>
+            <a href="<?php echo esc_url( $contact_btn_url ); ?>" class="dsd-header-cta dsd-header-cta--mobile"><?php echo esc_html( $contact_btn_text ); ?></a>
+        <?php endif; ?>
 
     </div><!-- .site-header-inner -->
 </header><!-- #masthead -->

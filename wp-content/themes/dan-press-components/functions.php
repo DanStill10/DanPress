@@ -112,6 +112,45 @@ add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
 
 /*
 |--------------------------------------------------------------------------
+| Customizer: Header Contact Button
+|--------------------------------------------------------------------------
+*/
+function dsd_header_customize_register( $wp_customize ) {
+
+    $wp_customize->add_panel( 'dsd_header_panel', array(
+        'title'    => __( 'Header', 'dan-press' ),
+        'priority' => 29,
+    ) );
+
+    $wp_customize->add_section( 'dsd_header_cta_section', array(
+        'title' => __( 'Contact Button', 'dan-press' ),
+        'panel' => 'dsd_header_panel',
+    ) );
+
+    $wp_customize->add_setting( 'header_contact_text', array(
+        'default'           => 'Get In Touch',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'header_contact_text', array(
+        'label'   => __( 'Button Text (leave empty to hide)', 'dan-press' ),
+        'section' => 'dsd_header_cta_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'header_contact_url', array(
+        'default'           => '#contact',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'header_contact_url', array(
+        'label'   => __( 'Button URL', 'dan-press' ),
+        'section' => 'dsd_header_cta_section',
+        'type'    => 'url',
+    ) );
+}
+add_action( 'customize_register', 'dsd_header_customize_register' );
+
+/*
+|--------------------------------------------------------------------------
 | Customizer: Hero Section Fields
 |--------------------------------------------------------------------------
 */
