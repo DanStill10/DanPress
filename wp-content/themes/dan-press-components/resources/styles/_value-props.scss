@@ -4,4 +4,61 @@
 // Value Propositions (3-Column) — DSD Design System
 // ==========================================================================
 
-// TODO: Build in feature/value-props branch
+.dsd-value-props {
+  padding: 5rem 0;
+}
+
+.dsd-value-props-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+// --------------------------------------------------------------------------
+// Individual Proposition
+// --------------------------------------------------------------------------
+
+.dsd-value-prop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dsd-value-prop__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--dsd-text-main);
+}
+
+.dsd-value-prop__subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dsd-text-main);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.dsd-value-prop__desc {
+  font-size: 0.9rem;
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 1024px) {
+  .dsd-value-props-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .dsd-value-props {
+    padding: 3rem 0;
+  }
+}
