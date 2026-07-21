@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
+  /**
+   * FAQ Accordion
+   * Toggles FAQ items open/closed with aria attributes.
+   */
+  document.querySelectorAll('[data-accordion-trigger]').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', !expanded);
+    });
+  });
 });
 
 /**

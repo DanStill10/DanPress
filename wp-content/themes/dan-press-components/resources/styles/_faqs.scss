@@ -4,4 +4,143 @@
 // FAQ Accordion — DSD Design System
 // ==========================================================================
 
-// TODO: Build in feature/faqs branch
+.dsd-faqs {
+  padding: 5rem 0;
+  background-color: var(--dsd-bg-elevated);
+  border-top: 1px solid var(--dsd-border);
+  border-bottom: 1px solid var(--dsd-border);
+}
+
+// --------------------------------------------------------------------------
+// FAQ Grid (grouped by category)
+// --------------------------------------------------------------------------
+
+.dsd-faqs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+// --------------------------------------------------------------------------
+// FAQ Group
+// --------------------------------------------------------------------------
+
+.dsd-faq-group__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dsd-text-main);
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--dsd-border);
+}
+
+// --------------------------------------------------------------------------
+// Accordion Item
+// --------------------------------------------------------------------------
+
+.dsd-faq-item {
+  border-bottom: 1px solid var(--dsd-border);
+
+  &:first-child {
+    border-top: 1px solid var(--dsd-border);
+  }
+}
+
+.dsd-faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--dsd-font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--dsd-text-main);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--dsd-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dsd-accent);
+    outline-offset: 2px;
+  }
+}
+
+.dsd-faq-item__icon {
+  flex-shrink: 0;
+  font-family: var(--dsd-font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dsd-accent);
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+// --------------------------------------------------------------------------
+// Accordion Content (collapsible)
+// --------------------------------------------------------------------------
+
+.dsd-faq-item__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+
+  [aria-expanded="true"] ~ & {
+    max-height: 500px;
+  }
+}
+
+.dsd-faq-item__answer {
+  padding: 0 0 1.25rem 0;
+  font-size: 0.9rem;
+  color: var(--dsd-text-muted);
+  line-height: 1.7;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: var(--dsd-accent);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Open state — rotate icon
+// --------------------------------------------------------------------------
+
+.dsd-faq-item__trigger[aria-expanded="true"] .dsd-faq-item__icon {
+  transform: rotate(45deg);
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-faqs {
+    padding: 3rem 0;
+  }
+
+  .dsd-faqs-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
