@@ -148,3 +148,17 @@ input[type="submit"] {
     background-color: var(--dsd-accent-hover);
   }
 }
+
+// --------------------------------------------------------------------------
+// 6. Shared Section Patterns
+// --------------------------------------------------------------------------
+
+.dsd-section-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.5rem;
+}
+
+// Section base spacing
+section {
+  padding: 5rem 0;
+}

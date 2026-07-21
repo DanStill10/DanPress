@@ -194,3 +194,68 @@ function dsd_hero_customize_register( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'dsd_hero_customize_register' );
+
+/*
+|--------------------------------------------------------------------------
+| Customizer: CTA Section Fields
+|--------------------------------------------------------------------------
+*/
+function dsd_cta_customize_register( $wp_customize ) {
+
+    // Panel
+    $wp_customize->add_panel( 'dsd_cta_panel', array(
+        'title'    => __( 'CTA Section', 'dan-press' ),
+        'priority' => 31,
+    ) );
+
+    // Section
+    $wp_customize->add_section( 'dsd_cta_section', array(
+        'title' => __( 'CTA Content', 'dan-press' ),
+        'panel' => 'dsd_cta_panel',
+    ) );
+
+    // --- Heading ---
+    $wp_customize->add_setting( 'cta_heading', array(
+        'default'           => 'Get In Touch',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_heading', array(
+        'label'   => __( 'Heading', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    // --- Subtitle ---
+    $wp_customize->add_setting( 'cta_subtitle', array(
+        'default'           => 'Have a project in mind? Let\'s talk about it.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_subtitle', array(
+        'label'   => __( 'Subtitle', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    // --- Button Text ---
+    $wp_customize->add_setting( 'cta_btn_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_btn_text', array(
+        'label'   => __( 'Button Text', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    // --- Button URL ---
+    $wp_customize->add_setting( 'cta_btn_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'cta_btn_url', array(
+        'label'   => __( 'Button URL', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'url',
+    ) );
+}
+add_action( 'customize_register', 'dsd_cta_customize_register' );
