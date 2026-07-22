@@ -10,10 +10,6 @@
 $heading = get_field( 'cl_heading' ) ?: 'Our Clients';
 $logos   = get_field( 'clients' );
 
-if ( WP_DEBUG && empty( $logos ) ) {
-    error_log( '[DSD Client Logos] Block rendered but logos field is empty. get_field("clients") returned: ' . print_r( $logos, true ) );
-}
-
 if ( empty( $logos ) ) {
     return;
 }
@@ -96,7 +92,8 @@ $wrapper_attrs = get_block_wrapper_attributes( array(
 </section>
 
 <?php
-function dsd_render_cl_logo( $logo ) {
+if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
+    function dsd_render_cl_logo( $logo ) {
     $image = $logo['cl_logo_image'] ?? null;
     $link  = $logo['cl_logo_link'] ?? '';
     $alt   = $logo['cl_logo_alt'] ?? '';
@@ -121,4 +118,5 @@ function dsd_render_cl_logo( $logo ) {
     $output .= '</figure>';
 
     return $output;
+    }
 }

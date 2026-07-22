@@ -107,5 +107,6 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "active": true,
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1784800000
 }
