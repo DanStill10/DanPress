@@ -39,14 +39,15 @@
 .dsd-cl-track {
   display: flex;
   width: max-content;
-  gap: 4rem;
+  gap: 3.5rem;
 }
 
 .dsd-cl-slide {
   display: flex;
   align-items: center;
-  gap: 4rem;
-  padding: 0 2rem;
+  justify-content: center;
+  gap: 3.5rem;
+  padding: 0 1.75rem;
   flex-shrink: 0;
 }
 
@@ -91,6 +92,40 @@ $marquee-duration: 40s;
 }
 
 // --------------------------------------------------------------------------
+// Centered Mode — when few logos, disable marquee and center
+// --------------------------------------------------------------------------
+
+.dsd-cl--centered {
+  .dsd-cl-marquee {
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .dsd-cl-track {
+    width: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .dsd-cl-track--left,
+  .dsd-cl-track--right {
+    animation: none;
+  }
+
+  .dsd-cl-slide {
+    justify-content: center;
+    gap: 3rem;
+    padding: 0;
+  }
+
+  .dsd-cl-slide[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+// --------------------------------------------------------------------------
 // Logo Item
 // --------------------------------------------------------------------------
 
@@ -109,7 +144,8 @@ $marquee-duration: 40s;
 }
 
 .dsd-cl-img {
-  height: 2rem;
+  height: 42px;
+  max-width: 140px;
   width: auto;
   filter: brightness(0) invert(1);
   object-fit: contain;
@@ -133,7 +169,18 @@ $marquee-duration: 40s;
   }
 
   .dsd-cl-img {
-    height: 1.5rem;
+    height: 32px;
+    max-width: 100px;
+  }
+
+  .dsd-cl--centered {
+    .dsd-cl-track {
+      gap: 2rem;
+    }
+
+    .dsd-cl-slide {
+      gap: 2rem;
+    }
   }
 
   $marquee-duration-mobile: 30s;

@@ -65,6 +65,11 @@ if ( $custom_bg ) {
     $classes[] = 'dsd-block--custom-bg';
 }
 
+$is_centered = count( $logos ) <= 6;
+if ( $is_centered ) {
+    $classes[] = 'dsd-cl--centered';
+}
+
 $style = '';
 if ( $custom_bg ) {
     $style .= '--dsd-section-bg: ' . esc_attr( $custom_bg ) . ';';
