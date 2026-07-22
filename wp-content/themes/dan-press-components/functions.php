@@ -192,5 +192,38 @@ function dsd_hero_customize_register( $wp_customize ) {
         'section' => 'dsd_hero_section',
         'type'    => 'url',
     ) );
+
+    // --- Background Video ---
+    $wp_customize->add_setting( 'hero_bg_video', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'hero_bg_video', array(
+        'label'       => __( 'Background Video URL (mp4)', 'dan-press' ),
+        'description' => __( 'Upload a video via Media Library and paste the URL here. Leave empty for solid background.', 'dan-press' ),
+        'section'     => 'dsd_hero_section',
+        'type'        => 'url',
+    ) );
+
+    // --- Background Image (fallback / poster) ---
+    $wp_customize->add_setting( 'hero_bg_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'hero_bg_image', array(
+        'label'   => __( 'Background Image (fallback / video poster)', 'dan-press' ),
+        'section' => 'dsd_hero_section',
+    ) ) );
+
+    // --- Accent Word Color Override ---
+    $wp_customize->add_setting( 'hero_accent_color', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( 'hero_accent_color', array(
+        'label'       => __( 'Accent Word Color (leave empty for default #0066FF)', 'dan-press' ),
+        'section'     => 'dsd_hero_section',
+        'type'        => 'color',
+    ) );
 }
 add_action( 'customize_register', 'dsd_hero_customize_register' );

@@ -1,8 +1,13 @@
 @import 'variables';
 
 // ==========================================================================
-// Hero Section — DSD Design System
+// Hero Section — Video Background, Pill Buttons, Accent Word
 // ==========================================================================
+
+// Accent word color override (set via Customizer, falls back to --dsd-accent)
+:root {
+  --dsd-hero-accent: var(--dsd-accent);
+}
 
 .dsd-hero {
   min-height: 100vh;
@@ -13,6 +18,49 @@
   position: relative;
   overflow: hidden;
 }
+
+// --------------------------------------------------------------------------
+// Video / Image Background
+// --------------------------------------------------------------------------
+
+.dsd-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dsd-hero-video,
+.dsd-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dsd-hero-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.dsd-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(17, 17, 17, 0.6) 0%,
+    rgba(17, 17, 17, 0.8) 50%,
+    rgba(17, 17, 17, 0.95) 100%
+  );
+}
+
+// Ensure content sits above overlay
+.dsd-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+// --------------------------------------------------------------------------
+// Layout
+// --------------------------------------------------------------------------
 
 .dsd-hero-inner {
   display: flex;
@@ -26,7 +74,7 @@
 // --------------------------------------------------------------------------
 
 .dsd-hero-headline {
-  font-family: var(--dsd-font-body);
+  font-family: var(--dsd-font-sans);
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 800;
   line-height: 1.05;
@@ -41,6 +89,7 @@
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  color: var(--dsd-hero-accent);
 
   &--active {
     opacity: 1;
@@ -55,7 +104,7 @@
 
 .dsd-hero-cursor {
   display: inline-block;
-  color: var(--dsd-accent);
+  color: var(--dsd-hero-accent);
   animation: dsd-blink 1s step-end infinite;
   margin-left: 4px;
 }
@@ -80,7 +129,7 @@
 }
 
 // --------------------------------------------------------------------------
-// CTA Buttons
+// Pill CTA Buttons
 // --------------------------------------------------------------------------
 
 .dsd-hero-actions {
@@ -100,6 +149,7 @@
   text-decoration: none;
   padding: 1rem 2rem;
   border: 1px solid transparent;
+  border-radius: 9999px;
   transition: all 0.2s ease;
   cursor: pointer;
 }

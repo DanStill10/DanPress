@@ -2,8 +2,8 @@
 /**
  * Template Part: Hero Section
  *
- * Full-viewport hero with animated cycling headline and CTA buttons.
- * Content is driven by Customizer fields registered in functions.php.
+ * Full-viewport hero with animated cycling headline, CTA buttons,
+ * optional video background, and dark overlay.
  *
  * @package Dan Press
  */
@@ -14,11 +14,32 @@ $cta_primary     = get_theme_mod( 'hero_cta_primary_text', '' );
 $cta_primary_url = get_theme_mod( 'hero_cta_primary_url', '#' );
 $cta_secondary     = get_theme_mod( 'hero_cta_secondary_text', '' );
 $cta_secondary_url = get_theme_mod( 'hero_cta_secondary_url', '#' );
+$hero_bg_video  = get_theme_mod( 'hero_bg_video', '' );
+$hero_bg_image  = get_theme_mod( 'hero_bg_image', '' );
+$hero_accent    = get_theme_mod( 'hero_accent_color', '' );
 
 $words_array = array_map( 'trim', explode( ',', $hero_words ) );
+
+$style = '';
+if ( $hero_accent ) {
+    $style = sprintf( 'style="--dsd-hero-accent: %s;"', esc_attr( $hero_accent ) );
+}
 ?>
 
-<section class="dsd-hero" data-words="<?php echo esc_attr( $hero_words ); ?>">
+<section class="dsd-hero" data-words="<?php echo esc_attr( $hero_words ); ?>" <?php echo $style; ?>>
+    <?php if ( $hero_bg_video || $hero_bg_image ) : ?>
+        <div class="dsd-hero-media">
+            <?php if ( $hero_bg_video ) : ?>
+                <video class="dsd-hero-video" autoplay muted loop playsinline <?php echo $hero_bg_image ? 'poster="' . esc_url( $hero_bg_image ) . '"' : ''; ?>>
+                    <source src="<?php echo esc_url( $hero_bg_video ); ?>" type="video/mp4">
+                </video>
+            <?php elseif ( $hero_bg_image ) : ?>
+                <div class="dsd-hero-image" style="background-image: url('<?php echo esc_url( $hero_bg_image ); ?>');"></div>
+            <?php endif; ?>
+            <div class="dsd-hero-overlay"></div>
+        </div>
+    <?php endif; ?>
+
     <div class="container dsd-hero-inner">
 
         <h1 class="dsd-hero-headline">
