@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Hero Word Cycling
-   * Cycles through comma-separated words in the hero headline.
+   * Hero Word Cycling — Typewriter Effect
+   * Types each word character by character, pauses, then deletes before typing the next.
    */
   const heroSection = document.querySelector('.dsd-hero');
   if (heroSection) {
@@ -25,19 +25,43 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wordsData && wordEl) {
       const words = wordsData.split(',').map(w => w.trim()).filter(Boolean);
       if (words.length > 1) {
-        let currentIndex = 0;
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-        setInterval(() => {
-          wordEl.classList.add('dsd-hero-word--exiting');
-          wordEl.classList.remove('dsd-hero-word--active');
+        const typeSpeed = 80;
+        const deleteSpeed = 40;
+        const pauseAfterType = 1500;
+        const pauseAfterDelete = 300;
 
-          setTimeout(() => {
-            currentIndex = (currentIndex + 1) % words.length;
-            wordEl.textContent = words[currentIndex];
-            wordEl.classList.remove('dsd-hero-word--exiting');
-            wordEl.classList.add('dsd-hero-word--active');
-          }, 400);
-        }, 3000);
+        function tick() {
+          const currentWord = words[wordIndex];
+
+          if (!isDeleting) {
+            wordEl.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+
+            if (charIndex === currentWord.length) {
+              setTimeout(tick, pauseAfterType);
+              isDeleting = true;
+              return;
+            }
+            setTimeout(tick, typeSpeed);
+          } else {
+            wordEl.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+
+            if (charIndex === 0) {
+              isDeleting = false;
+              wordIndex = (wordIndex + 1) % words.length;
+              setTimeout(tick, pauseAfterDelete);
+              return;
+            }
+            setTimeout(tick, deleteSpeed);
+          }
+        }
+
+        setTimeout(tick, pauseAfterType);
       }
     }
   }
