@@ -144,9 +144,8 @@ $marquee-duration: 40s;
 }
 
 .dsd-cl-img {
-  height: clamp(28px, 3vw, 42px);
-  max-width: clamp(80px, 10vw, 140px);
-  width: auto;
+  height: 150px;
+  width: 150px;
   filter: brightness(0) invert(1);
   object-fit: contain;
 }
