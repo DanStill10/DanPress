@@ -1,0 +1,68 @@
+{
+    "key": "group_client_logos",
+    "title": "Client Logos",
+    "fields": [
+        {
+            "key": "field_cl_heading",
+            "label": "Section Heading",
+            "name": "cl_heading",
+            "type": "text",
+            "default_value": "Our Clients",
+            "instructions": "The main heading for this section. The last word will be highlighted in accent color if wrapped in [accent] tags. Example: Our [accent]Clients[/accent]",
+            "required": 0
+        },
+        {
+            "key": "field_cl_logos",
+            "label": "Client Logos",
+            "name": "cl_logos",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Logo",
+            "min": 1,
+            "max": 48,
+            "instructions": "Upload client logos. White/monochrome logos work best on dark backgrounds."
+        },
+        {
+            "key": "field_cl_logo_image",
+            "label": "Logo Image",
+            "name": "cl_logo_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "mime_types": "png,svg,jpg,jpeg",
+            "parent_repeater": "field_cl_logos"
+        },
+        {
+            "key": "field_cl_logo_link",
+            "label": "Link (optional)",
+            "name": "cl_logo_link",
+            "type": "url",
+            "parent_repeater": "field_cl_logos",
+            "instructions": "Optional URL the logo links to."
+        },
+        {
+            "key": "field_cl_logo_alt",
+            "label": "Alt Text",
+            "name": "cl_logo_alt",
+            "type": "text",
+            "parent_repeater": "field_cl_logos",
+            "instructions": "Company name for accessibility."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "show_in_rest": 0
+}

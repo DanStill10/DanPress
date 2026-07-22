@@ -1,3 +1,148 @@
 @import 'variables';
 
-// Client Logos Marquee — TODO: build in feature/client-logos
+// ==========================================================================
+// Client Logos Marquee
+// ==========================================================================
+
+.dsd-cl {
+  padding: 4rem 0 3rem;
+  overflow: hidden;
+}
+
+// --------------------------------------------------------------------------
+// Marquee Container
+// --------------------------------------------------------------------------
+
+.dsd-cl-marquee {
+  margin-top: 2rem;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+// --------------------------------------------------------------------------
+// Track — contains two identical slides for seamless loop
+// --------------------------------------------------------------------------
+
+.dsd-cl-track {
+  display: flex;
+  width: max-content;
+  gap: 4rem;
+}
+
+.dsd-cl-slide {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 0 2rem;
+  flex-shrink: 0;
+}
+
+// --------------------------------------------------------------------------
+// Animation Directions
+// --------------------------------------------------------------------------
+
+$marquee-duration: 40s;
+
+.dsd-cl-track--left {
+  animation: dsd-marquee-left #{$marquee-duration} linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.dsd-cl-track--right {
+  animation: dsd-marquee-right #{$marquee-duration} linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes dsd-marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dsd-marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Logo Item
+// --------------------------------------------------------------------------
+
+.dsd-cl-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.dsd-cl-img {
+  height: 2rem;
+  width: auto;
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-cl-marquee {
+    margin-top: 1.5rem;
+  }
+
+  .dsd-cl-track {
+    gap: 2.5rem;
+  }
+
+  .dsd-cl-slide {
+    gap: 2.5rem;
+  }
+
+  .dsd-cl-img {
+    height: 1.5rem;
+  }
+
+  $marquee-duration-mobile: 30s;
+
+  .dsd-cl-track--left {
+    animation-duration: #{$marquee-duration-mobile};
+  }
+
+  .dsd-cl-track--right {
+    animation-duration: #{$marquee-duration-mobile};
+  }
+}
