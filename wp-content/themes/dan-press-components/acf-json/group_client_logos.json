@@ -8,7 +8,7 @@
             "name": "cl_heading",
             "type": "text",
             "default_value": "Our Clients",
-            "instructions": "The main heading for this section. The last word will be highlighted in accent color if wrapped in [accent] tags. Example: Our [accent]Clients[/accent]",
+            "instructions": "Section heading. Wrap a word in [accent] tags to highlight it in accent color.",
             "required": 0
         },
         {
@@ -37,8 +37,7 @@
             "label": "Link (optional)",
             "name": "cl_logo_link",
             "type": "url",
-            "parent_repeater": "field_cl_logos",
-            "instructions": "Optional URL the logo links to."
+            "parent_repeater": "field_cl_logos"
         },
         {
             "key": "field_cl_logo_alt",
@@ -47,18 +46,62 @@
             "type": "text",
             "parent_repeater": "field_cl_logos",
             "instructions": "Company name for accessibility."
+        },
+        {
+            "key": "field_cl_color_scheme",
+            "label": "Color Scheme",
+            "name": "color_scheme",
+            "type": "select",
+            "choices": {
+                "default": "Default (dark)",
+                "primary": "Primary (blue accent bg)",
+                "secondary": "Secondary (elevated bg)",
+                "custom": "Custom (set your own colors)"
+            },
+            "default_value": "default",
+            "instructions": "Controls the section background and text colors."
+        },
+        {
+            "key": "field_cl_custom_bg",
+            "label": "Custom Background Color",
+            "name": "custom_bg_color",
+            "type": "color_picker",
+            "conditional_logic": [
+                [
+                    [
+                        "field": "field_cl_color_scheme",
+                        "operator": "==",
+                        "value": "custom"
+                    ]
+                ]
+            ]
+        },
+        {
+            "key": "field_cl_custom_text",
+            "label": "Custom Text Color",
+            "name": "custom_text_color",
+            "type": "color_picker",
+            "conditional_logic": [
+                [
+                    [
+                        "field": "field_cl_color_scheme",
+                        "operator": "==",
+                        "value": "custom"
+                    ]
+                ]
+            ]
         }
     ],
     "location": [
         [
             {
-                "param": "page_type",
+                "param": "block",
                 "operator": "==",
-                "value": "front_page"
+                "value": "acf/client-logos"
             }
         ]
     ],
-    "menu_order": 1,
+    "menu_order": 0,
     "position": "normal",
     "style": "default",
     "label_placement": "top",

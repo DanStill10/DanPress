@@ -183,6 +183,87 @@ add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
 
 /*
 |--------------------------------------------------------------------------
+| ACF Block Registration
+|--------------------------------------------------------------------------
+*/
+function dsd_register_acf_blocks() {
+    if ( ! function_exists( 'acf_register_block_type' ) ) {
+        return;
+    }
+
+    $blocks = array(
+        'client-logos' => array(
+            'title'       => __( 'Client Logos', 'dan-press' ),
+            'description' => __( 'Infinite-scroll marquee of client logos.', 'dan-press' ),
+        ),
+        'services' => array(
+            'title'       => __( 'Services Grid', 'dan-press' ),
+            'description' => __( 'Grid of service cards with icons.', 'dan-press' ),
+        ),
+        'about' => array(
+            'title'       => __( 'About Section', 'dan-press' ),
+            'description' => __( 'Two-column layout with text, stats, and image carousel.', 'dan-press' ),
+        ),
+        'testimonials' => array(
+            'title'       => __( 'Testimonials', 'dan-press' ),
+            'description' => __( 'Rating cards with quotes and avatars.', 'dan-press' ),
+        ),
+        'value-props' => array(
+            'title'       => __( 'Value Propositions', 'dan-press' ),
+            'description' => __( 'Three-column grid of value prop cards.', 'dan-press' ),
+        ),
+        'blog-feed' => array(
+            'title'       => __( 'Blog Feed', 'dan-press' ),
+            'description' => __( 'Post card grid from WP_Query.', 'dan-press' ),
+        ),
+        'faqs' => array(
+            'title'       => __( 'FAQ Accordion', 'dan-press' ),
+            'description' => __( 'Expandable FAQ pairs.', 'dan-press' ),
+        ),
+        'cta' => array(
+            'title'       => __( 'Call to Action', 'dan-press' ),
+            'description' => __( 'CTA section with heading and button.', 'dan-press' ),
+        ),
+    );
+
+    foreach ( $blocks as $name => $settings ) {
+        acf_register_block_type( array(
+            'name'            => $name,
+            'title'           => $settings['title'],
+            'description'     => $settings['description'],
+            'render_template' => get_template_directory() . '/template-parts/blocks/' . $name . '/' . $name . '.php',
+            'category'        => 'dan-press',
+            'icon'            => 'layout',
+            'mode'            => 'preview',
+            'supports'        => array(
+                'align'   => false,
+                'anchor'  => true,
+                'spacing' => array(
+                    'padding' => true,
+                ),
+            ),
+        ) );
+    }
+}
+add_action( 'acf/init', 'dsd_register_acf_blocks' );
+
+/*
+|--------------------------------------------------------------------------
+| Register Block Category
+|--------------------------------------------------------------------------
+*/
+function dsd_block_categories( $categories, $post ) {
+    return array_merge( $categories, array(
+        array(
+            'slug'  => 'dan-press',
+            'title' => __( 'Dan Press Components', 'dan-press' ),
+        ),
+    ) );
+}
+add_filter( 'block_categories_all', 'dsd_block_categories', 10, 2 );
+
+/*
+|--------------------------------------------------------------------------
 | Customizer: Hero Section Fields
 |--------------------------------------------------------------------------
 */

@@ -161,3 +161,37 @@ input[type="submit"] {
 section {
   padding: 5rem 0;
 }
+
+// --------------------------------------------------------------------------
+// 7. Block Color Schemes
+// --------------------------------------------------------------------------
+
+.dsd-block {
+  --dsd-section-bg: var(--dsd-bg);
+  --dsd-section-text: var(--dsd-text-main);
+  background-color: var(--dsd-section-bg);
+  color: var(--dsd-section-text);
+}
+
+.dsd-block--primary {
+  --dsd-section-bg: var(--dsd-accent);
+  --dsd-section-text: #ffffff;
+}
+
+.dsd-block--secondary {
+  --dsd-section-bg: var(--dsd-bg-elevated);
+  --dsd-section-text: var(--dsd-text-main);
+}
+
+.dsd-block--custom-bg {
+  // Background color set via inline style --dsd-section-bg
+}
+
+// Ensure headings and links respect block text color
+.dsd-block .dsd-section-heading {
+  color: inherit;
+}
+
+.dsd-block a {
+  color: var(--dsd-accent);
+}

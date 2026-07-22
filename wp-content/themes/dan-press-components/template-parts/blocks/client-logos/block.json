@@ -1,0 +1,18 @@
+{
+    "name": "acf/client-logos",
+    "title": "Client Logos",
+    "description": "Infinite-scroll marquee of client logos.",
+    "category": "dan-press",
+    "icon": "layout",
+    "mode": "preview",
+    "supports": {
+        "anchor": true,
+        "spacing": {
+            "padding": true
+        }
+    },
+    "acf": {
+        "renderTemplate": "client-logos.php",
+        "mode": "preview"
+    }
+}
