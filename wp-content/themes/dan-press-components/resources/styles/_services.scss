@@ -1,3 +1,118 @@
 @import 'variables';
 
-// Services Grid — TODO: build in feature/services-grid
+// ==========================================================================
+// Services Grid
+// ==========================================================================
+
+.dsd-sv {
+  padding: 5rem 0;
+}
+
+// --------------------------------------------------------------------------
+// Grid
+// --------------------------------------------------------------------------
+
+.dsd-sv-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+// --------------------------------------------------------------------------
+// Card
+// --------------------------------------------------------------------------
+
+.dsd-sv-card {
+  background-color: var(--dsd-bg-elevated);
+  border: 1px solid var(--dsd-border);
+  border-radius: 12px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: var(--dsd-accent);
+    transform: translateY(-4px);
+  }
+}
+
+.dsd-sv-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  height: 100%;
+}
+
+// --------------------------------------------------------------------------
+// Card Elements
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-label {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dsd-text-muted);
+}
+
+.dsd-sv-card-title {
+  font-family: var(--dsd-font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dsd-text-main);
+  margin: 0;
+}
+
+.dsd-sv-card-desc {
+  font-family: var(--dsd-font-sans);
+  font-size: 0.9rem;
+  color: var(--dsd-text-muted);
+  line-height: 1.5;
+  flex-grow: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.dsd-sv-card-icon {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.dsd-sv-icon-img {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.dsd-sv-card a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 1024px) {
+  .dsd-sv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .dsd-sv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dsd-sv-card-inner {
+    padding: 1.5rem;
+  }
+}
