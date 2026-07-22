@@ -34,3 +34,6 @@ debug.log
 *~
 composer.phar
 *.bak
+
+# Project context (auto-generated, for agent reference)
+.context/
