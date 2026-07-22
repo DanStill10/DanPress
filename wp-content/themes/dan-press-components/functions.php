@@ -20,6 +20,43 @@ if ( ! file_exists( $composer = __DIR__ . '/vendor/autoload.php' ) ) {
 }
 require $composer;
 
+/*
+|--------------------------------------------------------------------------
+| Theme Support
+|--------------------------------------------------------------------------
+*/
+function dsd_theme_setup() {
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'html5', array(
+        'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script',
+    ) );
+    add_theme_support( 'responsive-embeds' );
+    add_theme_support( 'editor-styles' );
+    global $content_width;
+    if ( ! isset( $content_width ) ) {
+        $content_width = 1200;
+    }
+}
+add_action( 'after_setup_theme', 'dsd_theme_setup' );
+
+/*
+|--------------------------------------------------------------------------
+| ACF Local JSON
+|--------------------------------------------------------------------------
+*/
+function dsd_acf_json_load_point( $paths ) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'dsd_acf_json_load_point' );
+
+function dsd_acf_json_save_point( $path ) {
+    $path = get_stylesheet_directory() . '/acf-json';
+    return $path;
+}
+add_filter( 'acf/settings/save_json', 'dsd_acf_json_save_point' );
+
 /**
  * Enqueue Google Fonts for the theme.
  */
@@ -104,6 +141,38 @@ function danpress_enqueue_theme_assets() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'danpress_enqueue_theme_assets' );
+
+/*
+|--------------------------------------------------------------------------
+| Enqueue Block Editor Assets
+|--------------------------------------------------------------------------
+*/
+function dsd_enqueue_block_editor_assets() {
+    $asset_file = get_theme_file_path( 'build/index.asset.php' );
+    if ( ! file_exists( $asset_file ) ) {
+        return;
+    }
+    $asset = require $asset_file;
+
+    wp_enqueue_script(
+        'dsd-blocks',
+        get_theme_file_uri( 'build/index.js' ),
+        $asset['dependencies'],
+        $asset['version'],
+        true
+    );
+
+    $editor_css = get_theme_file_path( 'build/editor.css' );
+    if ( file_exists( $editor_css ) ) {
+        wp_enqueue_style(
+            'dsd-blocks-editor',
+            get_theme_file_uri( 'build/editor.css' ),
+            [],
+            $asset['version']
+        );
+    }
+}
+add_action( 'enqueue_block_editor_assets', 'dsd_enqueue_block_editor_assets' );
 
 function dan_press_register_nav_menu() {
     register_nav_menu( 'primary_menu', __( 'Primary Menu', 'dan-press' ) );
@@ -227,3 +296,62 @@ function dsd_hero_customize_register( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'dsd_hero_customize_register' );
+
+/*
+|--------------------------------------------------------------------------
+| Customizer: CTA Section Fields
+|--------------------------------------------------------------------------
+*/
+function dsd_cta_customize_register( $wp_customize ) {
+
+    $wp_customize->add_panel( 'dsd_cta_panel', array(
+        'title'    => __( 'CTA Section', 'dan-press' ),
+        'priority' => 31,
+    ) );
+
+    $wp_customize->add_section( 'dsd_cta_section', array(
+        'title' => __( 'CTA Content', 'dan-press' ),
+        'panel' => 'dsd_cta_panel',
+    ) );
+
+    $wp_customize->add_setting( 'cta_heading', array(
+        'default'           => 'Get In Touch',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_heading', array(
+        'label'   => __( 'Heading', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'cta_subtitle', array(
+        'default'           => 'Have a project in mind? Let\'s talk about it.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_subtitle', array(
+        'label'   => __( 'Subtitle', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'cta_btn_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'cta_btn_text', array(
+        'label'   => __( 'Button Text', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'cta_btn_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'cta_btn_url', array(
+        'label'   => __( 'Button URL', 'dan-press' ),
+        'section' => 'dsd_cta_section',
+        'type'    => 'url',
+    ) );
+}
+add_action( 'customize_register', 'dsd_cta_customize_register' );

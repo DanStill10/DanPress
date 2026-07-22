@@ -1,31 +1,25 @@
 <?php
-// -----------------------------------------------------------------------------
-// Template: front-page.php
-// -----------------------------------------------------------------------------
-// This is the most specific template file for the site's front page.
-// If it exists, WordPress will use it instead of page.php or index.php.
-// It's often highly customized.
+/**
+ * Template: front-page.php
+ *
+ * Homepage layout — composes all sections via template parts.
+ *
+ * @package Dan Press
+ */
 
 get_header(); ?>
 
 <main id="main" class="site-main" role="main">
 
-    <?php
-    // The main WordPress Loop
-    if ( have_posts() ) :
-        while ( have_posts() ) :
-            the_post();
-
-            // You would typically put custom layout code here instead of just the_content().
-            // For example, you might call custom blocks or specific template parts.
-            the_content();
-
-        endwhile;
-    else :
-        // Content to display if no content is found.
-        echo '<p>No content found.</p>';
-    endif;
-    ?>
+    <?php get_template_part( 'template-parts/hero' ); ?>
+    <?php get_template_part( 'template-parts/client-logos' ); ?>
+    <?php get_template_part( 'template-parts/services' ); ?>
+    <?php get_template_part( 'template-parts/about' ); ?>
+    <?php get_template_part( 'template-parts/testimonials' ); ?>
+    <?php get_template_part( 'template-parts/value-props' ); ?>
+    <?php get_template_part( 'template-parts/blog-feed' ); ?>
+    <?php get_template_part( 'template-parts/faqs' ); ?>
+    <?php get_template_part( 'template-parts/cta' ); ?>
 
 </main>
 
