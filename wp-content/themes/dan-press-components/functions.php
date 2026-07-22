@@ -127,11 +127,13 @@ function danpress_enqueue_theme_assets() {
 
             // Enqueue the main script from the manifest.
             if ( ! empty( $manifest['app']['js'] ) ) {
-                foreach ( $manifest['app']['js'] as $js_file ) {
+                foreach ( $manifest['app']['js'] as $index => $js_file ) {
+                    $handle = 'dan-press-app-' . $index;
+                    $deps   = $index > 0 ? array( 'dan-press-app-' . ( $index - 1 ) ) : array();
                     wp_enqueue_script(
-                        'dan-press-app',
+                        $handle,
                         "{$dist_uri}/{$js_file}",
-                        [],
+                        $deps,
                         null,
                         true
                     );
