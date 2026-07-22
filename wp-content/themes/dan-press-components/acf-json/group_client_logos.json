@@ -12,9 +12,9 @@
             "required": 0
         },
         {
-            "key": "field_cl_logos",
+            "key": "field_cl_clients",
             "label": "Client Logos",
-            "name": "cl_logos",
+            "name": "clients",
             "type": "repeater",
             "layout": "table",
             "button_label": "Add Logo",
@@ -30,21 +30,21 @@
             "return_format": "array",
             "preview_size": "thumbnail",
             "mime_types": "png,svg,jpg,jpeg",
-            "parent_repeater": "field_cl_logos"
+            "parent_repeater": "field_cl_clients"
         },
         {
             "key": "field_cl_logo_link",
             "label": "Link (optional)",
             "name": "cl_logo_link",
             "type": "url",
-            "parent_repeater": "field_cl_logos"
+            "parent_repeater": "field_cl_clients"
         },
         {
             "key": "field_cl_logo_alt",
             "label": "Alt Text",
             "name": "cl_logo_alt",
             "type": "text",
-            "parent_repeater": "field_cl_logos",
+            "parent_repeater": "field_cl_clients",
             "instructions": "Company name for accessibility."
         },
         {

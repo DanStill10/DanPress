@@ -8,7 +8,11 @@
  */
 
 $heading = get_field( 'cl_heading' ) ?: 'Our Clients';
-$logos   = get_field( 'cl_logos' );
+$logos   = get_field( 'clients' );
+
+if ( WP_DEBUG && empty( $logos ) ) {
+    error_log( '[DSD Client Logos] Block rendered but logos field is empty. get_field("clients") returned: ' . print_r( $logos, true ) );
+}
 
 if ( empty( $logos ) ) {
     return;
