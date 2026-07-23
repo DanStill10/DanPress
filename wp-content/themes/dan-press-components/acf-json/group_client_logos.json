@@ -68,11 +68,11 @@
             "type": "color_picker",
             "conditional_logic": [
                 [
-                    [
+                    {
                         "field": "field_cl_color_scheme",
                         "operator": "==",
                         "value": "custom"
-                    ]
+                    }
                 ]
             ]
         },
@@ -83,11 +83,11 @@
             "type": "color_picker",
             "conditional_logic": [
                 [
-                    [
+                    {
                         "field": "field_cl_color_scheme",
                         "operator": "==",
                         "value": "custom"
-                    ]
+                    }
                 ]
             ]
         }

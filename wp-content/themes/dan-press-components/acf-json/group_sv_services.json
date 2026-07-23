@@ -103,11 +103,11 @@
             "type": "color_picker",
             "conditional_logic": [
                 [
-                    [
+                    {
                         "field": "field_sv_color_scheme",
                         "operator": "==",
                         "value": "custom"
-                    ]
+                    }
                 ]
             ]
         },
@@ -118,11 +118,11 @@
             "type": "color_picker",
             "conditional_logic": [
                 [
-                    [
+                    {
                         "field": "field_sv_color_scheme",
                         "operator": "==",
                         "value": "custom"
-                    ]
+                    }
                 ]
             ]
         }
@@ -143,5 +143,5 @@
     "instruction_placement": "label",
     "active": true,
     "show_in_rest": 0,
-    "modified": 1784800002
+    "modified": 1784800004
 }
