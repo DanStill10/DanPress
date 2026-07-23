@@ -19,6 +19,14 @@
             "instructions": "Small label above each card title."
         },
         {
+            "key": "field_sv_btn_text",
+            "label": "Button Label (all cards)",
+            "name": "sv_btn_text",
+            "type": "text",
+            "default_value": "Learn More",
+            "instructions": "Pill button text shown on every card."
+        },
+        {
             "key": "field_sv_cards",
             "label": "Service Cards",
             "name": "sv_cards",
@@ -29,15 +37,26 @@
             "max": 12
         },
         {
+            "key": "field_sv_bg_image",
+            "label": "Background Image",
+            "name": "sv_bg_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "mime_types": "jpg,jpeg,png,webp",
+            "parent_repeater": "field_sv_cards",
+            "instructions": "Full-bleed card background. Use high-res landscape images."
+        },
+        {
             "key": "field_sv_icon",
             "label": "Icon",
             "name": "sv_icon",
             "type": "image",
             "return_format": "array",
             "preview_size": "thumbnail",
-            "mime_types": "svg,png,jpg,jpeg",
+            "mime_types": "svg,png",
             "parent_repeater": "field_sv_cards",
-            "instructions": "SVG or PNG icon. White icons work best on dark backgrounds."
+            "instructions": "Optional SVG or PNG icon."
         },
         {
             "key": "field_sv_title",
@@ -58,10 +77,11 @@
         },
         {
             "key": "field_sv_link",
-            "label": "Link",
+            "label": "Card Link",
             "name": "sv_link",
             "type": "url",
-            "parent_repeater": "field_sv_cards"
+            "parent_repeater": "field_sv_cards",
+            "instructions": "Where this card links to. Leave empty for no navigation."
         },
         {
             "key": "field_sv_color_scheme",
@@ -123,5 +143,5 @@
     "instruction_placement": "label",
     "active": true,
     "show_in_rest": 0,
-    "modified": 1784800001
+    "modified": 1784800002
 }

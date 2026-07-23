@@ -1,7 +1,7 @@
 @import 'variables';
 
 // ==========================================================================
-// Services Grid
+// Services Grid — Image Background Cards
 // ==========================================================================
 
 .dsd-sv {
@@ -14,87 +14,154 @@
 
 .dsd-sv-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
 // --------------------------------------------------------------------------
-// Card
+// Card — entire card is the CTA link
 // --------------------------------------------------------------------------
 
 .dsd-sv-card {
-  background-color: var(--dsd-bg-elevated);
-  border: 1px solid var(--dsd-border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
   border-radius: 12px;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 
-  &:hover {
-    border-color: var(--dsd-accent);
-    transform: translateY(-4px);
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    .dsd-sv-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+    }
+
+    .dsd-sv-card-bg {
+      transform: scale(1.05);
+    }
+
+    .dsd-sv-card-btn {
+      background-color: var(--dsd-accent);
+      border-color: var(--dsd-accent);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dsd-accent);
+    outline-offset: 2px;
   }
 }
 
-.dsd-sv-card-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 2rem;
-  height: 100%;
+// --------------------------------------------------------------------------
+// Background Image
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+  z-index: 0;
 }
 
 // --------------------------------------------------------------------------
-// Card Elements
+// Gradient Overlay — light top, dark bottom
 // --------------------------------------------------------------------------
+
+.dsd-sv-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  z-index: 1;
+  transition: background 0.35s ease;
+}
+
+// --------------------------------------------------------------------------
+// Content — sits above overlay
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 2rem 6rem;
+}
 
 .dsd-sv-card-label {
   font-family: var(--dsd-font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--dsd-text-muted);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .dsd-sv-card-title {
   font-family: var(--dsd-font-sans);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--dsd-text-main);
+  color: #fff;
   margin: 0;
 }
 
 .dsd-sv-card-desc {
   font-family: var(--dsd-font-sans);
-  font-size: 0.9rem;
-  color: var(--dsd-text-muted);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
-  flex-grow: 1;
+  max-width: 280px;
 
   p {
     margin: 0;
   }
 }
 
-.dsd-sv-card-icon {
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
+// --------------------------------------------------------------------------
+// Pill Button — positioned ~20% inset from bottom-right
+// --------------------------------------------------------------------------
 
-.dsd-sv-icon-img {
-  height: 48px;
-  width: 48px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
-.dsd-sv-card a {
-  text-decoration: none;
-  color: inherit;
-
-  &:hover {
-    color: inherit;
-  }
+.dsd-sv-card-btn {
+  position: absolute;
+  bottom: 20%;
+  right: 20%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.6rem;
+  font-family: var(--dsd-font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 // --------------------------------------------------------------------------
@@ -110,9 +177,16 @@
 @media (max-width: 640px) {
   .dsd-sv-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .dsd-sv-card-inner {
-    padding: 1.5rem;
+  .dsd-sv-card-content {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .dsd-sv-card-title {
+    font-size: 1.25rem;
   }
 }
