@@ -61,11 +61,8 @@ $heading     = get_field( 'sv_heading' ) ?: 'Solutions We [accent]Provide[/accen
 $category    = get_field( 'sv_category' ) ?: '';
 $btn_text    = get_field( 'sv_btn_text' ) ?: 'Learn More';
 $cards       = get_field( 'sv_cards' );
-$scheme      = get_field( 'color_scheme' ) ?: 'default';
-$custom_bg   = get_field( 'custom_bg_color' ) ?: '';
-$custom_text = get_field( 'custom_text_color' ) ?: '';
 
-if ( empty( $cards ) ) {
+if ( ! is_array( $cards ) || empty( $cards ) ) {
     return;
 }
 
@@ -76,24 +73,9 @@ $heading_html = preg_replace(
 );
 
 $classes = array( 'dsd-sv', 'dsd-block' );
-if ( $scheme !== 'default' ) {
-    $classes[] = 'dsd-block--' . $scheme;
-}
-if ( $custom_bg ) {
-    $classes[] = 'dsd-block--custom-bg';
-}
-
-$style = '';
-if ( $custom_bg ) {
-    $style .= '--dsd-section-bg: ' . esc_attr( $custom_bg ) . ';';
-}
-if ( $custom_text ) {
-    $style .= '--dsd-section-text: ' . esc_attr( $custom_text ) . ';';
-}
 
 $wrapper_attrs = get_block_wrapper_attributes( array(
     'class' => implode( ' ', $classes ),
-    'style' => $style,
 ) );
 ?>
 

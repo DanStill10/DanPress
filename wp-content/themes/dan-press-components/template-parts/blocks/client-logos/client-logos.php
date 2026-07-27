@@ -39,7 +39,7 @@ if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
 $heading = get_field( 'cl_heading' ) ?: 'Our Clients';
 $logos   = get_field( 'clients' );
 
-if ( empty( $logos ) ) {
+if ( ! is_array( $logos ) || empty( $logos ) ) {
     return;
 }
 
@@ -53,34 +53,15 @@ $heading_html = preg_replace(
     esc_html( $heading )
 );
 
-$scheme    = get_field( 'color_scheme' ) ?: 'default';
-$custom_bg = get_field( 'custom_bg_color' ) ?: '';
-$custom_text = get_field( 'custom_text_color' ) ?: '';
-
 $classes = array( 'dsd-cl', 'dsd-block' );
-if ( $scheme !== 'default' ) {
-    $classes[] = 'dsd-block--' . $scheme;
-}
-if ( $custom_bg ) {
-    $classes[] = 'dsd-block--custom-bg';
-}
 
 $is_centered = count( $logos ) <= 6;
 if ( $is_centered ) {
     $classes[] = 'dsd-cl--centered';
 }
 
-$style = '';
-if ( $custom_bg ) {
-    $style .= '--dsd-section-bg: ' . esc_attr( $custom_bg ) . ';';
-}
-if ( $custom_text ) {
-    $style .= '--dsd-section-text: ' . esc_attr( $custom_text ) . ';';
-}
-
 $wrapper_attrs = get_block_wrapper_attributes( array(
     'class' => implode( ' ', $classes ),
-    'style' => $style,
 ) );
 ?>
 
