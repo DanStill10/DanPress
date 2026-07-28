@@ -9,24 +9,20 @@
 
 if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
     function dsd_render_cl_logo( $logo ) {
-        $image = $logo['cl_logo_image'] ?? null;
-        $link  = $logo['cl_logo_link'] ?? '';
-        $alt   = $logo['cl_logo_alt'] ?? '';
-
-        if ( ! $image ) {
+        $img = $logo['cl_logo_image'] ?? null;
+        if ( ! $img ) {
             return '';
         }
 
-        $img_url = esc_url( $image['url'] ?? '' );
-        $img_alt = esc_attr( $alt ?: ( $image['alt'] ?? '' ) );
-        $width   = esc_attr( $image['sizes']['thumbnail-width'] ?? 150 );
-        $height  = esc_attr( $image['sizes']['thumbnail-height'] ?? 150 );
+        $url  = esc_url( $img['url'] ?? '' );
+        $alt  = esc_attr( $logo['cl_logo_alt'] ?? $img['alt'] ?? '' );
+        $link = $logo['cl_logo_link'] ?? '';
 
         $output = '<figure class="dsd-cl-item">';
         if ( $link ) {
             $output .= '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">';
         }
-        $output .= '<img class="dsd-cl-img" src="' . $img_url . '" alt="' . $img_alt . '" width="' . $width . '" height="' . $height . '" loading="lazy">';
+        $output .= '<img class="dsd-cl-img" src="' . $url . '" alt="' . $alt . '" width="150" height="150" loading="lazy">';
         if ( $link ) {
             $output .= '</a>';
         }
@@ -39,7 +35,7 @@ if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
 $heading = get_field( 'cl_heading' ) ?: 'Our Clients';
 $logos   = get_field( 'clients' );
 
-if ( empty( $logos ) ) {
+if ( ! is_array( $logos ) || empty( $logos ) ) {
     return;
 }
 
@@ -53,38 +49,13 @@ $heading_html = preg_replace(
     esc_html( $heading )
 );
 
-$scheme    = get_field( 'color_scheme' ) ?: 'default';
-$custom_bg = get_field( 'custom_bg_color' ) ?: '';
-$custom_text = get_field( 'custom_text_color' ) ?: '';
-
 $classes = array( 'dsd-cl', 'dsd-block' );
-if ( $scheme !== 'default' ) {
-    $classes[] = 'dsd-block--' . $scheme;
-}
-if ( $custom_bg ) {
-    $classes[] = 'dsd-block--custom-bg';
-}
-
-$is_centered = count( $logos ) <= 6;
-if ( $is_centered ) {
+if ( count( $logos ) <= 6 ) {
     $classes[] = 'dsd-cl--centered';
 }
-
-$style = '';
-if ( $custom_bg ) {
-    $style .= '--dsd-section-bg: ' . esc_attr( $custom_bg ) . ';';
-}
-if ( $custom_text ) {
-    $style .= '--dsd-section-text: ' . esc_attr( $custom_text ) . ';';
-}
-
-$wrapper_attrs = get_block_wrapper_attributes( array(
-    'class' => implode( ' ', $classes ),
-    'style' => $style,
-) );
 ?>
 
-<section <?php echo $wrapper_attrs; ?>>
+<section <?php echo get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) ); ?>>
     <div class="container">
         <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
     </div>

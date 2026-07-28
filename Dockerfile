@@ -59,11 +59,15 @@ FROM php:8.3-apache
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libmagickwand-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # PHP extensions
-RUN docker-php-ext-install mysqli intl opcache
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
+RUN docker-php-ext-install mysqli intl opcache gd fileinfo
 RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Apache: enable mod_rewrite for WordPress permalinks

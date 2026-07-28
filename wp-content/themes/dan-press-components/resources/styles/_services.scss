@@ -1,3 +1,246 @@
 @import 'variables';
 
-// Services Grid — TODO: build in feature/services-grid
+// ==========================================================================
+// Services Grid — Image Background Cards
+// ==========================================================================
+
+.dsd-sv {
+  padding: 5rem 0;
+}
+
+// --------------------------------------------------------------------------
+// Grid
+// --------------------------------------------------------------------------
+
+.dsd-sv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+// --------------------------------------------------------------------------
+// Card — flex column, entire card is the CTA link
+// --------------------------------------------------------------------------
+
+.dsd-sv-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    .dsd-sv-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+    }
+
+    .dsd-sv-card-bg {
+      transform: scale(1.05);
+    }
+
+    .dsd-sv-card-btn {
+      background-color: var(--dsd-accent);
+      border-color: var(--dsd-accent);
+    }
+
+    .dsd-sv-card-icon {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dsd-accent);
+    outline-offset: 2px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Background Image
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+// --------------------------------------------------------------------------
+// Gradient Overlay — light top, dark bottom
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  z-index: 1;
+  transition: background 0.35s ease;
+}
+
+// --------------------------------------------------------------------------
+// Content — flex: 1 pushes footer to bottom
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.dsd-sv-card-label {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dsd-sv-card-title {
+  font-family: var(--dsd-font-sans);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.dsd-sv-card-desc {
+  font-family: var(--dsd-font-sans);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  margin-top: auto;
+
+  p {
+    margin: 0;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Footer — pill button + arrow icon, flex row
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+}
+
+// --------------------------------------------------------------------------
+// Pill Button
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--dsd-font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+// --------------------------------------------------------------------------
+// Arrow Icon
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-icon {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// --------------------------------------------------------------------------
+// Responsive — Tablet
+// --------------------------------------------------------------------------
+
+@media (max-width: 1024px) {
+  .dsd-sv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive — Mobile
+// --------------------------------------------------------------------------
+
+@media (max-width: 640px) {
+  .dsd-sv-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dsd-sv-card {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  .dsd-sv-card-content {
+    padding: 1.25rem 1.25rem 0;
+  }
+
+  .dsd-sv-card-title {
+    font-size: 1.25rem;
+  }
+
+  .dsd-sv-card-desc {
+    font-size: 0.8rem;
+  }
+
+  .dsd-sv-card-footer {
+    padding: 1rem 1.25rem;
+  }
+
+  .dsd-sv-card-btn {
+    font-size: 0.65rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .dsd-sv-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
