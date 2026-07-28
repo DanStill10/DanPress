@@ -20,14 +20,13 @@
 }
 
 // --------------------------------------------------------------------------
-// Card — entire card is the CTA link
+// Card — flex column, entire card is the CTA link
 // --------------------------------------------------------------------------
 
 .dsd-sv-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   overflow: hidden;
   border-radius: 12px;
   aspect-ratio: 3 / 4;
@@ -57,6 +56,11 @@
     .dsd-sv-card-btn {
       background-color: var(--dsd-accent);
       border-color: var(--dsd-accent);
+    }
+
+    .dsd-sv-card-icon {
+      opacity: 1;
+      transform: translateX(4px);
     }
   }
 
@@ -97,7 +101,7 @@
 }
 
 // --------------------------------------------------------------------------
-// Content — sits above overlay
+// Content — flex: 1 pushes footer to bottom
 // --------------------------------------------------------------------------
 
 .dsd-sv-card-content {
@@ -106,7 +110,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0 2rem 6rem;
+  flex: 1;
+  padding: 1.5rem 1.5rem 0;
 }
 
 .dsd-sv-card-label {
@@ -120,18 +125,19 @@
 
 .dsd-sv-card-title {
   font-family: var(--dsd-font-sans);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
   margin: 0;
+  line-height: 1.2;
 }
 
 .dsd-sv-card-desc {
   font-family: var(--dsd-font-sans);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
-  max-width: 280px;
+  margin-top: auto;
 
   p {
     margin: 0;
@@ -139,18 +145,27 @@
 }
 
 // --------------------------------------------------------------------------
-// Pill Button — positioned ~20% inset from bottom-right
+// Footer — pill button + arrow icon, flex row
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+}
+
+// --------------------------------------------------------------------------
+// Pill Button
 // --------------------------------------------------------------------------
 
 .dsd-sv-card-btn {
-  position: absolute;
-  bottom: 20%;
-  right: 20%;
-  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1.6rem;
+  padding: 0.6rem 1.4rem;
   font-family: var(--dsd-font-mono);
   font-size: 0.7rem;
   font-weight: 700;
@@ -165,7 +180,19 @@
 }
 
 // --------------------------------------------------------------------------
-// Responsive
+// Arrow Icon
+// --------------------------------------------------------------------------
+
+.dsd-sv-card-icon {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// --------------------------------------------------------------------------
+// Responsive — Tablet
 // --------------------------------------------------------------------------
 
 @media (max-width: 1024px) {
@@ -174,19 +201,46 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Responsive — Mobile
+// --------------------------------------------------------------------------
+
 @media (max-width: 640px) {
   .dsd-sv-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
   }
 
+  .dsd-sv-card {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
   .dsd-sv-card-content {
-    padding: 0 1.5rem 5rem;
+    padding: 1.25rem 1.25rem 0;
   }
 
   .dsd-sv-card-title {
     font-size: 1.25rem;
+  }
+
+  .dsd-sv-card-desc {
+    font-size: 0.8rem;
+  }
+
+  .dsd-sv-card-footer {
+    padding: 1rem 1.25rem;
+  }
+
+  .dsd-sv-card-btn {
+    font-size: 0.65rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .dsd-sv-card-icon {
+    width: 36px;
+    height: 36px;
   }
 }

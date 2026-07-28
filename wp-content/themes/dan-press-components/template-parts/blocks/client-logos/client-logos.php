@@ -9,24 +9,20 @@
 
 if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
     function dsd_render_cl_logo( $logo ) {
-        $image = $logo['cl_logo_image'] ?? null;
-        $link  = $logo['cl_logo_link'] ?? '';
-        $alt   = $logo['cl_logo_alt'] ?? '';
-
-        if ( ! $image ) {
+        $img = $logo['cl_logo_image'] ?? null;
+        if ( ! $img ) {
             return '';
         }
 
-        $img_url = esc_url( $image['url'] ?? '' );
-        $img_alt = esc_attr( $alt ?: ( $image['alt'] ?? '' ) );
-        $width   = esc_attr( $image['sizes']['thumbnail-width'] ?? 150 );
-        $height  = esc_attr( $image['sizes']['thumbnail-height'] ?? 150 );
+        $url  = esc_url( $img['url'] ?? '' );
+        $alt  = esc_attr( $logo['cl_logo_alt'] ?? $img['alt'] ?? '' );
+        $link = $logo['cl_logo_link'] ?? '';
 
         $output = '<figure class="dsd-cl-item">';
         if ( $link ) {
             $output .= '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">';
         }
-        $output .= '<img class="dsd-cl-img" src="' . $img_url . '" alt="' . $img_alt . '" width="' . $width . '" height="' . $height . '" loading="lazy">';
+        $output .= '<img class="dsd-cl-img" src="' . $url . '" alt="' . $alt . '" width="150" height="150" loading="lazy">';
         if ( $link ) {
             $output .= '</a>';
         }
@@ -54,18 +50,12 @@ $heading_html = preg_replace(
 );
 
 $classes = array( 'dsd-cl', 'dsd-block' );
-
-$is_centered = count( $logos ) <= 6;
-if ( $is_centered ) {
+if ( count( $logos ) <= 6 ) {
     $classes[] = 'dsd-cl--centered';
 }
-
-$wrapper_attrs = get_block_wrapper_attributes( array(
-    'class' => implode( ' ', $classes ),
-) );
 ?>
 
-<section <?php echo $wrapper_attrs; ?>>
+<section <?php echo get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) ); ?>>
     <div class="container">
         <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
     </div>
