@@ -10,7 +10,7 @@
 }
 
 .dsd-hero {
-  min-height: 85vh;
+  min-height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,7 +177,7 @@
 
 @media (max-width: 1024px) {
   .dsd-hero {
-    min-height: 75vh;
+    min-height: 55vh;
   }
 }
 
