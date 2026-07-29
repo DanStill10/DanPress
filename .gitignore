@@ -17,6 +17,7 @@ xmlrpc.php
 
 # Lando specific files to ignore (if any beyond .lando.yml)
 # .lando.tmp/
+#.
 
 # WP-CONTENT Folder
 # -----------------
