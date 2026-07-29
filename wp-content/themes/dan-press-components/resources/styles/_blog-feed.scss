@@ -1,3 +1,154 @@
 @import 'variables';
 
-// Blog Feed — TODO: build in feature/blog-feed
+// ==========================================================================
+// Blog Feed — DSD Design System
+// ==========================================================================
+
+.dsd-blog-feed {
+  padding: 5rem 0;
+}
+
+.dsd-blog-feed-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+// --------------------------------------------------------------------------
+// Header / Intro (Left Column)
+// --------------------------------------------------------------------------
+
+.dsd-blog-feed-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.dsd-blog-feed-badge {
+  display: inline-block;
+  font-family: var(--dsd-font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dsd-accent);
+  background: rgba(0, 102, 255, 0.1);
+  border: 1px solid var(--dsd-accent);
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.dsd-blog-feed-intro {
+  font-size: 0.95rem;
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// --------------------------------------------------------------------------
+// Blog Card Grid (Right Column)
+// --------------------------------------------------------------------------
+
+.dsd-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.dsd-blog-card {
+  background: var(--dsd-bg-elevated);
+  border: 1px solid var(--dsd-border);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--dsd-accent);
+  }
+}
+
+.dsd-blog-card__image {
+  display: block;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
+  }
+}
+
+.dsd-blog-card__content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dsd-blog-card__cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dsd-blog-card__cat {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dsd-text-muted);
+  border: 1px solid var(--dsd-border);
+  padding: 0.2rem 0.5rem;
+}
+
+.dsd-blog-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+
+  a {
+    color: var(--dsd-text-main);
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--dsd-accent);
+      text-decoration: none;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 1024px) {
+  .dsd-blog-feed-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .dsd-blog-feed-header {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .dsd-blog-feed {
+    padding: 3rem 0;
+  }
+
+  .dsd-blog-grid {
+    grid-template-columns: 1fr;
+  }
+}

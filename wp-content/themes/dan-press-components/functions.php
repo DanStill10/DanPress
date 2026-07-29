@@ -20,8 +20,7 @@ if ( ! file_exists( $composer = __DIR__ . '/vendor/autoload.php' ) ) {
 }
 require $composer;
 
-/*
-|--------------------------------------------------------------------------
+|
 | Theme Support
 |--------------------------------------------------------------------------
 */
@@ -39,6 +38,27 @@ function dsd_theme_setup() {
     }
 }
 add_action( 'after_setup_theme', 'dsd_theme_setup' );
+
+/*
+|--------------------------------------------------------------------------
+| ACF Local JSON
+|--------------------------------------------------------------------------
+|
+| Save and load ACF field group JSON from the theme's acf-json/ directory.
+| This keeps field groups version-controlled alongside the theme.
+|
+*/
+function dsd_acf_json_load_point( $paths ) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'dsd_acf_json_load_point' );
+
+function dsd_acf_json_save_point( $path ) {
+    $path = get_stylesheet_directory() . '/acf-json';
+    return $path;
+}
+add_filter( 'acf/settings/save_json', 'dsd_acf_json_save_point' );
 
 /**
  * Enqueue Google Fonts for the theme.
@@ -370,16 +390,19 @@ add_action( 'customize_register', 'dsd_hero_customize_register' );
 */
 function dsd_cta_customize_register( $wp_customize ) {
 
+    // Panel
     $wp_customize->add_panel( 'dsd_cta_panel', array(
         'title'    => __( 'CTA Section', 'dan-press' ),
         'priority' => 31,
     ) );
 
+    // Section
     $wp_customize->add_section( 'dsd_cta_section', array(
         'title' => __( 'CTA Content', 'dan-press' ),
         'panel' => 'dsd_cta_panel',
     ) );
 
+    // --- Heading ---
     $wp_customize->add_setting( 'cta_heading', array(
         'default'           => 'Get In Touch',
         'sanitize_callback' => 'sanitize_text_field',
@@ -390,6 +413,7 @@ function dsd_cta_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
 
+    // --- Subtitle ---
     $wp_customize->add_setting( 'cta_subtitle', array(
         'default'           => 'Have a project in mind? Let\'s talk about it.',
         'sanitize_callback' => 'sanitize_text_field',
@@ -400,6 +424,7 @@ function dsd_cta_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
 
+    // --- Button Text ---
     $wp_customize->add_setting( 'cta_btn_text', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
@@ -410,6 +435,7 @@ function dsd_cta_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
 
+    // --- Button URL ---
     $wp_customize->add_setting( 'cta_btn_url', array(
         'default'           => '#',
         'sanitize_callback' => 'esc_url_raw',

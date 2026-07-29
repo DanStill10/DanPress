@@ -1,3 +1,128 @@
 @import 'variables';
 
-// Testimonials — TODO: build in feature/testimonials
+// ==========================================================================
+// Testimonials — DSD Design System
+// ==========================================================================
+
+.dsd-testimonials {
+  padding: 5rem 0;
+  background-color: var(--dsd-bg-elevated);
+  border-top: 1px solid var(--dsd-border);
+  border-bottom: 1px solid var(--dsd-border);
+}
+
+.dsd-testimonials-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+// --------------------------------------------------------------------------
+// Testimonial Cards Grid
+// --------------------------------------------------------------------------
+
+.dsd-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.dsd-testimonial-card {
+  background: var(--dsd-bg);
+  border: 1px solid var(--dsd-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--dsd-accent);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Rating
+// --------------------------------------------------------------------------
+
+.dsd-testimonial-card__rating {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.dsd-testimonial-card__number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dsd-text-main);
+  line-height: 1;
+}
+
+.dsd-testimonial-card__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.dsd-star {
+  font-size: 1rem;
+  color: var(--dsd-border);
+
+  &--filled {
+    color: var(--dsd-accent);
+  }
+}
+
+.dsd-testimonial-card__platform {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dsd-text-muted);
+}
+
+.dsd-testimonial-card__quote {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--dsd-text-muted);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.dsd-testimonial-card__author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--dsd-border);
+
+  strong {
+    font-size: 0.85rem;
+    color: var(--dsd-text-main);
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: var(--dsd-text-muted);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-testimonials {
+    padding: 3rem 0;
+  }
+
+  .dsd-testimonials-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
