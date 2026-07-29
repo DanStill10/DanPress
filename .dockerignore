@@ -11,4 +11,5 @@ readme.html
 *.log
 *.md
 !wp-content/themes/dan-press-components/README.md
+wp-content/uploads/
 php.ini

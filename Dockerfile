@@ -117,6 +117,8 @@ CMD ["bash", "-c", "\
   a2enmod mpm_prefork; \
   sed -i \"s/Listen .*/Listen ${PORT}/\" /etc/apache2/ports.conf; \
   sed -i \"s/<VirtualHost _default_:80>/<VirtualHost *:${PORT}>/\" /etc/apache2/sites-available/000-default.conf; \
+  mkdir -p ${APACHE_DOCUMENT_ROOT}/wp-content/uploads; \
+  chown www-data:www-data ${APACHE_DOCUMENT_ROOT}/wp-content/uploads; \
   apache2ctl -t; \
   exec apache2-foreground \
 "]
