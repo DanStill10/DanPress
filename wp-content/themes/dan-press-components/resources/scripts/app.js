@@ -65,6 +65,74 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
+  /**
+   * About Section — Image Gallery Crossfade Carousel
+   */
+  const carousel = document.querySelector('.dsd-ab-carousel');
+  if (carousel) {
+    const slides = carousel.querySelectorAll('.dsd-ab-carousel__slide');
+    const dots = carousel.querySelectorAll('.dsd-ab-carousel__dot');
+    const prevBtn = carousel.querySelector('.dsd-ab-carousel__btn--prev');
+    const nextBtn = carousel.querySelector('.dsd-ab-carousel__btn--next');
+    let currentIndex = 0;
+    let autoplayInterval = null;
+    const autoplayDelay = 4000;
+
+    function goTo(index) {
+      slides.forEach(s => s.classList.remove('is-active'));
+      dots.forEach(d => d.classList.remove('is-active'));
+
+      slides[index].classList.add('is-active');
+      dots[index].classList.add('is-active');
+      dots[index].setAttribute('aria-selected', 'true');
+
+      const prevDot = dots[currentIndex];
+      if (prevDot) prevDot.setAttribute('aria-selected', 'false');
+
+      currentIndex = index;
+    }
+
+    function next() {
+      goTo((currentIndex + 1) % slides.length);
+    }
+
+    function prev() {
+      goTo((currentIndex - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = setInterval(next, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-index'), 10);
+        if (!isNaN(idx)) {
+          goTo(idx);
+          startAutoplay();
+        }
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    if (slides.length > 1) {
+      startAutoplay();
+    }
+  }
 });
 
 /**
