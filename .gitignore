@@ -21,7 +21,8 @@ xmlrpc.php
 # WP-CONTENT Folder
 # -----------------
 # Plugins and mu-plugins are installed at deploy time, not tracked in Git.
-/wp-content/plugins/
+/wp-content/plugins/*
+!/wp-content/plugins/advanced-custom-fields-pro/
 /wp-content/mu-plugins/
 
 # User uploads should not be in the repository.
