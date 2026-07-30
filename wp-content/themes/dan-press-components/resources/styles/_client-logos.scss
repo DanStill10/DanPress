@@ -91,8 +91,8 @@ $marquee-duration: 40s;
 
 .dsd-cl-img {
   height: 175px;
-  width: 175px;
-  object-fit: cover;
+  width: auto;
+  object-fit: contain;
   border-radius: 10px;
 }
 

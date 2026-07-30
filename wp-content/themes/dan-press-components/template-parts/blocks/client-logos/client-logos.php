@@ -18,11 +18,14 @@ if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
         $alt  = esc_attr( $logo['cl_logo_alt'] ?? $img['alt'] ?? '' );
         $link = $logo['cl_logo_link'] ?? '';
 
+        $width  = $img['width'] ?? '';
+        $height = $img['height'] ?? '';
+
         $output = '<figure class="dsd-cl-item">';
         if ( $link ) {
             $output .= '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">';
         }
-        $output .= '<img class="dsd-cl-img" src="' . $url . '" alt="' . $alt . '" width="175" height="175" loading="lazy">';
+        $output .= '<img class="dsd-cl-img" src="' . $url . '" alt="' . $alt . '" width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '" loading="lazy">';
         if ( $link ) {
             $output .= '</a>';
         }
