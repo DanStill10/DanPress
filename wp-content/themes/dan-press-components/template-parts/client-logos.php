@@ -81,8 +81,8 @@ function dsd_render_logo_item( $logo ) {
 
     $img_url = esc_url( $image['url'] ?? '' );
     $img_alt = esc_attr( $alt ?: ( $image['alt'] ?? '' ) );
-    $width   = esc_attr( $image['sizes']['thumbnail-width'] ?? 150 );
-    $height  = esc_attr( $image['sizes']['thumbnail-height'] ?? 150 );
+    $width   = 175;
+    $height  = 175;
 
     $output = '<figure class="dsd-cl-item">';
     if ( $link ) {
