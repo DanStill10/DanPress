@@ -26,16 +26,21 @@ RUN curl -fsSL https://wordpress.org/latest.tar.gz -o /tmp/wordpress.tar.gz \
 COPY . .
 
 # Install WordPress plugins (downloaded from WordPress.org at build time)
-RUN mkdir -p wp-content/plugins \
-    && curl -fsSL -o /tmp/wpforms.zip https://downloads.wordpress.org/plugin/wpforms-lite.zip \
-    && unzip -qo /tmp/wpforms.zip -d wp-content/plugins && rm /tmp/wpforms.zip \
-    && curl -fsSL -o /tmp/updraftplus.zip https://downloads.wordpress.org/plugin/updraftplus.zip \
-    && unzip -qo /tmp/updraftplus.zip -d wp-content/plugins && rm /tmp/updraftplus.zip \
-    && curl -fsSL -o /tmp/acf.zip https://downloads.wordpress.org/plugin/advanced-custom-fields.zip \
-    && unzip -qo /tmp/acf.zip -d wp-content/plugins && rm /tmp/acf.zip \
-    && curl -fsSL -o /tmp/ai1wm.zip https://downloads.wordpress.org/plugin/all-in-one-wp-migration.zip \
-    && unzip -qo /tmp/ai1wm.zip -d wp-content/plugins && rm /tmp/ai1wm.zip \
-    && curl -fsSL -o /tmp/akismet.zip https://downloads.wordpress.org/plugin/akismet.zip \
+RUN mkdir -p wp-content/plugins
+
+RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/wpforms.zip https://downloads.wordpress.org/plugin/wpforms-lite.zip \
+    && unzip -qo /tmp/wpforms.zip -d wp-content/plugins && rm /tmp/wpforms.zip
+
+RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/updraftplus.zip https://downloads.wordpress.org/plugin/updraftplus.zip \
+    && unzip -qo /tmp/updraftplus.zip -d wp-content/plugins && rm /tmp/updraftplus.zip
+
+RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/acf.zip https://downloads.wordpress.org/plugin/advanced-custom-fields.zip \
+    && unzip -qo /tmp/acf.zip -d wp-content/plugins && rm /tmp/acf.zip
+
+RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/ai1wm.zip https://downloads.wordpress.org/plugin/all-in-one-wp-migration.zip \
+    && unzip -qo /tmp/ai1wm.zip -d wp-content/plugins && rm /tmp/ai1wm.zip
+
+RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/akismet.zip https://downloads.wordpress.org/plugin/akismet.zip \
     && unzip -qo /tmp/akismet.zip -d wp-content/plugins && rm /tmp/akismet.zip
 
 # Install theme Composer dependencies (autoloader)
