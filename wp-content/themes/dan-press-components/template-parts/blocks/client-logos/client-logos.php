@@ -51,19 +51,18 @@ $classes = array( 'dsd-cl', 'dsd-block' );
 <section <?php echo get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) ); ?>>
     <div class="container">
         <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
-    </div>
-
-    <div class="dsd-cl-marquee">
-        <div class="dsd-cl-track dsd-cl-track--left" aria-label="Client logos">
-            <div class="dsd-cl-slide">
-                <?php foreach ( $logos as $logo ) : ?>
-                    <?php echo dsd_render_cl_logo( $logo ); ?>
-                <?php endforeach; ?>
-            </div>
-            <div class="dsd-cl-slide" aria-hidden="true">
-                <?php foreach ( $logos as $logo ) : ?>
-                    <?php echo dsd_render_cl_logo( $logo ); ?>
-                <?php endforeach; ?>
+        <div class="dsd-cl-marquee">
+            <div class="dsd-cl-track dsd-cl-track--left" aria-label="Client logos">
+                <div class="dsd-cl-slide">
+                    <?php foreach ( $logos as $logo ) : ?>
+                        <?php echo dsd_render_cl_logo( $logo ); ?>
+                    <?php endforeach; ?>
+                </div>
+                <div class="dsd-cl-slide" aria-hidden="true">
+                    <?php foreach ( $logos as $logo ) : ?>
+                        <?php echo dsd_render_cl_logo( $logo ); ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </div>
