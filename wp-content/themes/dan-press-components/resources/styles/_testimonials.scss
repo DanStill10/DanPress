@@ -61,18 +61,25 @@
   line-height: 1;
 }
 
-.dsd-testimonial-card__stars {
-  display: flex;
-  gap: 2px;
+.dsd-testimonial-stars {
+  position: relative;
+  display: inline-block;
+  font-size: 1.15rem;
+  line-height: 1;
+  letter-spacing: 2px;
 }
 
-.dsd-star {
-  font-size: 1rem;
+.dsd-stars-empty {
   color: var(--dsd-border);
+}
 
-  &--filled {
-    color: var(--dsd-accent);
-  }
+.dsd-stars-filled {
+  color: var(--dsd-accent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .dsd-testimonial-card__platform {
