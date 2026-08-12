@@ -14,36 +14,73 @@
   gap: 3rem;
 }
 
-// --------------------------------------------------------------------------
-// Individual Proposition
-// --------------------------------------------------------------------------
-
-.dsd-value-prop {
+.dsd-value-prop-card {
+  background-color: var(--dsd-bg-elevated);
+  border: 1px solid var(--dsd-border);
+  padding: 2.5rem;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.25rem;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--dsd-accent);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 102, 255, 0.15);
+
+    .dsd-value-prop-card__desc {
+      color: var(--dsd-text-main);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dsd-accent);
+    outline-offset: 4px;
+  }
 }
 
-.dsd-value-prop__title {
-  font-size: 1.75rem;
+.dsd-value-prop-card__number {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dsd-accent);
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.dsd-value-prop-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dsd-value-prop-card__title {
+  font-size: 1.4rem;
   font-weight: 800;
   margin: 0;
   color: var(--dsd-text-main);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
 }
 
-.dsd-value-prop__subtitle {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--dsd-text-main);
-  margin: 0;
-  line-height: 1.5;
+.dsd-value-prop-card__subtitle {
+  font-family: var(--dsd-font-mono);
+  font-size: 0.75rem;
+  color: var(--dsd-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
-.dsd-value-prop__desc {
-  font-size: 0.9rem;
+.dsd-value-prop-card__desc {
+  font-size: 0.95rem;
   color: var(--dsd-text-muted);
-  line-height: 1.6;
-  margin: 0;
+  line-height: 1.65;
+  margin: 0.5rem 0 0;
+  transition: color 0.3s ease;
 }
 
 // --------------------------------------------------------------------------
@@ -53,12 +90,17 @@
 @media (max-width: 1024px) {
   .dsd-value-props-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 }
 
 @media (max-width: 767px) {
   .dsd-value-props {
-    padding: 3rem 0;
+    padding: 3.5rem 0;
+  }
+
+  .dsd-value-prop-card {
+    padding: 1.75rem;
+    gap: 1rem;
   }
 }
