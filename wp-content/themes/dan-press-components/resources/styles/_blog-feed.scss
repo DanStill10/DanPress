@@ -22,23 +22,9 @@
 .dsd-blog-feed-header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   position: sticky;
   top: 6rem;
-}
-
-.dsd-blog-feed-badge {
-  display: inline-block;
-  font-family: var(--dsd-font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dsd-accent);
-  background: rgba(0, 102, 255, 0.1);
-  border: 1px solid var(--dsd-accent);
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 0.75rem;
 }
 
 .dsd-blog-feed-intro {
@@ -84,6 +70,11 @@
   &:hover img {
     transform: scale(1.03);
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--dsd-accent);
+    outline-offset: 4px;
+  }
 }
 
 .dsd-blog-card__content {
@@ -124,6 +115,11 @@
     &:hover {
       color: var(--dsd-accent);
       text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--dsd-accent);
+      outline-offset: 4px;
     }
   }
 }

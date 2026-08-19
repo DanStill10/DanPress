@@ -1,35 +1,72 @@
 <?php
 /**
- * Template Part: Blog Feed
+ * Block: Blog Feed
  *
  * Displays recent blog posts in a card grid.
- * Uses WP_Query — no ACF fields needed.
+ * Uses WP_Query — content settings via ACF.
  *
  * @package Dan Press
  */
 
-$blog_args = array(
-    'posts_per_page'      => 3,
-    'post_status'         => 'publish',
-    'no_found_rows'       => true,
-    'ignore_sticky_posts' => true,
+$heading    = get_field( 'blog_feed_heading' ) ?: 'Our [accent]Blog[/accent]';
+$intro      = get_field( 'blog_feed_intro' ) ?: 'News, articles, and updates from our team.';
+$btn_text   = get_field( 'blog_feed_btn_text' ) ?: 'Browse All Articles';
+$btn_url    = get_field( 'blog_feed_btn_url' );
+$post_count = (int) get_field( 'blog_feed_count' );
+
+if ( $post_count < 1 ) {
+    $post_count = 3;
+}
+
+$heading_html = preg_replace(
+    '/\[accent\](.*?)\[\/accent\]/',
+    '<span class="dsd-accent-word">$1</span>',
+    esc_html( $heading )
 );
+
+if ( ! $btn_url ) {
+    $btn_url = get_permalink( get_option( 'page_for_posts' ) );
+    if ( ! $btn_url ) {
+        $btn_url = home_url( '/blog/' );
+    }
+}
+
+$selected_posts = (array) get_field( 'blog_feed_posts' );
+
+if ( $selected_posts ) {
+    // Curated mode: render selected posts in the admin's chosen order.
+    $blog_args = array(
+        'post__in'            => array_map( 'absint', $selected_posts ),
+        'post_type'           => 'post',
+        'post_status'         => 'publish',
+        'orderby'             => 'post__in',
+        'no_found_rows'       => true,
+        'ignore_sticky_posts' => true,
+    );
+} else {
+    // Fallback mode: most recent published posts.
+    $blog_args = array(
+        'posts_per_page'      => $post_count,
+        'post_status'         => 'publish',
+        'no_found_rows'       => true,
+        'ignore_sticky_posts' => true,
+    );
+}
 
 $blog_query = new WP_Query( $blog_args );
 ?>
 
-<section class="dsd-blog-feed" id="blog">
+<section <?php echo get_block_wrapper_attributes( array( 'class' => 'dsd-blog-feed dsd-block' ) ); ?>>
     <div class="container dsd-blog-feed-inner">
 
         <div class="dsd-blog-feed-header">
             <div>
-                <span class="dsd-blog-feed-badge">READ</span>
-                <h2 class="dsd-section-heading">Our <span class="dsd-accent-word">Blog</span></h2>
-                <p class="dsd-blog-feed-intro">News, articles, and updates from our team.</p>
+                <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
+                <p class="dsd-blog-feed-intro"><?php echo esc_html( $intro ); ?></p>
             </div>
 
-            <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog/' ) ); ?>" class="dsd-btn dsd-btn--ghost">
-                Browse All Articles
+            <a href="<?php echo esc_url( $btn_url ); ?>" class="dsd-btn dsd-btn--ghost">
+                <?php echo esc_html( $btn_text ); ?>
             </a>
         </div>
 

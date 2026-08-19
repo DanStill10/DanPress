@@ -466,3 +466,38 @@ function dsd_cta_customize_register( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'dsd_cta_customize_register' );
+
+/*
+|--------------------------------------------------------------------------
+| Blog Category Filter (posts page)
+|--------------------------------------------------------------------------
+|
+| The category filter bar on index.php submits a blog_cat query var.
+| This hook applies it to the MAIN query. It must live here (functions.php),
+| not in the template, because the main query has already run by the time
+| index.php loads. Guards applied so it can never touch other queries:
+|   - Only the main query (never secondary loops or admin)
+|   - Only on the posts page (is_home() && ! is_front_page())
+|   - Only when a valid, existing category slug is supplied
+*/
+function dsd_blog_apply_category_filter( $query ) {
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() || is_front_page() ) {
+        return;
+    }
+
+    if ( empty( $_GET['blog_cat'] ) ) {
+        return;
+    }
+
+    $slug = sanitize_title( wp_unslash( $_GET['blog_cat'] ) );
+
+    // Validate the slug against a real term before it touches the query —
+    // prevents junk/arbitrary input from ever reaching SQL.
+    $term = get_term_by( 'slug', $slug, 'category' );
+    if ( ! $term ) {
+        return;
+    }
+
+    $query->set( 'category_name', $term->slug );
+}
+add_action( 'pre_get_posts', 'dsd_blog_apply_category_filter' );
