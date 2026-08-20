@@ -99,7 +99,9 @@ if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_P
     $_SERVER['HTTPS'] = 'on';
 }
 
-
+/* Site URL — set WP_HOME and WP_SITEURL env vars per Railway service */
+define( 'WP_HOME', getenv('WP_HOME') ?: 'https://stillbuilt.digital' );
+define( 'WP_SITEURL', getenv('WP_SITEURL') ?: 'https://stillbuilt.digital' );
 
 /* That's all, stop editing! Happy publishing. */
 
