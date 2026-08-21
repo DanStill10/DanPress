@@ -100,8 +100,10 @@ if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_P
 }
 
 /* Site URL — set WP_HOME and WP_SITEURL env vars per Railway service */
-define( 'WP_HOME', getenv('WP_HOME') ?: 'https://stillbuilt.digital' );
-define( 'WP_SITEURL', getenv('WP_SITEURL') ?: 'https://stillbuilt.digital' );
+$dsd_default_url = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http' )
+    . '://' . ( $_SERVER['HTTP_HOST'] ?? 'stillbuilt.digital' );
+define( 'WP_HOME', getenv('WP_HOME') ?: $dsd_default_url );
+define( 'WP_SITEURL', getenv('WP_SITEURL') ?: $dsd_default_url );
 
 /* That's all, stop editing! Happy publishing. */
 

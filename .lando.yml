@@ -11,7 +11,9 @@ services:
     build:
       - "composer install --no-dev --no-interaction --prefer-dist" # Example: run composer install on build
     environment:
-      WP_ENV: development # <-- Add this line for development environment detection
+      WP_ENV: development
+      WP_HOME: http://dan-still-wordpress-site.lndo.site
+      WP_SITEURL: http://dan-still-wordpress-site.lndo.site
 
   mysql:
     type: mysql:5.7
