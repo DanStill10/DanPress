@@ -34,9 +34,6 @@ RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/wpforms.zip
 RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/updraftplus.zip https://downloads.wordpress.org/plugin/updraftplus.zip \
     && unzip -qo /tmp/updraftplus.zip -d wp-content/plugins && rm /tmp/updraftplus.zip
 
-RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/acf.zip https://downloads.wordpress.org/plugin/advanced-custom-fields.zip \
-    && unzip -qo /tmp/acf.zip -d wp-content/plugins && rm /tmp/acf.zip
-
 RUN curl -fsSL --retry 5 --retry-connrefused --retry-delay 2 -o /tmp/ai1wm.zip https://downloads.wordpress.org/plugin/all-in-one-wp-migration.zip \
     && unzip -qo /tmp/ai1wm.zip -d wp-content/plugins && rm /tmp/ai1wm.zip
 
