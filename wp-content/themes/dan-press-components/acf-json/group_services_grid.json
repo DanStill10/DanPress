@@ -1,0 +1,88 @@
+{
+    "key": "group_services_grid",
+    "title": "Services Grid",
+    "fields": [
+        {
+            "key": "field_sv_heading",
+            "label": "Heading",
+            "name": "sv_heading",
+            "type": "text",
+            "required": 0,
+            "default_value": "Solutions We [accent]Provide[/accent]"
+        },
+        {
+            "key": "field_sv_category",
+            "label": "Category Label",
+            "name": "sv_category",
+            "type": "text",
+            "required": 0,
+            "default_value": "OUR SOLUTIONS"
+        },
+        {
+            "key": "field_sv_btn_text",
+            "label": "Button Text",
+            "name": "sv_btn_text",
+            "type": "text",
+            "required": 0,
+            "default_value": "Learn More"
+        },
+        {
+            "key": "field_sv_cards",
+            "label": "Service Cards",
+            "name": "sv_cards",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Service",
+            "min": 1,
+            "max": 8,
+            "sub_fields": [
+                {
+                    "key": "field_sv_card_title",
+                    "label": "Title",
+                    "name": "sv_title",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_sv_card_link",
+                    "label": "Link URL",
+                    "name": "sv_link",
+                    "type": "url",
+                    "required": 0
+                },
+                {
+                    "key": "field_sv_card_bg_image",
+                    "label": "Background Image",
+                    "name": "sv_bg_image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "mime_types": "jpg,jpeg,png,webp"
+                },
+                {
+                    "key": "field_sv_card_description",
+                    "label": "Description",
+                    "name": "sv_description",
+                    "type": "textarea",
+                    "required": 0,
+                    "rows": 2
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/services"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

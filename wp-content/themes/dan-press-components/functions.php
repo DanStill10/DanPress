@@ -147,11 +147,11 @@ function dsd_enqueue_block_editor_assets() {
         true
     );
 
-    $editor_css = get_theme_file_path( 'build/editor.css' );
+    $editor_css = get_theme_file_path( 'public/editor.css' );
     if ( file_exists( $editor_css ) ) {
         wp_enqueue_style(
             'dsd-blocks-editor',
-            get_theme_file_uri( 'build/editor.css' ),
+            get_theme_file_uri( 'public/editor.css' ),
             [],
             $asset['version']
         );
@@ -163,6 +163,22 @@ function dan_press_register_nav_menu() {
     register_nav_menu( 'primary_menu', __( 'Primary Menu', 'dan-press' ) );
 }
 add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
+
+/*
+|--------------------------------------------------------------------------
+| ACF Local JSON — Load & Save from theme acf-json/ directory
+|--------------------------------------------------------------------------
+*/
+function dsd_acf_json_load( $paths ) {
+    $paths[] = get_theme_file_path( '/acf-json' );
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'dsd_acf_json_load' );
+
+function dsd_acf_json_save( $path ) {
+    return get_theme_file_path( '/acf-json' );
+}
+add_filter( 'acf/settings/save_json', 'dsd_acf_json_save' );
 
 /*
 |--------------------------------------------------------------------------

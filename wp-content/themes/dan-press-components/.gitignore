@@ -37,6 +37,3 @@ composer.phar
 
 # Project context (auto-generated, for agent reference)
 .context/
-
-# ACF Local JSON (sync disabled — managed manually in admin)
-acf-json/

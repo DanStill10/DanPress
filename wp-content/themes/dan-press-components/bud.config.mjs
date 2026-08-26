@@ -14,6 +14,7 @@ export default async (app) => {
     /** Define entrypoints using the correct paths */
     .entry({
       app: ['@src/scripts/app.js', '@src/styles/app.scss'],
+      editor: ['@src/styles/editor.scss'],
     })
 
     .use([BudSass, BudReact, BudSWC])

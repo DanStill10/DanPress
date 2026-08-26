@@ -1,0 +1,107 @@
+{
+    "key": "group_about_section",
+    "title": "About / Why Partner With Us",
+    "fields": [
+        {
+            "key": "field_about_heading",
+            "label": "Heading",
+            "name": "ab_heading",
+            "type": "text",
+            "required": 0,
+            "default_value": "Why [accent]Partner With Us[/accent]"
+        },
+        {
+            "key": "field_about_content",
+            "label": "Content",
+            "name": "ab_content",
+            "type": "wysiwyg",
+            "required": 0,
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "rows": 6
+        },
+        {
+            "key": "field_about_portfolio_link",
+            "label": "Portfolio Link URL",
+            "name": "ab_portfolio_link",
+            "type": "url",
+            "required": 0
+        },
+        {
+            "key": "field_about_portfolio_link_text",
+            "label": "Portfolio Link Text",
+            "name": "ab_portfolio_link_text",
+            "type": "text",
+            "required": 0,
+            "default_value": "Browse Our Portfolio"
+        },
+        {
+            "key": "field_about_gallery",
+            "label": "Portfolio Screenshots",
+            "name": "ab_gallery",
+            "type": "gallery",
+            "return_format": "array",
+            "preview_size": "medium",
+            "insert_size": "medium",
+            "mime_types": "jpg,jpeg,png,webp"
+        },
+        {
+            "key": "field_about_stat_1_num",
+            "label": "Stat 1 Number",
+            "name": "ab_stat_1_num",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_about_stat_1_label",
+            "label": "Stat 1 Label",
+            "name": "ab_stat_1_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_about_stat_2_num",
+            "label": "Stat 2 Number",
+            "name": "ab_stat_2_num",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_about_stat_2_label",
+            "label": "Stat 2 Label",
+            "name": "ab_stat_2_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_about_stat_3_num",
+            "label": "Stat 3 Number",
+            "name": "ab_stat_3_num",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_about_stat_3_label",
+            "label": "Stat 3 Label",
+            "name": "ab_stat_3_label",
+            "type": "text",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/about"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}
