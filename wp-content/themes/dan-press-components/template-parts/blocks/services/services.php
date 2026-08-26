@@ -19,8 +19,12 @@ if ( ! function_exists( 'dsd_render_sv_card' ) ) {
         $desc = $card['sv_description'] ?? '';
 
         $bg_style = $bg ? ' style="background-image: url(\'' . esc_url( $bg ) . '\')"' : '';
+        $card_classes = 'dsd-sv-card';
+        if ( ! $bg ) {
+            $card_classes .= ' dsd-sv-card--no-image';
+        }
 
-        $output  = '<a href="' . esc_url( $link ) . '" class="dsd-sv-card" aria-label="' . esc_attr( $title ) . '">';
+        $output  = '<a href="' . esc_url( $link ) . '" class="' . esc_attr( $card_classes ) . '" aria-label="' . esc_attr( $title ) . '">';
         $output .= '<div class="dsd-sv-card-bg"' . $bg_style . '></div>';
         $output .= '<div class="dsd-sv-card-overlay"></div>';
 
@@ -38,10 +42,6 @@ if ( ! function_exists( 'dsd_render_sv_card' ) ) {
         if ( $btn_text ) {
             $output .= '<span class="dsd-sv-card-btn">' . esc_html( $btn_text ) . '</span>';
         }
-        $output .= '<svg class="dsd-sv-card-icon" width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true">';
-        $output .= '<circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/>';
-        $output .= '<path d="M20 16l8 8-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
-        $output .= '</svg>';
         $output .= '</div>';
 
         $output .= '</a>';
