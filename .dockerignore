@@ -13,3 +13,29 @@ readme.html
 !wp-content/themes/dan-press-components/README.md
 wp-content/uploads/
 php.ini
+
+# WordPress core — managed by Dockerfile (downloaded from wordpress.org)
+wp-admin/
+wp-includes/
+wp-load.php
+wp-login.php
+wp-settings.php
+wp-blog-header.php
+wp-comments-post.php
+wp-cron.php
+wp-links-opml.php
+wp-mail.php
+wp-signup.php
+wp-trackback.php
+wp-activate.php
+index.php
+
+# Default themes — managed by WordPress core
+wp-content/themes/twentytwentyfive/
+wp-content/themes/twentytwentyfour/
+wp-content/themes/twentytwentythree/
+
+# Backup directories
+wp-content/updraft/
+wp-content/backups/
+wp-content/upgrade/
