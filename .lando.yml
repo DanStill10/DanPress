@@ -9,6 +9,7 @@ services:
   appserver: 
     type: php:8.0 # Specify the PHP version for the appserver
     build:
+      - "test -f wp-includes/version.php || (curl -fsSL https://wordpress.org/latest.tar.gz -o /tmp/wp.tar.gz && tar -xzf /tmp/wp.tar.gz -C /tmp && cp -a /tmp/wordpress/* . && rm -rf /tmp/wordpress /tmp/wp.tar.gz)"
       - "composer install --no-dev --no-interaction --prefer-dist" # Example: run composer install on build
     environment:
       WP_ENV: development
@@ -16,7 +17,7 @@ services:
       WP_SITEURL: http://dan-still-wordpress-site.lndo.site
 
   mysql:
-    type: mysql:5.7
+    type: mysql:8.4
     portforward: true
 
 tooling:
