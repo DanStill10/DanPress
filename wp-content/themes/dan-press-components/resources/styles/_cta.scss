@@ -15,7 +15,6 @@
   align-items: center;
   text-align: center;
   gap: 1.5rem;
-  padding: 5rem 0;
 }
 
 .dsd-cta-heading {
@@ -33,7 +32,7 @@
 }
 
 @media (max-width: 767px) {
-  .dsd-cta-inner {
+  .dsd-cta {
     padding: 3rem 0;
   }
 }
