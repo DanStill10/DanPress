@@ -158,7 +158,18 @@ input[type="submit"] {
   margin-bottom: 1.5rem;
 }
 
-section {
+// Baseline vertical rhythm for theme sections. Explicitly scoped to the
+// theme's section classes (never the bare `section` tag) so plugin/block
+// output and components that define their own padding don't double up.
+.dsd-hero,
+.dsd-ab,
+.dsd-sv,
+.dsd-cl,
+.dsd-value-props,
+.dsd-blog-feed,
+.dsd-faqs,
+.dsd-testimonials,
+.dsd-cta {
   padding: 5rem 0;
 }
 
