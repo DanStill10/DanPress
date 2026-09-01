@@ -41,29 +41,14 @@ function dsd_theme_setup() {
 add_action( 'after_setup_theme', 'dsd_theme_setup' );
 
 /**
- * Enqueue Google Fonts for the theme.
+ * Enqueue Theme-wide Frontend Assets (from Bud.js)
+ *
+ * This function enqueues the main site styles and scripts for the front-end
+ * of the website. Inter is self-hosted and bundled into app.css via
+ * @fontsource/inter, so no external font request is required.
+ *
+ * It handles both development and production environments.
  */
-function dan_press_enqueue_fonts() {
-    wp_enqueue_style(
-        'dan-press-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
-        [],
-        null
-    );
-}
-add_action( 'wp_enqueue_scripts', 'dan_press_enqueue_fonts' );
-
-
-/*
-|--------------------------------------------------------------------------
-| Enqueue Theme-wide Frontend Assets (from Bud.js)
-|--------------------------------------------------------------------------
-|
-| This function enqueues the main site styles, scripts, and Google Fonts
-| for the front-end of the website. It handles both development and
-| production environments.
-|
-*/
 function danpress_enqueue_theme_assets() {
     // Step 1: Check if we are in development or production.
     // You can set define('WP_ENV', 'development'); in your wp-config.php.
@@ -75,7 +60,7 @@ function danpress_enqueue_theme_assets() {
         wp_enqueue_style(
             'dan-press-app',
             "{$dev_url}/app.css",
-            ['dan-press-google-fonts'],
+            [],
             null
         );
 
@@ -102,7 +87,7 @@ function danpress_enqueue_theme_assets() {
                     wp_enqueue_style(
                         'dan-press-app',
                         "{$dist_uri}/{$css_file}",
-                        ['dan-press-google-fonts'],
+                        [],
                         null
                     );
                 }

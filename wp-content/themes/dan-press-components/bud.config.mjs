@@ -20,6 +20,16 @@ export default async (app) => {
     .use([BudSass, BudReact, BudSWC])
     .watch(['**/*.php']);
 
+  // Emit all font files (including those self-hosted via @fontsource/inter
+  // from node_modules) into public/fonts/ so the compiled app.css can
+  // reference them locally instead of pointing into node_modules.
+  app.build.setRule('font', (rule) =>
+    rule
+      .setType('asset/resource')
+      .setTest(/\.woff2$/)
+      .setGenerator({ filename: 'fonts/[name][ext]' }),
+  );
+
   // if (app.isDevelopment) {
   //   app.dev
   //     .setProxyUrl('http://dan-still-wordpress-site.lndo.site')

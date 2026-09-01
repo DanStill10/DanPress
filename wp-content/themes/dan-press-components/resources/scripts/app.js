@@ -1,4 +1,15 @@
 /**
+ * Self-hosted Inter font (subsetted, font-display:swap).
+ * Imported from JS so webpack resolves the @font-face url() paths and emits
+ * the woff2 files into the bundled app.css — no external font request.
+ */
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/inter/latin-800.css';
+
+/**
  * Mobile Menu Toggle
  */
 document.addEventListener('DOMContentLoaded', () => {
