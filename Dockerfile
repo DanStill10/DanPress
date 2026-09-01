@@ -72,8 +72,9 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-install mysqli intl opcache gd fileinfo
 RUN pecl install imagick && docker-php-ext-enable imagick
 
-# Apache: enable mod_rewrite for WordPress permalinks
-RUN a2enmod rewrite
+# Apache: enable mod_rewrite for WordPress permalinks, plus mod_deflate and
+# mod_expires/mod_headers for gzip compression and browser caching of assets.
+RUN a2enmod rewrite deflate expires headers
 
 # Allow WordPress .htaccess rewrite rules to take effect
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf

@@ -1,0 +1,54 @@
+# =============================================================================
+# Dan Press Components — Performance headers (theme assets)
+# Applied to this theme's subtree: /wp-content/themes/dan-press-components/*
+# These supplement WordPress' root .htaccess (rewrites) and keep third-party
+# requests (fonts.googleapis.com, etc.) out of the critical path.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Caching / Compression: enabled as modules in the production Dockerfile image
+#   a2enmod deflate expires headers
+# -----------------------------------------------------------------------------
+
+# ---- Gzip compression (mod_deflate) ---------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+    AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+    AddOutputFilterByType DEFLATE application/xml image/svg+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject application/x-font-ttf
+    AddOutputFilterByType DEFLATE font/opentype font/ttf font/otf
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary: Accept-Encoding
+</IfModule>
+
+# ---- Browser cache (mod_expires) -------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+    ExpiresByType font/woff2                "access plus 1 year"
+    ExpiresByType application/font-woff2    "access plus 1 year"
+    ExpiresByType image/svg+xml             "access plus 1 year"
+    ExpiresByType image/webp                "access plus 1 year"
+    ExpiresByType image/png                 "access plus 1 year"
+    ExpiresByType image/jpeg                "access plus 1 year"
+    ExpiresByType image/gif                 "access plus 1 year"
+    ExpiresByType text/html                 "access plus 0 seconds"
+</IfModule>
+
+# ---- Cache-Control / ETag (mod_headers) -------------------------------------
+<IfModule mod_headers.c>
+    # Fingerprinted build assets (app.js/app.css emit content hashes) are
+    # immutable, so we can cache them aggressively without revalidation.
+    <FilesMatch "\.(css|js|woff2|png|jpe?g|gif|svg|webp)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # The HTML document itself should never be cached by the browser.
+    <FilesMatch "\.(php|html|htm)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    </FilesMatch>
+    # Fingerprinted SVG/PNG/etc. served freshly on every request when updated.
+    FileETag MTime Size
+</IfModule>
