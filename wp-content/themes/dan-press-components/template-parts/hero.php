@@ -30,7 +30,15 @@ if ( $hero_accent ) {
     <?php if ( $hero_bg_video || $hero_bg_image ) : ?>
         <div class="dsd-hero-media">
             <?php if ( $hero_bg_video ) : ?>
-                <video class="dsd-hero-video" autoplay muted loop playsinline <?php echo $hero_bg_image ? 'poster="' . esc_url( $hero_bg_image ) . '"' : ''; ?>>
+                <video
+                    class="dsd-hero-video"
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    data-hero-video
+                    <?php echo $hero_bg_image ? 'poster="' . esc_url( $hero_bg_image ) . '"' : ''; ?>
+                >
                     <source src="<?php echo esc_url( $hero_bg_video ); ?>" type="video/mp4">
                 </video>
             <?php elseif ( $hero_bg_image ) : ?>

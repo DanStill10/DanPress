@@ -14,6 +14,51 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
+   * Hero Background Video — progressive enhancement
+   * The <video> is rendered with preload="none" and no autoplay so it never
+   * blocks first paint or downloads on its own. We only start it once the hero
+   * is near the viewport AND the user isn't on a constrained setup:
+   *   - prefers-reduced-motion is off
+   *   - not in a Data Saver context
+   *   - effective connection isn't sluggish (2g / slow-2g)
+   *   - viewport is wide enough that the video is worth the bytes
+   */
+  const heroVideo = document.querySelector('.dsd-hero video[data-hero-video]');
+  if (heroVideo) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const connection = navigator.connection || {};
+    const saveData = connection.saveData === true;
+    const slowConn = connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g';
+    const tooNarrow = window.matchMedia('(max-width: 767px)').matches;
+    let videoObserver = null;
+
+    const startVideo = () => {
+      if (videoObserver) {
+        videoObserver.disconnect();
+        videoObserver = null;
+      }
+      heroVideo.setAttribute('autoplay', '');
+      heroVideo.play().catch(() => {});
+    };
+
+    if (!reduceMotion && !saveData && !slowConn && !tooNarrow) {
+      if ('IntersectionObserver' in window) {
+        videoObserver = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              startVideo();
+            }
+          },
+          { rootMargin: '200px 0px' }
+        );
+        videoObserver.observe(heroVideo);
+      } else {
+        startVideo();
+      }
+    }
+  }
+
+  /**
    * Hero Word Cycling — Typewriter Effect
    * Types each word character by character, pauses, then deletes before typing the next.
    */
