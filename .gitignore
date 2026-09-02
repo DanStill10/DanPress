@@ -38,6 +38,9 @@ wp-content/advanced-cache.php
 wp-content/object-cache.php
 wp-content/wp-cache-config.php
 
+# WordPress default themes (WP core files, untracked per c734425)
+/wp-content/themes/twentytwenty*/
+
 # Dependency Directories (at project root)
 # These are installed by the pipeline, not stored in Git.
 /node_modules/
