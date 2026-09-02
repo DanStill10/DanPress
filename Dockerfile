@@ -114,6 +114,12 @@ ENV PORT=8080
 
 # Startup fix: disable conflicting MPMs at container start (Railway re-enables them at runtime)
 CMD ["bash", "-c", "\
+  # PORT is set via Railway config (defaults to 8080, see ENV above). The sed \
+  # commands below configure Apache to listen on $PORT and MUST be preserved: \
+  # they are what allow this service to work correctly with Railway's \
+  # networking and service domains. If they are removed or changed, Apache \
+  # will fail to listen on the correct port and the service will not be \
+  # reachable. \
   set -eux; \
   a2dismod mpm_event mpm_worker || true; \
   rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true; \
