@@ -30,6 +30,13 @@ export default async (app) => {
       .setGenerator({ filename: 'fonts/[name][ext]' }),
   );
 
+  // Content-hash emitted JS/CSS filenames in production (e.g. js/app.abc12345.js,
+  // css/app.abc12345.css). Combined with the immutable browser cache in
+  // .htaccess this ensures clients never reuse a stale asset after a deploy.
+  if (app.isProduction) {
+    app.hash('[contenthash:8]');
+  }
+
   // if (app.isDevelopment) {
   //   app.dev
   //     .setProxyUrl('http://dan-still-wordpress-site.lndo.site')
