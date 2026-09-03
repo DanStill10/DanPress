@@ -44,8 +44,9 @@ add_action( 'after_setup_theme', 'dsd_theme_setup' );
  * Enqueue Theme-wide Frontend Assets (from Bud.js)
  *
  * This function enqueues the main site styles and scripts for the front-end
- * of the website. Inter is self-hosted and bundled into app.css via
- * @fontsource/inter, so no external font request is required.
+ * of the website. Fonts (Inter, Space Grotesk, JetBrains Mono) are
+ * self-hosted and bundled into app.css via @fontsource, so no external
+ * font requests are required.
  *
  * It handles both development and production environments.
  */

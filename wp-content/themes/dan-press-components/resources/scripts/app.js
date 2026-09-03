@@ -1,13 +1,17 @@
 /**
- * Self-hosted Inter font (subsetted, font-display:swap).
+ * Self-hosted fonts (subsetted, font-display:swap).
  * Imported from JS so webpack resolves the @font-face url() paths and emits
- * the woff2 files into the bundled app.css — no external font request.
+ * the woff2 files into the bundled app.css — no external font requests.
  */
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
 import '@fontsource/inter/latin-700.css';
 import '@fontsource/inter/latin-800.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource/jetbrains-mono/latin-600.css';
+import '@fontsource/jetbrains-mono/latin-700.css';
 
 /**
  * Mobile Menu Toggle

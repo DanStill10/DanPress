@@ -44,7 +44,8 @@
 
   // --- Font Stacks ---
   --dsd-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --dsd-font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --dsd-font-heading: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --dsd-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 // --------------------------------------------------------------------------
@@ -55,8 +56,9 @@
 //       Use --dsd-accent-hover or hardcoded values for hover states.
 
 // Font families
-$font-body:  var(--dsd-font-sans);
-$font-mono:  var(--dsd-font-mono);
+$font-body:    var(--dsd-font-sans);
+$font-heading: var(--dsd-font-heading);
+$font-mono:    var(--dsd-font-mono);
 
 // Colors
 $color-text:        var(--dsd-text-main);
