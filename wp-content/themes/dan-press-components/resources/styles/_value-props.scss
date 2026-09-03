@@ -1,35 +1,96 @@
 @import 'variables';
 
 // ==========================================================================
-// Value Propositions (3-Column) — DSD Design System
+// Value Propositions (3-Column) — Glassmorphism & Glowing Cards
 // ==========================================================================
 
 .dsd-value-props {
   padding: 5rem 0;
+  position: relative;
 }
+
+// --------------------------------------------------------------------------
+// Section Header (Optional)
+// --------------------------------------------------------------------------
+
+.dsd-value-props-header {
+  margin-bottom: 3rem;
+  max-width: 680px;
+
+  .dsd-section-heading {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.dsd-value-props-intro {
+  font-family: var(--dsd-font-sans);
+  font-size: var(--dsd-fs-body);
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// --------------------------------------------------------------------------
+// Grid Layout
+// --------------------------------------------------------------------------
 
 .dsd-value-props-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  gap: 2rem;
 }
 
+// --------------------------------------------------------------------------
+// Glassmorphism Card
+// --------------------------------------------------------------------------
+
 .dsd-value-prop-card {
-  background-color: var(--dsd-bg-elevated);
-  border: 1px solid var(--dsd-border);
-  padding: 2.5rem;
-  border-radius: 12px;
+  position: relative;
+  background: rgba(26, 26, 26, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  justify-content: space-between;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease;
+  overflow: hidden;
+
+  // Glowing accent line indicator on top edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dsd-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 
   &:hover,
   &:focus-within {
     border-color: var(--dsd-accent);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 102, 255, 0.15);
+    transform: translateY(-6px);
+    background: rgba(26, 26, 26, 0.85);
+    box-shadow: 0 16px 40px -10px rgba(0, 102, 255, 0.3),
+                0 0 20px 0 rgba(0, 102, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .dsd-value-prop-card__title {
+      color: #ffffff;
+    }
 
     .dsd-value-prop-card__desc {
       color: var(--dsd-text-main);
@@ -42,44 +103,44 @@
   }
 }
 
-.dsd-value-prop-card__number {
-  font-family: var(--dsd-font-mono);
-  font-size: var(--dsd-fs-sm);
-  font-weight: 700;
-  color: var(--dsd-accent);
-  letter-spacing: 0.05em;
-  display: block;
-}
-
 .dsd-value-prop-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.85rem;
 }
 
 .dsd-value-prop-card__title {
+  font-family: var(--dsd-font-sans);
   font-size: var(--dsd-fs-h4);
   font-weight: 800;
   margin: 0;
   color: var(--dsd-text-main);
   text-transform: uppercase;
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
-.dsd-value-prop-card__subtitle {
+.dsd-value-prop-card__badge {
+  display: inline-block;
+  align-self: flex-start;
   font-family: var(--dsd-font-mono);
   font-size: var(--dsd-fs-xs);
+  font-weight: 700;
   color: var(--dsd-accent);
+  border: 1px solid var(--dsd-border);
+  background: rgba(0, 102, 255, 0.08);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 600;
 }
 
 .dsd-value-prop-card__desc {
+  font-family: var(--dsd-font-sans);
   font-size: var(--dsd-fs-body);
   color: var(--dsd-text-muted);
   line-height: 1.65;
-  margin: 0.5rem 0 0;
+  margin: 0.25rem 0 0;
   transition: color 0.3s ease;
 }
 
@@ -89,8 +150,8 @@
 
 @media (max-width: 1024px) {
   .dsd-value-props-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
@@ -99,8 +160,13 @@
     padding: 3.5rem 0;
   }
 
+  .dsd-value-props-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
   .dsd-value-prop-card {
-    padding: 1.75rem;
-    gap: 1rem;
+    padding: 1.75rem 1.5rem;
   }
 }
+
