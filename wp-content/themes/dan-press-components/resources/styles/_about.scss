@@ -44,6 +44,7 @@
 
   .dsd-section-heading {
     margin: 0;
+    text-align: center;
   }
 
   &:hover .dsd-section-heading {
@@ -67,7 +68,7 @@
 }
 
 .dsd-ab__text {
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   color: var(--dsd-text-muted);
   line-height: 2.4;
 
@@ -86,7 +87,7 @@
   justify-content: center;
   padding: 0.6rem 1.4rem;
   font-family: var(--dsd-font-mono);
-  font-size: 0.7rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -123,15 +124,19 @@
 
 .dsd-ab__stat-num {
   font-family: var(--dsd-font-sans);
-  font-size: 2rem;
+  font-size: var(--dsd-fs-h2);
   font-weight: 800;
   color: var(--dsd-accent);
   line-height: 1;
+
+  @media (max-width: 640px) {
+    font-size: var(--dsd-fs-h2-mobile);
+  }
 }
 
 .dsd-ab__stat-label {
   font-family: var(--dsd-font-mono);
-  font-size: 0.65rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -298,10 +303,6 @@
 
   .dsd-ab__stat {
     flex: 0 0 auto;
-  }
-
-  .dsd-ab__stat-num {
-    font-size: 1.6rem;
   }
 
   .dsd-ab-carousel {

@@ -10,7 +10,7 @@
 
 .dsd-archive-description {
   color: var(--dsd-text-muted);
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   max-width: 640px;
 }
 
@@ -27,7 +27,7 @@
 
 .dsd-archive-filter {
   font-family: var(--dsd-font-mono);
-  font-size: 0.7rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -68,7 +68,7 @@
 }
 
 .dsd-archive-item__title {
-  font-size: 1.5rem;
+  font-size: var(--dsd-fs-h4);
   margin: 0 0 0.75rem;
 
   a {
@@ -91,7 +91,7 @@
 
 .dsd-archive-item__author {
   font-family: var(--dsd-font-mono);
-  font-size: 0.7rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -117,7 +117,7 @@
 .dsd-archive-item__excerpt {
   margin: 1rem 0 0;
   color: var(--dsd-text-muted);
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   line-height: 1.6;
 }
 
@@ -148,7 +148,7 @@
     height: 2.5rem;
     padding: 0 0.75rem;
     font-family: var(--dsd-font-mono);
-    font-size: 0.75rem;
+    font-size: var(--dsd-fs-xs);
     font-weight: 700;
     color: var(--dsd-text-main);
     border: 1px solid var(--dsd-border);
@@ -192,6 +192,6 @@
   }
 
   .dsd-archive-item__title {
-    font-size: 1.25rem;
+    font-size: var(--dsd-fs-h5);
   }
 }

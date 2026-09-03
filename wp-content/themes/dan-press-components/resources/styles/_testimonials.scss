@@ -55,7 +55,7 @@
 }
 
 .dsd-testimonial-card__number {
-  font-size: 2.5rem;
+  font-size: var(--dsd-fs-h1);
   font-weight: 800;
   color: var(--dsd-text-main);
   line-height: 1;
@@ -64,7 +64,7 @@
 .dsd-testimonial-stars {
   position: relative;
   display: inline-block;
-  font-size: 1.15rem;
+  font-size: var(--dsd-fs-subtitle);
   line-height: 1;
   letter-spacing: 2px;
 }
@@ -84,7 +84,7 @@
 
 .dsd-testimonial-card__platform {
   font-family: var(--dsd-font-mono);
-  font-size: 0.7rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -92,7 +92,7 @@
 }
 
 .dsd-testimonial-card__quote {
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   line-height: 1.6;
   color: var(--dsd-text-muted);
   margin: 0;
@@ -109,12 +109,12 @@
   border-top: 1px solid var(--dsd-border);
 
   strong {
-    font-size: 0.85rem;
+    font-size: var(--dsd-fs-sm);
     color: var(--dsd-text-main);
   }
 
   span {
-    font-size: 0.75rem;
+    font-size: var(--dsd-fs-xs);
     color: var(--dsd-text-muted);
   }
 }

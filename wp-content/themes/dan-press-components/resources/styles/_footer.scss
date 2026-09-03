@@ -9,7 +9,7 @@
   background-color: var(--dsd-bg);
   color: var(--dsd-text-main);
   font-family: var(--dsd-font-sans);
-  font-size: 0.9rem;
+  font-size: var(--dsd-fs-sm);
   border-top: 1px solid var(--dsd-border);
 
   .site-footer-inner {
@@ -30,7 +30,7 @@
 
   a {
     font-family: var(--dsd-font-mono);
-    font-size: 0.75rem;
+    font-size: var(--dsd-fs-xs);
     font-weight: 700;
     color: var(--dsd-text-main);
     text-decoration: none;
@@ -46,7 +46,7 @@
 
 .site-info {
   font-family: var(--dsd-font-mono);
-  font-size: 0.7rem;
+  font-size: var(--dsd-fs-xs);
   color: var(--dsd-text-muted);
   letter-spacing: 0.02em;
 }

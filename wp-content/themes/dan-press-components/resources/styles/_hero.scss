@@ -77,13 +77,21 @@
 
 .dsd-hero-headline {
   font-family: var(--dsd-font-sans);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: var(--dsd-fs-display);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--dsd-text-main);
   margin: 0;
+
+  @media (max-width: 1024px) {
+    font-size: 3.5rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-display-mobile);
+  }
 }
 
 .dsd-hero-word {
@@ -110,12 +118,16 @@
 
 .dsd-hero-subtitle {
   font-family: var(--dsd-font-mono);
-  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-size: var(--dsd-fs-subtitle);
   color: var(--dsd-text-muted);
   letter-spacing: 0.02em;
   max-width: 540px;
   margin: 0;
   line-height: 1.6;
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-subtitle-mobile);
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -185,10 +197,6 @@
   .dsd-hero {
     min-height: auto;
     padding: 8rem 0 4rem;
-  }
-
-  .dsd-hero-headline {
-    font-size: clamp(2.5rem, 12vw, 4rem);
   }
 
   .dsd-hero-actions {

@@ -31,7 +31,7 @@
 }
 
 .dsd-blog-feed-intro {
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   color: var(--dsd-text-muted);
   line-height: 1.6;
   margin: 0;
@@ -96,7 +96,7 @@
 
 .dsd-blog-card__cat {
   font-family: var(--dsd-font-mono);
-  font-size: 0.6rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -106,7 +106,7 @@
 }
 
 .dsd-blog-card__title {
-  font-size: 1.1rem;
+  font-size: var(--dsd-fs-subtitle);
   font-weight: 700;
   margin: 0;
   line-height: 1.3;

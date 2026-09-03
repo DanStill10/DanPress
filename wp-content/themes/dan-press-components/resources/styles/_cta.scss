@@ -18,8 +18,12 @@
 }
 
 .dsd-cta-heading {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: var(--dsd-fs-h1);
   margin: 0;
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-h1-mobile);
+  }
 }
 
 .dsd-cta-subtitle {

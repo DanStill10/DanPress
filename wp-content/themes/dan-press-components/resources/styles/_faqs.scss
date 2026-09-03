@@ -27,7 +27,7 @@
 // --------------------------------------------------------------------------
 
 .dsd-faq-group__title {
-  font-size: 1.1rem;
+  font-size: var(--dsd-fs-subtitle);
   font-weight: 700;
   color: var(--dsd-text-main);
   margin: 0 0 1rem 0;
@@ -59,7 +59,7 @@
   cursor: pointer;
   text-align: left;
   font-family: var(--dsd-font-sans);
-  font-size: 0.95rem;
+  font-size: var(--dsd-fs-body);
   font-weight: 500;
   color: var(--dsd-text-main);
   transition: color 0.15s ease;
@@ -77,7 +77,7 @@
 .dsd-faq-item__icon {
   flex-shrink: 0;
   font-family: var(--dsd-font-mono);
-  font-size: 1.25rem;
+  font-size: var(--dsd-fs-h5);
   font-weight: 700;
   color: var(--dsd-accent);
   transition: transform 0.2s ease;
@@ -100,7 +100,7 @@
 
 .dsd-faq-item__answer {
   padding: 0 0 1.25rem 0;
-  font-size: 0.9rem;
+  font-size: var(--dsd-fs-sm);
   color: var(--dsd-text-muted);
   line-height: 1.7;
 

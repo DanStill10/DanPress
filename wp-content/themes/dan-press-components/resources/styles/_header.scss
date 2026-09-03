@@ -30,7 +30,7 @@
 .site-branding {
   .site-title {
     font-family: var(--dsd-font-mono);
-    font-size: 1.4rem;
+    font-size: var(--dsd-fs-h4);
     font-weight: 700;
     color: var(--dsd-text-main);
     text-decoration: none;
@@ -46,7 +46,7 @@
 
   .site-description {
     font-family: var(--dsd-font-mono);
-    font-size: 0.7rem;
+    font-size: var(--dsd-fs-xs);
     color: var(--dsd-text-muted);
     letter-spacing: 0.02em;
     margin: 0;
@@ -61,7 +61,7 @@
   display: inline-block;
   padding: 0.55rem 1.4rem;
   font-family: var(--dsd-font-mono);
-  font-size: 0.75rem;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -152,7 +152,7 @@
     display: block;
     padding: 1rem;
     font-family: var(--dsd-font-mono);
-    font-size: 0.8rem;
+    font-size: var(--dsd-fs-xs);
     font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
@@ -225,7 +225,7 @@
     a {
       padding: 0.5rem 0;
       border-bottom: 2px solid transparent;
-      font-size: 0.75rem;
+      font-size: var(--dsd-fs-xs);
 
       &:hover,
       &.current-menu-item a {

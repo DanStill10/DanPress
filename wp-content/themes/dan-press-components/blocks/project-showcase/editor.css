@@ -8,7 +8,7 @@
 
 .dsd-admin-banner {
   font-family: var(--dsd-font-mono);
-  font-size: 10px;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   background: var(--dsd-text-main);
   color: var(--dsd-bg);
@@ -25,6 +25,10 @@
 .dsd-inline-inputs {
   display: flex;
   gap: 12px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 }
 
 .dsd-inline-inputs > div {

@@ -154,8 +154,12 @@ input[type="submit"] {
 // --------------------------------------------------------------------------
 
 .dsd-section-heading {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--dsd-fs-h1);
   margin-bottom: 1.5rem;
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-h1-mobile);
+  }
 }
 
 // Baseline vertical rhythm for theme sections. Explicitly scoped to the

@@ -30,7 +30,7 @@
 
 .dsd-badge {
   font-family: var(--dsd-font-mono);
-  font-size: 11px;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   color: var(--dsd-accent);
   border: 1px solid var(--dsd-accent);
@@ -41,7 +41,7 @@
 
 .dsd-tech-stack {
   font-family: var(--dsd-font-mono);
-  font-size: 11px;
+  font-size: var(--dsd-fs-xs);
   color: var(--dsd-text-muted);
 }
 
@@ -50,12 +50,16 @@
    -------------------------------------------------------------------------- */
 
 .dsd-card-title {
-  font-size: 24px;
+  font-size: var(--dsd-fs-h3);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin: 0 0 8px 0;
   text-transform: uppercase;
   color: var(--dsd-text-main);
+
+  @media (max-width: 640px) {
+    font-size: var(--dsd-fs-h4);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -63,7 +67,7 @@
    -------------------------------------------------------------------------- */
 
 .dsd-card-text {
-  font-size: 14px;
+  font-size: var(--dsd-fs-sm);
   line-height: 1.5;
   color: var(--dsd-text-muted);
   margin: 0 0 20px 0;
@@ -80,7 +84,7 @@
 
 .dsd-link {
   font-family: var(--dsd-font-mono);
-  font-size: 12px;
+  font-size: var(--dsd-fs-xs);
   font-weight: 700;
   color: var(--dsd-text-main);
   text-decoration: none;
