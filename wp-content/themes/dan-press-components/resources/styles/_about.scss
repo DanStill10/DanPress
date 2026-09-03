@@ -39,7 +39,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  cursor: pointer;
   align-self: center;
 
   .dsd-section-heading {
@@ -50,12 +49,12 @@
   &:hover .dsd-section-heading {
     text-underline-offset: 6px;
     text-decoration-thickness: 2px;
-    text-decoration: underline;
     text-decoration-color: var(--dsd-accent);
     transition: color 0.3s ease;
   }
 
   &:hover .dsd-ab__portfolio-link {
+    cursor: pointer;
     background-color: var(--dsd-accent);
     border-color: var(--dsd-accent);
     color: #fff;
