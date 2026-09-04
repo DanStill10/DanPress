@@ -69,6 +69,10 @@
     color: var(--dsd-accent);
   }
 
+  .wpforms-field {
+    margin-bottom: 1.5rem;
+  }
+
   .wpforms-field input[type="text"],
   .wpforms-field input[type="email"],
   .wpforms-field input[type="tel"],
@@ -77,19 +81,58 @@
   .wpforms-field textarea,
   .wpforms-field select {
     width: 100%;
-    padding: 0.75em;
+    padding: 0.85em 1em;
     font-family: var(--dsd-font-sans);
     font-size: var(--dsd-fs-body);
     background-color: var(--dsd-bg);
     color: var(--dsd-text-main);
-    border: 1px solid var(--dsd-border);
-    border-radius: 0px;
+    // --dsd-border reads as ~1.4:1 against this block's --dsd-bg-elevated
+    // background — effectively invisible. --dsd-border-strong clears the
+    // WCAG 3:1 non-text-contrast minimum for UI component boundaries.
+    border: 1px solid var(--dsd-border-strong);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: var(--dsd-text-muted);
+      opacity: 1;
+    }
+
+    &:hover {
+      border-color: var(--dsd-text-muted);
+    }
 
     &:focus {
       outline: none;
       border-color: var(--dsd-accent);
-      box-shadow: 0 0 0 1px var(--dsd-accent);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
     }
+  }
+
+  .wpforms-field textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  // Native checkbox/radio inputs — accent-color recolors the browser's own
+  // check/dot without needing custom SVG markup.
+  .wpforms-field-checkbox input[type="checkbox"],
+  .wpforms-field-radio input[type="radio"],
+  .wpforms-field-gdpr-checkbox input[type="checkbox"] {
+    accent-color: var(--dsd-accent);
+    width: 1.05em;
+    height: 1.05em;
+    margin-right: 0.5em;
+  }
+
+  .wpforms-field-checkbox ul li label,
+  .wpforms-field-radio ul li label,
+  .wpforms-field-gdpr-checkbox label {
+    display: inline-flex;
+    align-items: center;
+    color: var(--dsd-text-muted);
+    font-family: var(--dsd-font-sans);
+    font-size: var(--dsd-fs-body);
   }
 
   .wpforms-field-description,
@@ -102,8 +145,16 @@
     color: #ff6b6b;
   }
 
+  .wpforms-field-input-error,
+  input.wpforms-error,
+  textarea.wpforms-error,
+  select.wpforms-error {
+    border-color: #ff6b6b;
+  }
+
   .wpforms-submit-container {
     text-align: left;
+    margin-top: 0.5rem;
   }
 
   .wpforms-submit {
@@ -120,18 +171,24 @@
     border: 1px solid var(--dsd-accent-hover);
     border-radius: 9999px;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: var(--dsd-accent);
       border-color: var(--dsd-accent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      background-color: var(--dsd-accent);
+      border-color: var(--dsd-accent);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.35);
     }
   }
 
   .wpforms-confirmation-container-full {
     background-color: var(--dsd-bg-elevated);
-    border: 1px solid var(--dsd-border);
+    border: 1px solid var(--dsd-border-strong);
     color: var(--dsd-text-main);
     border-radius: 8px;
   }

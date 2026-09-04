@@ -20,6 +20,11 @@
 
   // --- Borders ---
   --dsd-border: #333333;
+  // Meets WCAG's 3:1 non-text contrast minimum against both --dsd-bg and
+  // --dsd-bg-elevated — use for functional UI boundaries (form control
+  // outlines) that must stay visible; --dsd-border stays for purely
+  // decorative dividers/card edges.
+  --dsd-border-strong: #666666;
 
   // --- Accent ---
   --dsd-accent: #0066FF;
@@ -66,6 +71,7 @@ $color-text-muted:  var(--dsd-text-muted);
 $color-bg:          var(--dsd-bg);
 $color-bg-elevated: var(--dsd-bg-elevated);
 $color-border:      var(--dsd-border);
+$color-border-strong: var(--dsd-border-strong);
 $color-accent:      var(--dsd-accent);
 
 // Legacy aliases (map old names to new tokens for partial compatibility)
