@@ -45,6 +45,7 @@
                 array(
                     'theme_location' => 'primary_menu',
                     'menu_id'        => 'primary-menu',
+                    'fallback_cb'    => 'dsd_primary_menu_fallback',
                 )
             );
             ?>

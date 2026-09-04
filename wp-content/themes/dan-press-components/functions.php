@@ -156,6 +156,25 @@ function dan_press_register_nav_menu() {
 }
 add_action( 'after_setup_theme', 'dan_press_register_nav_menu' );
 
+/**
+ * wp_nav_menu() falls back to wp_page_menu() (auto-listing every published
+ * page) whenever no menu is assigned to a theme location — its markup
+ * doesn't match .main-navigation's styling either. Replace that with a
+ * quiet no-op for visitors, and a direct link for admins so the missing
+ * menu is obvious instead of silently auto-populating.
+ */
+function dsd_primary_menu_fallback() {
+    if ( ! current_user_can( 'edit_theme_options' ) ) {
+        return;
+    }
+
+    printf(
+        '<ul><li><a href="%s">%s</a></li></ul>',
+        esc_url( admin_url( 'nav-menus.php' ) ),
+        esc_html__( 'Set up the Primary Menu', 'dan-press' )
+    );
+}
+
 /*
 |--------------------------------------------------------------------------
 | ACF Local JSON — Load & Save from theme acf-json/ directory
