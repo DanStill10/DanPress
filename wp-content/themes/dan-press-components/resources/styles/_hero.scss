@@ -157,14 +157,18 @@
 }
 
 .dsd-btn--primary {
-  background-color: var(--dsd-accent);
+  // Resting state uses the darker accent shade — white text on the base
+  // --dsd-accent (#0066FF) computes to ~4.8:1, uncomfortably close to the
+  // WCAG AA minimum (4.5:1) for this button's small bold label.
+  // --dsd-accent-hover (#0052CC) gives ~6.8:1, comfortably clear of it.
+  background-color: var(--dsd-accent-hover);
   color: #ffffff;
-  border-color: var(--dsd-accent);
+  border-color: var(--dsd-accent-hover);
 
   &:hover,
   &:focus {
-    background-color: var(--dsd-accent-hover);
-    border-color: var(--dsd-accent-hover);
+    background-color: var(--dsd-accent);
+    border-color: var(--dsd-accent);
     color: #ffffff;
     text-decoration: none;
   }

@@ -27,25 +27,25 @@ while ( have_posts() ) :
     <main id="main" class="site-main" role="main">
 
         <header class="dsd-service-hero">
-            <div class="container dsd-service-hero__inner">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dsd-service-hero__back">&larr; Back to Home</a>
+            <div class="container dsd-service-hero__inner<?php echo has_post_thumbnail() ? '' : ' dsd-service-hero__inner--no-image'; ?>">
+                <div class="dsd-service-hero__content">
+                    <?php if ( $eyebrow ) : ?>
+                        <span class="dsd-service-hero__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
+                    <?php endif; ?>
 
-                <?php if ( $eyebrow ) : ?>
-                    <span class="dsd-service-hero__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
-                <?php endif; ?>
+                    <h1 class="dsd-service-hero__title"><?php the_title(); ?></h1>
 
-                <h1 class="dsd-service-hero__title"><?php the_title(); ?></h1>
+                    <?php if ( $subtitle ) : ?>
+                        <p class="dsd-service-hero__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+                    <?php endif; ?>
+                </div>
 
-                <?php if ( $subtitle ) : ?>
-                    <p class="dsd-service-hero__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+                <?php if ( has_post_thumbnail() ) : ?>
+                    <div class="dsd-service-hero__image">
+                        <?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?>
+                    </div>
                 <?php endif; ?>
             </div>
-
-            <?php if ( has_post_thumbnail() ) : ?>
-                <div class="dsd-service-hero__image container">
-                    <?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?>
-                </div>
-            <?php endif; ?>
         </header>
 
         <article id="post-<?php the_ID(); ?>" <?php post_class( 'dsd-service-article' ); ?>>
@@ -53,24 +53,22 @@ while ( have_posts() ) :
                 <div class="dsd-service-content">
                     <?php the_content(); ?>
                 </div>
-            </div>
-        </article>
 
-        <section class="dsd-cta dsd-block">
-            <div class="container">
-                <div class="dsd-cta-inner">
-                    <h2 class="dsd-cta-heading"><?php echo esc_html( $cta_heading ); ?></h2>
+                <div class="dsd-service-cta">
+                    <h2 class="dsd-service-cta__heading"><?php echo esc_html( $cta_heading ); ?></h2>
 
                     <?php if ( $cta_subtitle ) : ?>
-                        <p class="dsd-cta-subtitle"><?php echo esc_html( $cta_subtitle ); ?></p>
+                        <p class="dsd-service-cta__subtitle"><?php echo esc_html( $cta_subtitle ); ?></p>
                     <?php endif; ?>
 
                     <a href="<?php echo esc_url( $cta_btn_url ); ?>" class="dsd-btn dsd-btn--primary">
                         <?php echo esc_html( $cta_btn_text ); ?>
                     </a>
                 </div>
+
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dsd-service-back">&larr; Back to Home</a>
             </div>
-        </section>
+        </article>
 
     </main>
 
