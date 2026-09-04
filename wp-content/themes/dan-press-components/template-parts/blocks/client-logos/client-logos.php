@@ -8,7 +8,7 @@
  */
 
 if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
-    function dsd_render_cl_logo( $logo ) {
+    function dsd_render_cl_logo( $logo, $is_preview ) {
         $img = $logo['cl_logo_image'] ?? null;
         if ( ! $img ) {
             return '';
@@ -23,7 +23,7 @@ if ( ! function_exists( 'dsd_render_cl_logo' ) ) {
 
         $output = '<figure class="dsd-cl-item">';
         if ( $link ) {
-            $output .= '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">';
+            $output .= '<a ' . dsd_block_href( $link, $is_preview ) . ' target="_blank" rel="noopener noreferrer">';
         }
         $output .= '<img class="dsd-cl-img" src="' . $url . '" alt="' . $alt . '" width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '" loading="lazy">';
         if ( $link ) {
@@ -58,12 +58,12 @@ $classes = array( 'dsd-cl', 'dsd-block' );
             <div class="dsd-cl-track dsd-cl-track--left" aria-label="Client logos">
                 <div class="dsd-cl-slide">
                     <?php foreach ( $logos as $logo ) : ?>
-                        <?php echo dsd_render_cl_logo( $logo ); ?>
+                        <?php echo dsd_render_cl_logo( $logo, $is_preview ); ?>
                     <?php endforeach; ?>
                 </div>
                 <div class="dsd-cl-slide" aria-hidden="true">
                     <?php foreach ( $logos as $logo ) : ?>
-                        <?php echo dsd_render_cl_logo( $logo ); ?>
+                        <?php echo dsd_render_cl_logo( $logo, $is_preview ); ?>
                     <?php endforeach; ?>
                 </div>
             </div>

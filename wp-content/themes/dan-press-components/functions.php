@@ -33,6 +33,22 @@ function dsd_theme_setup() {
     ) );
     add_theme_support( 'responsive-embeds' );
     add_theme_support( 'editor-styles' );
+
+    // Load the compiled front-end stylesheet into the block editor's content
+    // iframe so blocks preview with real site styling (dark backgrounds,
+    // fonts, etc.) instead of the default white canvas. `add_editor_style()`
+    // is the mechanism that reaches the iframe — enqueuing via
+    // `enqueue_block_editor_assets` only affects the outer admin page, never
+    // the iframe. Production filenames are content-hashed, so the actual
+    // path is resolved from the manifest rather than hardcoded.
+    $manifest_path = get_theme_file_path( 'public/entrypoints.json' );
+    if ( file_exists( $manifest_path ) ) {
+        $manifest = json_decode( file_get_contents( $manifest_path ), true );
+        if ( ! empty( $manifest['app']['css'][0] ) ) {
+            add_editor_style( 'public/' . $manifest['app']['css'][0] );
+        }
+    }
+
     global $content_width;
     if ( ! isset( $content_width ) ) {
         $content_width = 1200;
@@ -132,16 +148,6 @@ function dsd_enqueue_block_editor_assets() {
         $asset['version'],
         true
     );
-
-    $editor_css = get_theme_file_path( 'public/editor.css' );
-    if ( file_exists( $editor_css ) ) {
-        wp_enqueue_style(
-            'dsd-blocks-editor',
-            get_theme_file_uri( 'public/editor.css' ),
-            [],
-            $asset['version']
-        );
-    }
 }
 add_action( 'enqueue_block_editor_assets', 'dsd_enqueue_block_editor_assets' );
 
@@ -171,6 +177,20 @@ add_filter( 'acf/settings/save_json', 'dsd_acf_json_save' );
 | ACF Block Registration
 |--------------------------------------------------------------------------
 */
+
+/**
+ * Build an anchor's href attribute, omitted entirely when rendering an ACF
+ * block's editor preview ($is_preview). Block preview HTML is real, live
+ * markup injected into the block-editor canvas — a real href there is a
+ * real, clickable link, and if the canvas's click-interception isn't
+ * airtight (an iframed-canvas/ACF-version gap), clicking it navigates the
+ * whole editor to that URL. Dropping the href in preview makes that
+ * impossible while leaving the front-end render untouched.
+ */
+function dsd_block_href( $url, $is_preview ) {
+    return $is_preview ? '' : 'href="' . esc_url( $url ) . '"';
+}
+
 function dsd_register_acf_blocks() {
     if ( ! function_exists( 'acf_register_block_type' ) ) {
         return;

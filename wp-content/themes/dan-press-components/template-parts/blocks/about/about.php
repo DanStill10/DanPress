@@ -29,7 +29,7 @@ $heading_html = preg_replace(
                 <div class="dsd-ab__top-row">
                     <div class="dsd-ab__cta-col">
                         <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
-                        <a href="<?php echo esc_url( $link_url ); ?>" class="dsd-ab__portfolio-link"><?php echo esc_html( $link_text ); ?></a>
+                        <a <?php echo dsd_block_href( $link_url, $is_preview ); ?> class="dsd-ab__portfolio-link"><?php echo esc_html( $link_text ); ?></a>
                     </div>
                     <?php if ( $content ) : ?>
                         <div class="dsd-ab__text-col">

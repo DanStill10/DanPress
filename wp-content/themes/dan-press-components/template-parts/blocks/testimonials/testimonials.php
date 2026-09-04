@@ -26,7 +26,7 @@ $heading_html = preg_replace(
             <h2 class="dsd-section-heading"><?php echo $heading_html; ?></h2>
 
             <?php if ( $btn_text ) : ?>
-                <a href="<?php echo esc_url( $btn_url ); ?>" class="dsd-btn dsd-btn--ghost">
+                <a <?php echo dsd_block_href( $btn_url, $is_preview ); ?> class="dsd-btn dsd-btn--ghost">
                     <?php echo esc_html( $btn_text ); ?>
                 </a>
             <?php endif; ?>

@@ -65,7 +65,7 @@ $blog_query = new WP_Query( $blog_args );
                 <p class="dsd-blog-feed-intro"><?php echo esc_html( $intro ); ?></p>
             </div>
 
-            <a href="<?php echo esc_url( $btn_url ); ?>" class="dsd-btn dsd-btn--ghost">
+            <a <?php echo dsd_block_href( $btn_url, $is_preview ); ?> class="dsd-btn dsd-btn--ghost">
                 <?php echo esc_html( $btn_text ); ?>
             </a>
         </div>
@@ -76,7 +76,7 @@ $blog_query = new WP_Query( $blog_args );
 
                     <article class="dsd-blog-card">
                         <?php if ( has_post_thumbnail() ) : ?>
-                            <a href="<?php the_permalink(); ?>" class="dsd-blog-card__image">
+                            <a <?php echo dsd_block_href( get_permalink(), $is_preview ); ?> class="dsd-blog-card__image">
                                 <?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy' ) ); ?>
                             </a>
                         <?php endif; ?>
@@ -94,7 +94,7 @@ $blog_query = new WP_Query( $blog_args );
                             <?php endif; ?>
 
                             <h3 class="dsd-blog-card__title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <a <?php echo dsd_block_href( get_permalink(), $is_preview ); ?>><?php the_title(); ?></a>
                             </h3>
                         </div>
                     </article>

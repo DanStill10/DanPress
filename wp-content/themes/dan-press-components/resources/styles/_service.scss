@@ -1,0 +1,171 @@
+@import 'variables';
+
+// ==========================================================================
+// Service Detail Page (template-service.php)
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// Hero
+// --------------------------------------------------------------------------
+
+.dsd-service-hero {
+  padding: 6rem 0 3rem;
+  background-color: var(--dsd-bg-elevated);
+  border-bottom: 1px solid var(--dsd-border);
+}
+
+.dsd-service-hero__inner {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dsd-service-hero__back {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-family: var(--dsd-font-mono);
+  font-size: var(--dsd-fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dsd-text-muted);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--dsd-accent);
+    text-decoration: none;
+  }
+}
+
+.dsd-service-hero__eyebrow {
+  font-family: var(--dsd-font-mono);
+  font-size: var(--dsd-fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dsd-accent);
+}
+
+.dsd-service-hero__title {
+  margin: 0;
+  font-size: var(--dsd-fs-h1);
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-h1-mobile);
+  }
+}
+
+.dsd-service-hero__subtitle {
+  font-family: var(--dsd-font-sans);
+  font-size: var(--dsd-fs-subtitle);
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 640px;
+
+  @media (max-width: 767px) {
+    font-size: var(--dsd-fs-subtitle-mobile);
+  }
+}
+
+.dsd-service-hero__image {
+  margin-top: 3rem;
+
+  img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Content
+// --------------------------------------------------------------------------
+
+.dsd-service-article {
+  padding: 4rem 0 5rem;
+}
+
+.dsd-service-content {
+  max-width: 760px;
+  color: var(--dsd-text-muted);
+  font-size: var(--dsd-fs-body);
+  line-height: 1.8;
+
+  h2,
+  h3,
+  h4 {
+    color: var(--dsd-text-main);
+  }
+
+  h2 {
+    font-size: var(--dsd-fs-h3);
+  }
+
+  h3 {
+    font-size: var(--dsd-fs-h4);
+  }
+
+  a {
+    color: var(--dsd-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--dsd-accent-hover);
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25em;
+    margin: 0 0 1em;
+  }
+
+  li + li {
+    margin-top: 0.5em;
+  }
+
+  img {
+    border-radius: 12px;
+    margin: 0.5em 0;
+  }
+
+  blockquote {
+    margin: 1.5em 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--dsd-accent);
+    color: var(--dsd-text-main);
+    font-style: italic;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-service-hero {
+    padding: 8rem 0 2.5rem;
+  }
+
+  .dsd-service-hero__image {
+    margin-top: 2rem;
+
+    img {
+      max-height: 320px;
+    }
+  }
+
+  .dsd-service-article {
+    padding: 3rem 0;
+  }
+}

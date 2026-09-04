@@ -210,3 +210,17 @@ input[type="submit"] {
 .dsd-block a {
   color: var(--dsd-accent);
 }
+
+// --------------------------------------------------------------------------
+// 8. Block Editor Canvas
+// --------------------------------------------------------------------------
+// `.editor-styles-wrapper` only exists inside the block editor's content
+// iframe — it never appears on the front end, so this is safe to ship in
+// the same stylesheet. Scoped to the canvas background only (not admin
+// chrome/panels) so blocks preview against the real site background
+// instead of the editor's default white canvas.
+.editor-styles-wrapper {
+  background-color: var(--dsd-bg);
+  color: var(--dsd-text-main);
+  font-family: $font-body;
+}

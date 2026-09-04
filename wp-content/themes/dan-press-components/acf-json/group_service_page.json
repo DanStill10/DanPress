@@ -1,0 +1,37 @@
+{
+    "key": "group_service_page",
+    "title": "Service Page",
+    "fields": [
+        {
+            "key": "field_service_eyebrow",
+            "label": "Eyebrow / Category Label",
+            "name": "service_eyebrow",
+            "type": "text",
+            "instructions": "Small label above the title, e.g. \"WEB DESIGN\". Optional.",
+            "required": 0
+        },
+        {
+            "key": "field_service_subtitle",
+            "label": "Subtitle",
+            "name": "service_subtitle",
+            "type": "text",
+            "instructions": "One-line summary shown below the title. Optional.",
+            "required": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-service.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

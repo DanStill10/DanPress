@@ -8,7 +8,7 @@
  */
 
 if ( ! function_exists( 'dsd_render_sv_card' ) ) {
-    function dsd_render_sv_card( $card, $category, $btn_text ) {
+    function dsd_render_sv_card( $card, $category, $btn_text, $is_preview ) {
         $title = $card['sv_title'] ?? '';
         if ( ! $title ) {
             return '';
@@ -20,7 +20,7 @@ if ( ! function_exists( 'dsd_render_sv_card' ) ) {
 
         $bg_style = $bg ? ' style="background-image: url(\'' . esc_url( $bg ) . '\')"' : '';
 
-        $output  = '<a href="' . esc_url( $link ) . '" class="dsd-sv-card" aria-label="' . esc_attr( $title ) . '">';
+        $output  = '<a ' . dsd_block_href( $link, $is_preview ) . ' class="dsd-sv-card" aria-label="' . esc_attr( $title ) . '">';
         $output .= '<div class="dsd-sv-card-bg"' . $bg_style . '></div>';
         $output .= '<div class="dsd-sv-card-overlay"></div>';
 
@@ -72,7 +72,7 @@ $heading_html = preg_replace(
 
         <div class="dsd-sv-grid">
             <?php foreach ( $cards as $card ) : ?>
-                <?php echo dsd_render_sv_card( $card, $category, $btn_text ); ?>
+                <?php echo dsd_render_sv_card( $card, $category, $btn_text, $is_preview ); ?>
             <?php endforeach; ?>
         </div>
     </div>
