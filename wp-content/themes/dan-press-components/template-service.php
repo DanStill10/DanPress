@@ -21,7 +21,7 @@ while ( have_posts() ) :
     $cta_heading  = get_theme_mod( 'cta_heading', 'Get In Touch' );
     $cta_subtitle = get_theme_mod( 'cta_subtitle', 'Have a project in mind? Let\'s talk about it.' );
     $cta_btn_text = get_theme_mod( 'header_contact_text', 'Get In Touch' );
-    $cta_btn_url  = get_theme_mod( 'header_contact_url', '#contact' );
+    $cta_btn_url  = dsd_get_contact_url();
     ?>
 
     <main id="main" class="site-main" role="main">

@@ -37,7 +37,7 @@
 
         <?php
         $contact_btn_text = get_theme_mod( 'header_contact_text', 'Get In Touch' );
-        $contact_btn_url  = get_theme_mod( 'header_contact_url', '#contact' );
+        $contact_btn_url  = dsd_get_contact_url();
         ?>
         <nav id="site-navigation" class="main-navigation">
             <?php

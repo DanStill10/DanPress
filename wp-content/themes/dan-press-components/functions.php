@@ -248,6 +248,27 @@ function dsd_register_acf_blocks() {
             'title'       => __( 'Call to Action', 'dan-press' ),
             'description' => __( 'CTA section with heading and button.', 'dan-press' ),
         ),
+        'contact' => array(
+            'title'       => __( 'Contact', 'dan-press' ),
+            'description' => __( 'Heading, intro, and embedded WPForms form. Always anchored as #contact so the header button can scroll to it.', 'dan-press' ),
+            // Anchor support disabled: the block hardcodes id="contact" itself,
+            // so a user-set anchor here could collide with it.
+            'supports'    => array(
+                'align'   => false,
+                'anchor'  => false,
+                'spacing' => array(
+                    'padding' => true,
+                ),
+            ),
+        ),
+    );
+
+    $default_supports = array(
+        'align'   => false,
+        'anchor'  => true,
+        'spacing' => array(
+            'padding' => true,
+        ),
     );
 
     foreach ( $blocks as $name => $settings ) {
@@ -259,13 +280,7 @@ function dsd_register_acf_blocks() {
             'category'        => 'dan-press',
             'icon'            => 'layout',
             'mode'            => 'preview',
-            'supports'        => array(
-                'align'   => false,
-                'anchor'  => true,
-                'spacing' => array(
-                    'padding' => true,
-                ),
-            ),
+            'supports'        => $settings['supports'] ?? $default_supports,
         ) );
     }
 }
@@ -313,17 +328,41 @@ function dsd_header_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
 
-    $wp_customize->add_setting( 'header_contact_url', array(
-        'default'           => '#contact',
-        'sanitize_callback' => 'esc_url_raw',
+    $wp_customize->add_setting( 'contact_page_id', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
     ) );
-    $wp_customize->add_control( 'header_contact_url', array(
-        'label'   => __( 'Button URL', 'dan-press' ),
-        'section' => 'dsd_header_cta_section',
-        'type'    => 'url',
+    $wp_customize->add_control( 'contact_page_id', array(
+        'label'       => __( 'Contact Page', 'dan-press' ),
+        'description' => __( 'Used everywhere except the homepage, where the button scrolls to the on-page Contact section instead.', 'dan-press' ),
+        'section'     => 'dsd_header_cta_section',
+        'type'        => 'dropdown-pages',
     ) );
 }
 add_action( 'customize_register', 'dsd_header_customize_register' );
+
+/**
+ * Header/CTA contact destination: scrolls to the homepage's #contact
+ * section when already on the front page, otherwise links to the
+ * dedicated Contact page chosen above (falls back to home + #contact if
+ * none is set yet, which still works — the anchor just resolves after a
+ * page load instead of a same-page scroll).
+ */
+function dsd_get_contact_url() {
+    if ( is_front_page() ) {
+        return '#contact';
+    }
+
+    $contact_page_id = (int) get_theme_mod( 'contact_page_id' );
+    if ( $contact_page_id ) {
+        $url = get_permalink( $contact_page_id );
+        if ( $url ) {
+            return $url;
+        }
+    }
+
+    return home_url( '/#contact' );
+}
 
 /*
 |--------------------------------------------------------------------------

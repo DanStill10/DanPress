@@ -1,0 +1,148 @@
+@import 'variables';
+
+// ==========================================================================
+// Contact Block — Heading, Intro, WPForms Embed
+// ==========================================================================
+
+.dsd-contact {
+  padding: 5rem 0;
+}
+
+.dsd-contact-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.dsd-contact-header {
+  text-align: center;
+  max-width: 640px;
+
+  .dsd-section-heading {
+    margin: 0 0 0.75rem;
+  }
+}
+
+.dsd-contact-intro {
+  font-family: var(--dsd-font-sans);
+  font-size: var(--dsd-fs-body);
+  color: var(--dsd-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.dsd-contact-form {
+  width: 100%;
+  max-width: 640px;
+}
+
+.dsd-contact-form__notice {
+  text-align: center;
+  font-family: var(--dsd-font-mono);
+  font-size: var(--dsd-fs-sm);
+  color: var(--dsd-text-muted);
+}
+
+// --------------------------------------------------------------------------
+// WPForms — dark-theme overrides
+// --------------------------------------------------------------------------
+// WPForms' own "Base"/"Modern" styling targets a light background; these
+// rules only touch the classnames it renders. Setting WPForms → Settings →
+// Styling to "Base" avoids fighting its more opinionated "Modern" CSS.
+
+.dsd-contact-form {
+  .wpforms-container {
+    margin: 0;
+  }
+
+  .wpforms-field-label {
+    font-family: var(--dsd-font-mono);
+    font-size: var(--dsd-fs-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--dsd-text-muted);
+  }
+
+  .wpforms-field-required {
+    color: var(--dsd-accent);
+  }
+
+  .wpforms-field input[type="text"],
+  .wpforms-field input[type="email"],
+  .wpforms-field input[type="tel"],
+  .wpforms-field input[type="url"],
+  .wpforms-field input[type="number"],
+  .wpforms-field textarea,
+  .wpforms-field select {
+    width: 100%;
+    padding: 0.75em;
+    font-family: var(--dsd-font-sans);
+    font-size: var(--dsd-fs-body);
+    background-color: var(--dsd-bg);
+    color: var(--dsd-text-main);
+    border: 1px solid var(--dsd-border);
+    border-radius: 0px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--dsd-accent);
+      box-shadow: 0 0 0 1px var(--dsd-accent);
+    }
+  }
+
+  .wpforms-field-description,
+  .wpforms-field-sublabel {
+    color: var(--dsd-text-muted);
+  }
+
+  label.wpforms-error,
+  em.wpforms-error {
+    color: #ff6b6b;
+  }
+
+  .wpforms-submit-container {
+    text-align: left;
+  }
+
+  .wpforms-submit {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--dsd-font-mono);
+    font-size: var(--dsd-fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.85em 2em;
+    background-color: var(--dsd-accent-hover);
+    color: #ffffff;
+    border: 1px solid var(--dsd-accent-hover);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background-color: var(--dsd-accent);
+      border-color: var(--dsd-accent);
+    }
+  }
+
+  .wpforms-confirmation-container-full {
+    background-color: var(--dsd-bg-elevated);
+    border: 1px solid var(--dsd-border);
+    color: var(--dsd-text-main);
+    border-radius: 8px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Responsive
+// --------------------------------------------------------------------------
+
+@media (max-width: 767px) {
+  .dsd-contact {
+    padding: 3.5rem 0;
+  }
+}
